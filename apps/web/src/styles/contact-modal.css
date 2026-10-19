@@ -1,0 +1,158 @@
+/* Dialog shell — above replica nav (z-index 900) and dropdowns (960) */
+.contact-dialog-content {
+  display: flex !important;
+  flex-direction: column !important;
+  min-height: 0 !important;
+  z-index: 9999 !important;
+  max-width: 700px !important;
+  width: calc(100% - 2rem);
+  max-height: min(88vh, 840px);
+  padding: 0 !important;
+  gap: 0 !important;
+  overflow: hidden !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  border-radius: 18px !important;
+  background: #fff !important;
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.28) !important;
+}
+
+/* Belt-and-suspenders: hide fixed nav while any dialog overlay is open */
+body:has([data-radix-dialog-overlay][data-state="open"]) #replica-nav {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.contact-dialog-content > button[class*="absolute"] {
+  top: 18px;
+  right: 18px;
+  z-index: 10;
+  background: var(--bg2, #f5f5f5);
+  border: 1px solid var(--bd, rgba(0, 0, 0, 0.09));
+}
+
+.contact-modal.replica-page {
+  background: transparent;
+  min-height: 0;
+  color: var(--ink);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.contact-modal__header {
+  flex-shrink: 0;
+  padding: 22px 28px 18px;
+  border-bottom: 1px solid var(--bd);
+  background: var(--bg);
+}
+
+.contact-modal__title {
+  font-size: clamp(20px, 2.2vw, 26px);
+  font-weight: 400;
+  letter-spacing: -0.4px;
+  line-height: 1.25;
+  color: var(--ink);
+  margin: 0;
+  padding-right: 2rem;
+}
+
+.contact-modal__subtitle {
+  margin: 8px 0 0;
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--ink3);
+  line-height: 1.6;
+}
+
+.contact-modal__body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 22px 28px 28px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.contact-modal .contact-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: min(100%, 560px);
+  margin: 0 auto;
+}
+
+.contact-modal__col-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink4);
+  margin: 0 0 12px;
+}
+
+.contact-modal .modal-intro .body {
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+
+.contact-modal .cinfo-card {
+  margin-bottom: 10px;
+  padding: 16px 18px;
+}
+
+.contact-modal .cinfo-card:last-child {
+  margin-bottom: 0;
+}
+
+.contact-modal .cform {
+  padding: 22px;
+  margin: 0;
+  background: var(--bg2);
+  border-radius: 8px;
+  border: 1px solid var(--bd);
+}
+
+.contact-modal .contact-info-section {
+  margin-top: 24px;
+}
+
+.contact-modal .cform .btn {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.contact-modal .cfield label {
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.contact-modal .cfield input,
+.contact-modal .cfield textarea,
+.contact-modal .cfield select {
+  font-size: 13px;
+  padding: 10px 12px;
+}
+
+.contact-modal .cfield textarea {
+  min-height: 96px;
+}
+
+@media (max-width: 900px) {
+  .contact-modal .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-dialog-content {
+    max-height: 92vh;
+  }
+
+  .contact-modal__body {
+    padding: 18px 20px 24px;
+  }
+
+  .contact-modal__header {
+    padding: 18px 20px 16px;
+  }
+}

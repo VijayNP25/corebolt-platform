@@ -1,0 +1,836 @@
+@import "./replica-nav.css";
+@import "./replica-footer.css";
+
+.perception-kits-page {
+  --pk-green: #90ce00;
+  --pk-green-btn: #76b900;
+  --pk-black: #0a0a0a;
+  --pk-gray-bg: #f5f5f5;
+  --pk-gray-border: #e0e0e0;
+  --pk-row-alt: #fbfbfb;
+  --pk-text-gray: #000000;
+  --pk-text-dark: #1a1a1a;
+  --dark: #0a0a0a;
+  --g: #76b900;
+
+  font-family: "Inter", "Inter Fallback", sans-serif;
+  color: var(--pk-text-dark);
+  background: #fff;
+  line-height: 1.5;
+  font-size: 15px;
+}
+
+.perception-kits-page .wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+.perception-kits-page img {
+  display: block;
+  max-width: 100%;
+}
+
+.perception-kits-page section a:not(.pk-btn-primary):not(.pk-table-cta) {
+  text-decoration: none;
+  color: inherit;
+}
+
+.perception-kits-page footer .footer-links a,
+.perception-kits-page footer .footer-links a:link,
+.perception-kits-page footer .footer-links a:visited,
+.perception-kits-page footer .footer-legal a,
+.perception-kits-page footer .footer-legal a:link,
+.perception-kits-page footer .footer-legal a:visited {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.perception-kits-page footer .footer-links a:hover,
+.perception-kits-page footer .footer-links a:active,
+.perception-kits-page footer .footer-legal a:hover,
+.perception-kits-page footer .footer-legal a:active {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.perception-kits-page section {
+  padding: 70px 40px;
+}
+
+.perception-kits-page .pk-container {
+  max-width: 1140px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Hero */
+.perception-kits-page .pk-hero {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  padding-top: 120px;
+  padding-bottom: 60px;
+  background: #fff;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.perception-kits-page .pk-hero .pk-container {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+}
+
+.perception-kits-page .pk-hero-content {
+  flex: 1;
+  max-width: 540px;
+}
+
+.perception-kits-page .pk-hero-content h1 {
+  font-size: 38px;
+  font-weight: 400;
+  line-height: 1.18;
+}
+
+.perception-kits-page .pk-hero-content h1 .accent {
+  color: var(--pk-green);
+  font-weight: 700;
+  display: block;
+}
+
+.perception-kits-page .pk-hero-description {
+  margin-top: 16px;
+  font-size: 15px;
+  color: #000;
+  max-width: 480px;
+  line-height: 1.8;
+}
+
+.perception-kits-page .pk-integration-card {
+  max-width: 480px;
+  margin-top: 18px;
+  padding: 18px 0;
+  border-top: 1px solid var(--pk-gray-border);
+  border-bottom: 1px solid var(--pk-gray-border);
+}
+
+.perception-kits-page .pk-integration-card h2 {
+  margin-bottom: 16px;
+  color: var(--pk-text-dark);
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.perception-kits-page .pk-integration-card ul {
+  margin: 0;
+  padding-left: 20px;
+  list-style: disc;
+}
+
+.perception-kits-page .pk-integration-card li {
+  margin-bottom: 12px;
+  color: #000;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.perception-kits-page .pk-integration-card li:last-child {
+  margin-bottom: 0;
+}
+
+.perception-kits-page .pk-btn-primary {
+  display: inline-block;
+  margin-top: 22px;
+  background: var(--pk-green-btn);
+  color: #fff;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 12px 24px;
+  border-radius: 4px;
+}
+
+.perception-kits-page .pk-quantity-section {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 22px;
+  margin-right: 12px;
+  color: #fff;
+}
+
+.perception-kits-page .pk-quantity-label {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.perception-kits-page .pk-quantity-control {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.perception-kits-page .pk-quantity-control button,
+.perception-kits-page .pk-quantity-control output {
+  width: 38px;
+  height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.perception-kits-page .pk-quantity-control button {
+  border: 0;
+  background: transparent;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.perception-kits-page .pk-quantity-control button:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.perception-kits-page .pk-quantity-control output {
+  border-inline: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 14px;
+}
+
+.perception-kits-page .pk-hero-image {
+  flex: 1;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.perception-kits-page .pk-hero-image img {
+  width: 100%;
+  max-width: 725px;
+  aspect-ratio: 1;
+  object-fit: cover;
+  margin: 0 auto;
+  border-radius: 12px;
+}
+
+/* Applications */
+.perception-kits-page .pk-applications {
+  background: var(--pk-black);
+  color: #fff;
+  text-align: center;
+  padding-top: 64px;
+  padding-bottom: 64px;
+}
+
+.perception-kits-page .pk-applications h2 {
+  font-size: 52px;
+  font-weight: 300;
+  color: #fff;
+  line-height: 1.15;
+  letter-spacing: -0.5px;
+}
+
+.perception-kits-page .pk-applications h2 .accent {
+  color: var(--pk-green);
+  font-weight: 700;
+  display: block;
+}
+
+.perception-kits-page .pk-applications > .pk-container > p {
+  color: var(--pk-text-gray);
+  margin-top: 16px;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.perception-kits-page .pk-app-grid {
+  margin-top: 48px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  text-align: left;
+}
+
+.perception-kits-page .pk-app-card {
+  position: relative;
+  border-radius: 4px;
+  overflow: hidden;
+  height: 220px;
+  background-color: #1a1a1a;
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease,
+    box-shadow 0.3s ease;
+}
+
+.perception-kits-page .pk-app-card.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.perception-kits-page .pk-app-card:nth-child(1) {
+  transition-delay: 0.05s;
+}
+.perception-kits-page .pk-app-card:nth-child(2) {
+  transition-delay: 0.15s;
+}
+.perception-kits-page .pk-app-card:nth-child(3) {
+  transition-delay: 0.25s;
+}
+.perception-kits-page .pk-app-card:nth-child(4) {
+  transition-delay: 0.35s;
+}
+.perception-kits-page .pk-app-card:nth-child(5) {
+  transition-delay: 0.45s;
+}
+.perception-kits-page .pk-app-card:nth-child(6) {
+  transition-delay: 0.55s;
+}
+
+.perception-kits-page .pk-app-card:hover {
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+}
+
+.perception-kits-page .pk-app-card:hover .pk-app-card-img {
+  transform: scale(1.08);
+}
+
+.perception-kits-page .pk-app-card-img {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.5s ease;
+}
+
+.perception-kits-page .pk-app-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0.85) 100%);
+}
+
+.perception-kits-page .pk-app-card-text {
+  position: absolute;
+  left: 18px;
+  bottom: 14px;
+  z-index: 2;
+}
+
+.perception-kits-page .pk-app-card-text h3 {
+  font-size: 17px;
+  font-weight: 700;
+  color: #fff;
+  display: inline-block;
+  padding-bottom: 4px;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.3s ease;
+}
+
+.perception-kits-page .pk-app-card:hover .pk-app-card-text h3 {
+  border-color: var(--pk-green-btn);
+}
+
+.perception-kits-page .pk-app-card-text p {
+  font-size: 12.5px;
+  color: #c9c9c9;
+  margin-top: 4px;
+}
+
+/* Why CORE BOLT */
+.perception-kits-page .pk-why-section {
+  background: #fff;
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
+.perception-kits-page .pk-why-tag {
+  display: inline-block;
+  margin-bottom: 22px;
+  padding: 8px 18px;
+  border: 1px solid rgba(118, 185, 0, 0.35);
+  border-radius: 40px;
+  background: rgba(118, 185, 0, 0.12);
+  color: var(--pk-green);
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+.perception-kits-page .pk-why-section h2 {
+  color: var(--pk-text-dark);
+  font-size: 38px;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.perception-kits-page .pk-why-intro {
+  max-width: 900px;
+  margin-top: 14px;
+  color: #4a4a4a;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.perception-kits-page .pk-why-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 36px;
+  margin-top: 40px;
+}
+
+.perception-kits-page .pk-why-card {
+  position: relative;
+  overflow: hidden;
+  padding: 34px 30px;
+  border: 1px solid #e0e0e0;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+  transition:
+    transform 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.perception-kits-page .pk-why-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(118, 185, 0, 0.35);
+  box-shadow:
+    0 20px 45px rgba(0, 0, 0, 0.12),
+    0 0 25px rgba(118, 185, 0, 0.15);
+}
+
+.perception-kits-page .pk-why-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  margin-bottom: 22px;
+  border-radius: 12px;
+  background: rgba(118, 185, 0, 0.14);
+}
+
+.perception-kits-page .pk-why-icon svg {
+  width: 26px;
+  height: 26px;
+  fill: none;
+  stroke: var(--pk-green);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.perception-kits-page .pk-why-card h3 {
+  margin-bottom: 10px;
+  color: var(--pk-text-dark);
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.perception-kits-page .pk-why-card p {
+  color: #555;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* Configurator cards */
+.perception-kits-page .pk-provide-section {
+  background: #000;
+  padding-top: 64px;
+  padding-bottom: 64px;
+  text-align: center;
+}
+
+/* Legacy specs */
+.perception-kits-page .pk-specs-section {
+  background: var(--pk-gray-bg);
+  padding-top: 64px;
+  padding-bottom: 64px;
+  text-align: center;
+}
+
+.perception-kits-page .pk-specs-eyebrow {
+  color: var(--pk-green);
+  font-weight: 700;
+  font-size: 12.5px;
+  letter-spacing: 1.5px;
+  margin-bottom: 10px;
+}
+
+.perception-kits-page .pk-specs-title {
+  font-size: 34px;
+  font-weight: 400;
+  color: var(--pk-text-dark);
+  margin-bottom: 48px;
+}
+
+.perception-kits-page .pk-specs-container {
+  max-width: 1140px;
+  margin: 0 auto 48px;
+  text-align: left;
+}
+
+.perception-kits-page .pk-table-heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 auto 20px;
+  width: 100%;
+  max-width: 1100px;
+}
+
+.perception-kits-page .pk-table-heading .bar {
+  width: 4px;
+  height: 18px;
+  background: var(--pk-green-btn);
+  border-radius: 2px;
+}
+
+.perception-kits-page .pk-table-heading h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--pk-text-dark);
+}
+
+.perception-kits-page .pk-styled-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+}
+
+.perception-kits-page .pk-styled-table thead tr {
+  background: #000;
+}
+
+.perception-kits-page .pk-styled-table thead th {
+  color: #fff;
+  font-weight: 700;
+  text-align: left;
+  font-size: 12.5px;
+  letter-spacing: 0.5px;
+  padding: 14px 22px;
+}
+
+.perception-kits-page .pk-styled-table tbody tr {
+  border-bottom: 1px solid var(--pk-gray-border);
+  transition: background-color 0.2s ease;
+}
+
+.perception-kits-page .pk-styled-table tbody tr:nth-child(even) {
+  background: var(--pk-row-alt);
+}
+
+.perception-kits-page .pk-styled-table tbody tr:hover td {
+  background: rgba(118, 185, 0, 0.04);
+}
+
+.perception-kits-page .pk-styled-table tbody td {
+  padding: 16px 22px;
+  font-size: 14px;
+  vertical-align: top;
+}
+
+.perception-kits-page .pk-styled-table tbody td:first-child {
+  font-weight: 600;
+  color: var(--pk-text-dark);
+  width: 22%;
+}
+
+.perception-kits-page .pk-styled-table tbody td:last-child {
+  color: var(--pk-text-gray);
+}
+
+.perception-kits-page .pk-sub-list div {
+  margin-bottom: 6px;
+}
+
+.perception-kits-page .pk-sub-list div:last-child {
+  margin-bottom: 0;
+}
+
+.perception-kits-page .pk-table-wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.perception-kits-page .pk-table-cta {
+  display: inline-block;
+  margin-top: 22px;
+  background: var(--pk-green-btn);
+  color: #fff;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 12px 24px;
+  border-radius: 4px;
+}
+
+.perception-kits-page .pk-table-cta-row {
+  text-align: left;
+  margin: 0 auto;
+}
+
+.perception-kits-page .pk-table-cta-row.narrow {
+  max-width: 1100px;
+}
+
+.perception-kits-page .pk-specs-triple-intro {
+  max-width: 800px;
+  margin: 0 auto 40px;
+  text-align: center;
+}
+
+.perception-kits-page .pk-specs-triple-intro h3 {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--pk-text-dark);
+  margin-bottom: 12px;
+}
+
+.perception-kits-page .pk-specs-triple-intro p {
+  font-size: 15px;
+  color: #000;
+  line-height: 1.8;
+}
+
+.perception-kits-page .pk-provide-section .pk-specs-eyebrow {
+  margin-bottom: 8px;
+  font-size: 50px;
+  line-height: 1.12;
+}
+
+.perception-kits-page .pk-provide-section .pk-specs-triple-intro h3 {
+  color: #fff;
+}
+
+.perception-kits-page .pk-provide-section .pk-specs-triple-intro p {
+  color: #c9c9c9;
+  font-size: 13.5px;
+  line-height: 1.6;
+}
+
+.perception-kits-page .pk-specs-triple {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  max-width: 1140px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.perception-kits-page .pk-spec-card {
+  background: #111;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+  border: 1px solid #262626;
+  display: flex;
+  flex-direction: column;
+}
+
+.perception-kits-page .pk-spec-card-image {
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+  display: block;
+}
+
+.perception-kits-page .pk-spec-card-title {
+  padding: 18px 20px 0;
+  color: #fff;
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.perception-kits-page .pk-spec-card-desc {
+  padding: 8px 20px 0;
+  font-size: 13.5px;
+  color: #c9c9c9;
+  line-height: 1.6;
+}
+
+.perception-kits-page .pk-spec-card table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #111;
+}
+
+.perception-kits-page .pk-spec-card tbody tr {
+  border-bottom: 1px solid #2a2a2a;
+  transition: background-color 0.2s ease;
+}
+
+.perception-kits-page .pk-spec-card tbody tr:last-child {
+  border-bottom: none;
+}
+
+.perception-kits-page .pk-spec-card tbody tr:nth-child(even) {
+  background: #1a1a1a;
+}
+
+.perception-kits-page .pk-spec-card tbody tr:hover {
+  background: #233d0c;
+}
+
+.perception-kits-page .pk-spec-card tbody td {
+  padding: 14px 20px 14px 34px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  position: relative;
+}
+
+.perception-kits-page .pk-spec-card tbody td::before {
+  content: "•";
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--pk-green-btn);
+  font-size: 20px;
+  line-height: 1;
+}
+
+.perception-kits-page .pk-spec-card-cta {
+  margin: 0 20px 22px;
+  margin-top: auto;
+  padding-top: 26px;
+  text-align: center;
+}
+
+.perception-kits-page .pk-spec-card-cta .pk-table-cta {
+  margin-top: 0;
+  width: 75%;
+  text-align: center;
+}
+
+/* Overview */
+.perception-kits-page .pk-overview-section {
+  background: #fff;
+  padding-top: 64px;
+  padding-bottom: 64px;
+  text-align: center;
+}
+
+.perception-kits-page .pk-overview-section h2 {
+  font-size: 30px;
+  font-weight: 400;
+  color: var(--pk-text-dark);
+  max-width: 900px;
+  margin: 0 auto 14px;
+}
+
+.perception-kits-page .pk-overview-subheading {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--pk-text-dark);
+  max-width: 800px;
+  margin: 0 auto 30px;
+}
+
+.perception-kits-page .pk-overview-body {
+  max-width: 1140px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.perception-kits-page .pk-overview-body p {
+  font-size: 15px;
+  color: var(--pk-text-gray);
+  line-height: 1.8;
+  margin-bottom: 18px;
+}
+
+.perception-kits-page .pk-overview-body p:last-child {
+  margin-bottom: 0;
+}
+
+/* CTA */
+.perception-kits-page .pk-cta-banner {
+  background: #0a0a11;
+  text-align: center;
+  padding-top: 70px;
+  padding-bottom: 70px;
+  border-top: 2px solid var(--pk-green-btn);
+}
+
+.perception-kits-page .pk-cta-eyebrow {
+  color: var(--pk-green);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 2px;
+  margin-bottom: 14px;
+}
+
+.perception-kits-page .pk-cta-banner h2 {
+  color: #fff;
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.perception-kits-page .pk-cta-banner h2 .accent {
+  color: var(--pk-green);
+  font-weight: 700;
+  display: block;
+}
+
+.perception-kits-page .pk-cta-banner > p {
+  color: #9c9c9c;
+  font-size: 15px;
+  margin-top: 16px;
+  max-width: 560px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (max-width: 900px) {
+  .perception-kits-page section {
+    padding: 56px 20px;
+  }
+
+  .perception-kits-page .pk-hero {
+    padding-top: 100px;
+  }
+
+  .perception-kits-page .pk-hero .pk-container {
+    flex-direction: column;
+  }
+
+  .perception-kits-page .pk-app-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .perception-kits-page .pk-specs-triple {
+    grid-template-columns: 1fr;
+  }
+
+  .perception-kits-page .pk-why-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .perception-kits-page .pk-applications h2 {
+    font-size: 36px;
+  }
+
+  .perception-kits-page .pk-provide-section .pk-specs-eyebrow {
+    font-size: 38px;
+  }
+}
+
+@media (max-width: 768px) {
+  .perception-kits-page .wrap {
+    padding: 0 24px;
+  }
+
+  .perception-kits-page .pk-why-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .perception-kits-page .pk-why-section h2 {
+    font-size: 30px;
+  }
+}

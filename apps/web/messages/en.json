@@ -1,0 +1,22 @@
+{
+  "nav": {
+    "home": "Home",
+    "products": "Products",
+    "blog": "Blogs",
+    "about": "About Us",
+    "contact": "Contact Us",
+    "cart": "Cart",
+    "account": "Account"
+  },
+  "currency": {
+    "label": "Currency",
+    "INR": "INR",
+    "USD": "USD"
+  },
+  "common": {
+    "askPrice": "Ask Price",
+    "buyNow": "Buy Now",
+    "knowMore": "Know more",
+    "loading": "Loading…"
+  }
+}

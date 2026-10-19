@@ -1,0 +1,35 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "COREBOLT API",
+    "version": "0.1.0",
+    "description": "REST API for COREBOLT e-commerce (presentation calls /api/v1)."
+  },
+  "servers": [{ "url": "http://localhost:4000/api/v1" }],
+  "paths": {
+    "/health": {
+      "get": {
+        "summary": "Health check",
+        "responses": { "200": { "description": "OK" } }
+      }
+    },
+    "/auth/register": { "post": { "summary": "Register" } },
+    "/auth/login": { "post": { "summary": "Login" } },
+    "/auth/logout": { "post": { "summary": "Logout" } },
+    "/auth/me": { "get": { "summary": "Current user" } },
+    "/products": { "get": { "summary": "List products" } },
+    "/products/{slug}": { "get": { "summary": "Product by slug" } },
+    "/categories": { "get": { "summary": "List categories" } },
+    "/cart": { "get": { "summary": "Get cart" } },
+    "/cart/items": { "post": { "summary": "Add cart item" } },
+    "/checkout": { "post": { "summary": "Create order + payment session" } },
+    "/orders/me": { "get": { "summary": "My orders" } },
+    "/enquiries": { "post": { "summary": "Submit enquiry" } },
+    "/currency/rate": { "get": { "summary": "Current FX rate + markup" } },
+    "/reviews/product/{productId}": {
+      "get": { "summary": "Approved reviews for product" }
+    },
+    "/webhooks/icici": { "post": { "summary": "ICICI payment webhook" } },
+    "/webhooks/stripe": { "post": { "summary": "Stripe payment webhook" } }
+  }
+}

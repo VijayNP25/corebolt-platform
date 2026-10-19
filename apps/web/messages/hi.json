@@ -1,0 +1,22 @@
+{
+  "nav": {
+    "home": "होम",
+    "products": "उत्पाद",
+    "blog": "ब्लॉग",
+    "about": "हमारे बारे में",
+    "contact": "संपर्क",
+    "cart": "कार्ट",
+    "account": "खाता"
+  },
+  "currency": {
+    "label": "मुद्रा",
+    "INR": "INR",
+    "USD": "USD"
+  },
+  "common": {
+    "askPrice": "कीमत पूछें",
+    "buyNow": "अभी खरीदें",
+    "knowMore": "और जानें",
+    "loading": "लोड हो रहा है…"
+  }
+}

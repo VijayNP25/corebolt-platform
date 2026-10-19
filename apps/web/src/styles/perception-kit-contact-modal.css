@@ -1,0 +1,180 @@
+﻿/* Styles scoped to the Perception Kit "Get a Quote" modal only.
+   Uses the .pk-contact-modal wrapper class so nothing here leaks into the
+   shared ContactFormModal used on other pages. */
+
+.pk-contact-modal .pk-components {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 6px;
+}
+
+.pk-contact-modal .pk-component-card {
+  border: 1px solid var(--bd);
+  background: #fff;
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+
+.pk-contact-modal .pk-component-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.pk-contact-modal .pk-component-name {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink4);
+}
+
+.pk-contact-modal .pk-component-fixed-note {
+  font-size: 11px;
+  color: var(--ink4);
+}
+
+.pk-contact-modal .pk-component-fixed-value {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink);
+  padding: 10px 12px;
+  border: 1px solid var(--bd);
+  border-radius: 6px;
+  background: var(--bg2);
+}
+
+.pk-contact-modal .pk-component-row {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.pk-contact-modal .pk-component-row > .pk-select-wrap {
+  flex: 1;
+  min-width: 0;
+}
+
+.pk-contact-modal .pk-qty-wrap {
+  width: 92px;
+  flex-shrink: 0;
+}
+
+.pk-contact-modal .pk-qty-wrap label,
+.pk-contact-modal .pk-select-wrap label {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 0.6px;
+  color: rgba(0, 0, 0, 0.55);
+  margin-bottom: 6px;
+}
+
+.pk-contact-modal .pk-qty-wrap input {
+  width: 100%;
+  font-size: 13px;
+  padding: 10px 10px;
+  border: 1px solid var(--bd);
+  border-radius: 6px;
+  background: #fff;
+}
+
+.pk-contact-modal .pk-qty-hint {
+  font-size: 10px;
+  color: var(--ink4);
+  margin-top: 4px;
+}
+
+/* Searchable single-select combobox (PerceptionKitProductSelect) */
+.pk-contact-modal .pk-select {
+  position: relative;
+}
+
+.pk-contact-modal .pk-select__control {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--bd, #d0d0d0);
+  border-radius: 6px;
+  background: #fff;
+}
+
+.pk-contact-modal .pk-select__control:focus-within {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.12);
+}
+
+.pk-contact-modal .pk-select__input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 13px;
+  padding: 10px 32px 10px 12px;
+  color: #111827;
+}
+
+.pk-contact-modal .pk-select__input::placeholder {
+  color: #9ca3af;
+}
+
+.pk-contact-modal .pk-select__chevron {
+  position: absolute;
+  right: 10px;
+  width: 14px;
+  height: 14px;
+  color: #9ca3af;
+  pointer-events: none;
+}
+
+.pk-contact-modal .pk-select__popover {
+  position: absolute;
+  z-index: 50;
+  margin-top: 6px;
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  background: #fff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+}
+
+.pk-contact-modal .pk-select__list {
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.pk-contact-modal .pk-select__item {
+  cursor: pointer;
+  padding: 8px 12px;
+  font-size: 13px;
+  color: #111827;
+}
+
+.pk-contact-modal .pk-select__item[data-selected="true"],
+.pk-contact-modal .pk-select__item:hover {
+  background: #f3f4f6;
+}
+
+.pk-contact-modal .pk-select__item[data-selected-item="true"] {
+  font-weight: 600;
+}
+
+.pk-contact-modal .pk-select__empty {
+  padding: 10px 12px;
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+@media (max-width: 520px) {
+  .pk-contact-modal .pk-component-row {
+    flex-direction: column;
+  }
+
+  .pk-contact-modal .pk-qty-wrap {
+    width: 100%;
+  }
+}

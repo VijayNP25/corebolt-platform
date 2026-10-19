@@ -1,0 +1,217 @@
+/*
+ * PHONE-ONLY photo-card layout for product / subcategory / group cards
+ * (product-card.tsx, selection-grid-card.tsx, subcategory-selection.tsx).
+ * Tablet and desktop keep the original card design untouched: everything
+ * below is inside @media (max-width: 768px), except hiding the phone-only
+ * extras (.mx-only) on larger screens.
+ *
+ * Look (phone): a white card with the photo inset at the top (6 px corners);
+ * below it the name, a grey line (product cards: the category, e.g. "Edge
+ * Computers"), a 2-line description, and a bottom row with the price (or
+ * "Ask for price") and a dark "Know More" button with an arrow badge. No blur
+ * effects. All corners 6 px.
+ * No card (product, subcategory, group) carries chips, a brand logo or a count
+ * badge on the photo on phones.
+ */
+.mx-only {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mx-only {
+    display: revert;
+  }
+  .mx-card .mx-hide,
+  .mx-card .mx-desktop-actions,
+  .mx-card .mx-ghost,
+  .mx-card .mx-brand {
+    display: none !important;
+  }
+
+  /* ---------- card ---------- */
+  .mx-card {
+    position: relative !important;
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100% !important;
+    padding: 8px !important;
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+    border-radius: 6px !important;
+    overflow: hidden !important;
+    background: #fff !important;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06) !important;
+    transform: none !important;
+    color: #111;
+  }
+
+  /* ---------- photo (inset, own shape, capped height) ---------- */
+  .mx-card .mx-media {
+    position: relative !important;
+    display: block;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 0;
+    border-radius: 6px;
+    overflow: hidden !important;
+    background: #f1f2f4 !important;
+    transform: none !important;
+  }
+  .mx-card .mx-media picture {
+    display: block;
+    width: 100%;
+  }
+  .mx-card .mx-media img {
+    display: block;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 168px;
+    max-height: 240px; /* keeps tall photos from eating the screen */
+    object-fit: cover !important;
+    object-position: center;
+    transform: none !important;
+  }
+  .mx-card .mx-media > .absolute.inset-0 {
+    display: none; /* desktop hover overlay */
+  }
+  /* no chips, brand logo or count badge over the photo on phones */
+  .mx-card .mx-media .mx-notch {
+    display: none !important;
+  }
+
+  /* ---------- text ---------- */
+  .mx-card .mx-body {
+    position: relative;
+    display: flex !important;
+    flex-direction: column !important;
+    flex: 1 1 auto !important;
+    padding: 12px 6px 0 !important;
+    transform: none !important;
+  }
+  .mx-card .mx-title,
+  .mx-card .mx-title a {
+    margin: 0 !important;
+    font-size: 17px !important;
+    line-height: 1.25 !important;
+    font-weight: 500 !important;
+    letter-spacing: -0.01em;
+    color: #111 !important;
+  }
+  .mx-card .mx-tag {
+    display: block;
+    margin: 3px 0 0;
+    font-size: 12.5px;
+    line-height: 1.35;
+    color: #6b6f76;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .mx-card .mx-desc {
+    flex: 0 0 auto !important;
+    margin: 8px 0 0 !important;
+    padding: 0 !important;
+    font-size: 12.5px !important;
+    line-height: 1.5 !important;
+    color: #4b4f56 !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .mx-card .mx-desc p {
+    margin: 0;
+    color: inherit !important;
+    font-size: inherit !important;
+    line-height: inherit !important;
+    display: inline;
+  }
+  .mx-card .mx-desc button {
+    display: none !important;
+  }
+
+  /* ---------- bottom row: price + button ---------- */
+  .mx-card .mx-actions {
+    position: relative;
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin: auto 0 0 !important;
+    padding: 12px 6px 6px !important;
+    border: 0 !important;
+  }
+  .mx-card .mx-body > .mx-actions {
+    padding: 12px 0 6px !important;
+  }
+  .mx-card .mx-cost {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-width: 0;
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 1.15;
+    color: #111;
+    white-space: nowrap;
+  }
+  .mx-card .mx-cost small {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #6b6f76;
+    margin-top: 2px;
+  }
+  .mx-card .mx-cost--ask {
+    padding: 0;
+    border: 0;
+    background: none;
+    font-size: 14px;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: #76b900;
+    cursor: pointer;
+  }
+  .mx-card .mx-body .mx-cost {
+    font-size: 13px;
+    color: #6b6f76;
+  }
+  .mx-card .mx-pill {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 10px;
+    height: 40px;
+    min-height: 0;
+    margin-left: auto;
+    padding: 0 4px 0 16px !important;
+    border-radius: 6px !important;
+    background: #111 !important;
+    color: #fff !important;
+    border: 0 !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    line-height: 1;
+    letter-spacing: 0 !important;
+    text-transform: none !important;
+    white-space: nowrap;
+    text-decoration: none;
+    box-shadow: none !important;
+  }
+  .mx-card .mx-pill-ico {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    background: #fff;
+    color: #111;
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .mx-card .mx-pill-ico svg {
+    width: 15px;
+    height: 15px;
+  }
+}

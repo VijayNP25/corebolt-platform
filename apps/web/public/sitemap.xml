@@ -1,0 +1,1438 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Home Page -->
+  <url>
+    <loc>https://www.core-bolt.com/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <!-- /about-us -->
+  <url>
+    <loc>https://www.core-bolt.com/about-us</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- /contact-us -->
+  <url>
+    <loc>https://www.core-bolt.com/contact-us</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- /perception-kits -->
+  <url>
+    <loc>https://www.core-bolt.com/perception-kits</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <!-- /3d-lidar-radar-sensors -->
+  <url>
+    <loc>https://www.core-bolt.com/3d-lidar-radar-sensors</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- /blog -->
+  <url>
+    <loc>https://www.core-bolt.com/blog</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <!-- /privacy-policy -->
+  <url>
+    <loc>https://www.core-bolt.com/privacy-policy</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <!-- /return-warranty-policy -->
+  <url>
+    <loc>https://www.core-bolt.com/return-warranty-policy</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <!-- Blog Post: ai-edge-computer-gmsl-cameras-integration -->
+  <url>
+    <loc>https://www.core-bolt.com/blog/ai-edge-computer-gmsl-cameras-integration</loc>
+    <lastmod>2026-4-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Blog Post: custom-servo-lift-column-for-robotics-and-automation -->
+  <url>
+    <loc>https://www.core-bolt.com/blog/custom-servo-lift-column-for-robotics-and-automation</loc>
+    <lastmod>2026-3-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Blog Post: why-robots-need-perception -->
+  <url>
+    <loc>https://www.core-bolt.com/blog/why-robots-need-perception</loc>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Blog Post: lidar-vs-cameras-what-each-sensor-sees -->
+  <url>
+    <loc>https://www.core-bolt.com/blog/lidar-vs-cameras-what-each-sensor-sees</loc>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Blog Post: industrial-panel-pc-guide-for-factory-automation -->
+  <url>
+    <loc>https://www.core-bolt.com/blog/industrial-panel-pc-guide-for-factory-automation</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Blog Post: ai-edge-comuter-complete-guide-to-edge-ai-gpu-computing-nvidia-jetson -->
+  <url>
+    <loc>https://www.core-bolt.com/blog/ai-edge-comuter-complete-guide-to-edge-ai-gpu-computing-nvidia-jetson</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Blog Post: robosense-airy-96-beam-lidar-sensor -->
+  <url>
+    <loc>https://www.core-bolt.com/blog/robosense-airy-96-beam-lidar-sensor</loc>
+    <lastmod>2026-03-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Blog Post: livox-mid-360s-lidar-sensor -->
+  <url>
+    <loc>https://www.core-bolt.com/blog/livox-mid-360s-lidar-sensor</loc>
+    <lastmod>2026-03-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Blog Post: actuator-selection-robotics-automated-machinery -->
+  <url>
+    <loc>https://www.core-bolt.com/blog/actuator-selection-robotics-automated-machinery</loc>
+    <lastmod>2025-12-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Blog Post: compute-for-vision-lidar-workloads -->
+  <url>
+    <loc>https://www.core-bolt.com/blog/compute-for-vision-lidar-workloads</loc>
+    <lastmod>2025-12-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Blog Post: lidar-vs-vision-systems -->
+  <url>
+    <loc>https://www.core-bolt.com/blog/lidar-vs-vision-systems</loc>
+    <lastmod>2025-12-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Blog Post: gmsl-depth-camera-outdoor-vision-systems -->
+  <url>
+    <loc>https://www.core-bolt.com/blog/gmsl-depth-camera-outdoor-vision-systems</loc>
+    <lastmod>2025-12-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Blog Post: wiring-harness-and-connectors -->
+  <url>
+    <loc>https://www.core-bolt.com/blog/wiring-harness-and-connectors</loc>
+    <lastmod>2025-12-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Blog Post: rugged-computing-for-modern-industries -->
+  <url>
+    <loc>https://www.core-bolt.com/blog/rugged-computing-for-modern-industries</loc>
+    <lastmod>2025-12-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Blog Post: top-linear-actuator-manufacturers-suppliers -->
+  <url>
+    <loc>https://www.core-bolt.com/blog/top-linear-actuator-manufacturers-suppliers</loc>
+    <lastmod>2025-12-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Blog Post: next-gen-wiring-connector-solutions -->
+  <url>
+    <loc>https://www.core-bolt.com/blog/next-gen-wiring-connector-solutions</loc>
+    <lastmod>2025-12-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Blog Post: robosense-ruby-plus -->
+  <url>
+    <loc>https://www.core-bolt.com/blog/robosense-ruby-plus</loc>
+    <lastmod>2025-11-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Blog Post: robosense-m1plus-vs-m2-comparison -->
+  <url>
+    <loc>https://www.core-bolt.com/blog/robosense-m1plus-vs-m2-comparison</loc>
+    <lastmod>2025-11-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Blog Post: robosense-e1r-vs-e1-comparison -->
+  <url>
+    <loc>https://www.core-bolt.com/blog/robosense-e1r-vs-e1-comparison</loc>
+    <lastmod>2025-11-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Blog Post: nvidia-developer-kits -->
+  <url>
+    <loc>https://www.core-bolt.com/blog/nvidia-developer-kits</loc>
+    <lastmod>2025-11-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Category: lidar -->
+  <url>
+    <loc>https://www.core-bolt.com/lidar</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- Subcategory Selection: lidar -->
+  <url>
+    <loc>https://www.core-bolt.com/lidar-sensor-price-in-india</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Subcategory: lidar/ouster-velodyne -->
+  <url>
+    <loc>https://www.core-bolt.com/ouster-velodyne-3d-lidar-systems</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- Product: lidar/ouster-velodyne/ouster-os-dome-lidar-sensor -->
+  <url>
+    <loc>https://www.core-bolt.com/lidar/ouster-velodyne/ouster-os-dome-lidar-sensor</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: lidar/ouster-velodyne/ouster-os0-lidar-sensor -->
+  <url>
+    <loc>https://www.core-bolt.com/lidar/ouster-velodyne/ouster-os0-lidar-sensor</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: lidar/ouster-velodyne/ouster-os1-lidar-sensor -->
+  <url>
+    <loc>https://www.core-bolt.com/lidar/ouster-velodyne/ouster-os1-lidar-sensor</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: lidar/ouster-velodyne/ouster-os2-lidar-sensor -->
+  <url>
+    <loc>https://www.core-bolt.com/lidar/ouster-velodyne/ouster-os2-lidar-sensor</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: lidar/ouster-velodyne/velodyne-vlp-16-puck-lidar-sensor -->
+  <url>
+    <loc>https://www.core-bolt.com/lidar/ouster-velodyne/velodyne-vlp-16-puck-lidar-sensor</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: lidar/ouster-velodyne/velodyne-vlp-16-puck-lite-lidar-sensor -->
+  <url>
+    <loc>https://www.core-bolt.com/lidar/ouster-velodyne/velodyne-vlp-16-puck-lite-lidar-sensor</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: lidar/ouster-velodyne/velodyne-vlp-16-puck-hi-res-lidar-sensor -->
+  <url>
+    <loc>https://www.core-bolt.com/lidar/ouster-velodyne/velodyne-vlp-16-puck-hi-res-lidar-sensor</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: lidar/ouster-velodyne/vlp-32-ultra-puck-lidar-sensor -->
+  <url>
+    <loc>https://www.core-bolt.com/lidar/ouster-velodyne/vlp-32-ultra-puck-lidar-sensor</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: lidar/ouster-velodyne/vls-128-ultra-prime-lidar-sensor -->
+  <url>
+    <loc>https://www.core-bolt.com/lidar/ouster-velodyne/vls-128-ultra-prime-lidar-sensor</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Subcategory: lidar/hesai -->
+  <url>
+    <loc>https://www.core-bolt.com/hesai-lidar-technology</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- Product: lidar/hesai/hesai-etx-automotive-lidar-sensor -->
+  <url>
+    <loc>https://www.core-bolt.com/lidar/hesai/hesai-etx-automotive-lidar-sensor</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: lidar/hesai/hesai-at-360-lidar-sensor -->
+  <url>
+    <loc>https://www.core-bolt.com/lidar/hesai/hesai-at-360-lidar-sensor</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: lidar/hesai/hesai-at-1440-lidar-sensor -->
+  <url>
+    <loc>https://www.core-bolt.com/lidar/hesai/hesai-at-1440-lidar-sensor</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: lidar/hesai/hesai-at128-automotive-lidar-sensor -->
+  <url>
+    <loc>https://www.core-bolt.com/lidar/hesai/hesai-at128-automotive-lidar-sensor</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: lidar/hesai/hesai-atx-lidar-sensor -->
+  <url>
+    <loc>https://www.core-bolt.com/lidar/hesai/hesai-atx-lidar-sensor</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: lidar/hesai/hesai-ftx-lidar-sensor -->
+  <url>
+    <loc>https://www.core-bolt.com/lidar/hesai/hesai-ftx-lidar-sensor</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: lidar/hesai/hesai-jt-16-lidar-sensor -->
+  <url>
+    <loc>https://www.core-bolt.com/lidar/hesai/hesai-jt-16-lidar-sensor</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: lidar/hesai/hesai-jt128-lidar-sensor -->
+  <url>
+    <loc>https://www.core-bolt.com/lidar/hesai/hesai-jt128-lidar-sensor</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: lidar/hesai/hesai-xt16-lidar-sensor -->
+  <url>
+    <loc>https://www.core-bolt.com/lidar/hesai/hesai-xt16-lidar-sensor</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: lidar/hesai/hesai-xt32-lidar-sensor -->
+  <url>
+    <loc>https://www.core-bolt.com/lidar/hesai/hesai-xt32-lidar-sensor</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: lidar/hesai/hesai-xt32m-lidar-sensor -->
+  <url>
+    <loc>https://www.core-bolt.com/lidar/hesai/hesai-xt32m-lidar-sensor</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: lidar/hesai/hesai-ot128-lidar-sensor -->
+  <url>
+    <loc>https://www.core-bolt.com/lidar/hesai/hesai-ot128-lidar-sensor</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: lidar/hesai/hesai-pandar128-lidar-sensor -->
+  <url>
+    <loc>https://www.core-bolt.com/lidar/hesai/hesai-pandar128-lidar-sensor</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: lidar/hesai/hesai-qt128-lidar-sensor -->
+  <url>
+    <loc>https://www.core-bolt.com/lidar/hesai/hesai-qt128-lidar-sensor</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Subcategory: lidar/livox-3d-lidar-sensor -->
+  <url>
+    <loc>https://www.core-bolt.com/livox-3d-lidar-sensor-supplier</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- Product: lidar/livox-3d-lidar-sensor/livox-mid-360-lidar-sensor -->
+  <url>
+    <loc>https://www.core-bolt.com/lidar/livox-3d-lidar-sensor/livox-mid-360-lidar-sensor</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: lidar/livox-3d-lidar-sensor/livox-mid-360l-lidar-sensor -->
+  <url>
+    <loc>https://www.core-bolt.com/lidar/livox-3d-lidar-sensor/livox-mid-360l-lidar-sensor</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: lidar/livox-3d-lidar-sensor/livox-avia-lidar-sensor -->
+  <url>
+    <loc>https://www.core-bolt.com/lidar/livox-3d-lidar-sensor/livox-avia-lidar-sensor</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: lidar/livox-3d-lidar-sensor/livox-hap-lidar-sensor -->
+  <url>
+    <loc>https://www.core-bolt.com/lidar/livox-3d-lidar-sensor/livox-hap-lidar-sensor</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: lidar/livox-3d-lidar-sensor/livox-mid-40-lidar-sensor -->
+  <url>
+    <loc>https://www.core-bolt.com/lidar/livox-3d-lidar-sensor/livox-mid-40-lidar-sensor</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: lidar/livox-3d-lidar-sensor/livox-mid-100-lidar-sensor -->
+  <url>
+    <loc>https://www.core-bolt.com/lidar/livox-3d-lidar-sensor/livox-mid-100-lidar-sensor</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: lidar/livox-3d-lidar-sensor/livox-mid-70-lidar-sensor -->
+  <url>
+    <loc>https://www.core-bolt.com/lidar/livox-3d-lidar-sensor/livox-mid-70-lidar-sensor</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: lidar/livox-3d-lidar-sensor/livox-avia-lidar-sensor -->
+  <url>
+    <loc>https://www.core-bolt.com/lidar/livox-3d-lidar-sensor/livox-avia-lidar-sensor</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: lidar/livox-3d-lidar-sensor/livox-hap-lidar-sensor -->
+  <url>
+    <loc>https://www.core-bolt.com/lidar/livox-3d-lidar-sensor/livox-hap-lidar-sensor</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: lidar/livox-3d-lidar-sensor/livox-mid-40-lidar-sensor -->
+  <url>
+    <loc>https://www.core-bolt.com/lidar/livox-3d-lidar-sensor/livox-mid-40-lidar-sensor</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: lidar/livox-3d-lidar-sensor/livox-mid-100-lidar-sensor -->
+  <url>
+    <loc>https://www.core-bolt.com/lidar/livox-3d-lidar-sensor/livox-mid-100-lidar-sensor</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: lidar/livox-3d-lidar-sensor/livox-mid-70-lidar-sensor -->
+  <url>
+    <loc>https://www.core-bolt.com/lidar/livox-3d-lidar-sensor/livox-mid-70-lidar-sensor</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: lidar/livox-3d-lidar-sensor/livox-tele-15-lidar-sensor -->
+  <url>
+    <loc>https://www.core-bolt.com/lidar/livox-3d-lidar-sensor/livox-tele-15-lidar-sensor</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Subcategory: lidar/robosense -->
+  <url>
+    <loc>https://www.core-bolt.com/robosense-smart-lidar</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- Product: lidar/robosense/robosense-e1r-lidar-sensor -->
+  <url>
+    <loc>https://www.core-bolt.com/lidar/robosense/robosense-e1r-lidar-sensor</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: lidar/robosense/robosense-e1-lidar-sensor -->
+  <url>
+    <loc>https://www.core-bolt.com/lidar/robosense/robosense-e1-lidar-sensor</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: lidar/robosense/robosense-airy-96-beam-lidar-sensor -->
+  <url>
+    <loc>https://www.core-bolt.com/lidar/robosense/robosense-airy-96-beam-lidar-sensor</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: lidar/robosense/robosense-airy-192-lidar-sensor -->
+  <url>
+    <loc>https://www.core-bolt.com/lidar/robosense/robosense-airy-192-lidar-sensor</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: lidar/robosense/robosense-airy-lite-lidar-sensor -->
+  <url>
+    <loc>https://www.core-bolt.com/lidar/robosense/robosense-airy-lite-lidar-sensor</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: lidar/robosense/robosense-bpearl-lidar-sensor -->
+  <url>
+    <loc>https://www.core-bolt.com/lidar/robosense/robosense-bpearl-lidar-sensor</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: lidar/robosense/robosense-fairy-lidar-sensor -->
+  <url>
+    <loc>https://www.core-bolt.com/lidar/robosense/robosense-fairy-lidar-sensor</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: lidar/robosense/robosense-helios-16-lidar-sensor -->
+  <url>
+    <loc>https://www.core-bolt.com/lidar/robosense/robosense-helios-16-lidar-sensor</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: lidar/robosense/robosense-helios-32-h32f70-lidar-sensor -->
+  <url>
+    <loc>https://www.core-bolt.com/lidar/robosense/robosense-helios-32-h32f70-lidar-sensor</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: lidar/robosense/robosense-helios-32-h32F26-lidar-sensor -->
+  <url>
+    <loc>https://www.core-bolt.com/lidar/robosense/robosense-helios-32-h32f26-lidar-sensor</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: lidar/robosense/robosense-em4-lidar-sensor -->
+  <url>
+    <loc>https://www.core-bolt.com/lidar/robosense/robosense-em4-lidar-sensor</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: lidar/robosense/robosense-emx-lidar-sensor -->
+  <url>
+    <loc>https://www.core-bolt.com/lidar/robosense/robosense-emx-lidar-sensor</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: lidar/robosense/robosense-mx-lidar-sensor -->
+  <url>
+    <loc>https://www.core-bolt.com/lidar/robosense/robosense-mx-lidar-sensor</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: lidar/robosense/robosense-m2-lidar-sensor -->
+  <url>
+    <loc>https://www.core-bolt.com/lidar/robosense/robosense-m2-lidar-sensor</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: lidar/robosense/robosense-m1-plus-lidar-sensor -->
+  <url>
+    <loc>https://www.core-bolt.com/lidar/robosense/robosense-m1-plus-lidar-sensor</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: lidar/robosense/robosense-ruby-plus-lidar-sensor -->
+  <url>
+    <loc>https://www.core-bolt.com/lidar/robosense/robosense-ruby-plus-lidar-sensor</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Subcategory: lidar/autol-lidar-sensors -->
+  <url>
+    <loc>https://www.core-bolt.com/lidar/autol-lidar-sensors</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- Product: lidar/autol-lidar-sensors/g32-lidar-sensor -->
+  <url>
+    <loc>https://www.core-bolt.com/lidar/autol-lidar-sensors/g32-lidar-sensor</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: lidar/autol-lidar-sensors/g192-lidar-sensor -->
+  <url>
+    <loc>https://www.core-bolt.com/lidar/autol-lidar-sensors/g192-lidar-sensor</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: lidar/autol-lidar-sensors/s56-lidar-sensor -->
+  <url>
+    <loc>https://www.core-bolt.com/lidar/autol-lidar-sensors/s56-lidar-sensor</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: lidar/autol-lidar-sensors/s192-lidar-sensor -->
+  <url>
+    <loc>https://www.core-bolt.com/lidar/autol-lidar-sensors/s192-lidar-sensor</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Category: radar -->
+  <url>
+    <loc>https://www.core-bolt.com/radar</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- Subcategory Selection: radar -->
+  <url>
+    <loc>https://www.core-bolt.com/radar/subcategories</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Product: radar/continental-ars-408-21-long-range-radar -->
+  <url>
+    <loc>https://www.core-bolt.com/radar/continental-ars-408-21-long-range-radar</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: radar/continental-ars-548-rdi-long-range-radar -->
+  <url>
+    <loc>https://www.core-bolt.com/radar/continental-ars-548-rdi-long-range-radar</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Category: edge-computers -->
+  <url>
+    <loc>https://www.core-bolt.com/edge-computers</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- Subcategory Selection: edge-computers -->
+  <url>
+    <loc>https://www.core-bolt.com/edge-computers/subcategories</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Subcategory: edge-computers/hyperedge-series -->
+  <url>
+    <loc>https://www.core-bolt.com/edge-computers/hyperedge-series</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- Product: edge-computers/hyperedge-series/hyperedge-m100s-ai-edge-computer -->
+  <url>
+    <loc>https://www.core-bolt.com/edge-computers/hyperedge-series/hyperedge-m100s-ai-edge-computer</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: edge-computers/hyperedge-series/hyperedge-m300f-edge-computer -->
+  <url>
+    <loc>https://www.core-bolt.com/edge-computers/hyperedge-series/hyperedge-m300f-edge-computer</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: edge-computers/hyperedge-series/hyperedge-u300-ai-edge-computer -->
+  <url>
+    <loc>https://www.core-bolt.com/edge-computers/hyperedge-series/hyperedge-u300-ai-edge-computer</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: edge-computers/hyperedge-series/hyperedge-m500-ai-edge-computer -->
+  <url>
+    <loc>https://www.core-bolt.com/edge-computers/hyperedge-series/hyperedge-m500-ai-edge-computer</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: edge-computers/hyperedge-series/hyperedge-700r-ai-edge-computer -->
+  <url>
+    <loc>https://www.core-bolt.com/edge-computers/hyperedge-series/hyperedge-700r-ai-edge-computer</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: edge-computers/hyperedge-series/hyperedge-900dr-ai-edge-computer -->
+  <url>
+    <loc>https://www.core-bolt.com/edge-computers/hyperedge-series/hyperedge-900dr-ai-edge-computer</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: edge-computers/hyperedge-series/hyperedge-900sr-ai-edge-computer -->
+  <url>
+    <loc>https://www.core-bolt.com/edge-computers/hyperedge-series/hyperedge-900sr-ai-edge-computer</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: edge-computers/hyperedge-series/jetson-agx-developer-kit-64gb -->
+  <url>
+    <loc>https://www.core-bolt.com/edge-computers/hyperedge-series/jetson-agx-developer-kit-64gb</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: edge-computers/hyperedge-series/jetson-agx-orin-som-32gb -->
+  <url>
+    <loc>https://www.core-bolt.com/edge-computers/hyperedge-series/jetson-agx-orin-som-32gb</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: edge-computers/hyperedge-series/jetson-agx-orin-som-64gb -->
+  <url>
+    <loc>https://www.core-bolt.com/edge-computers/hyperedge-series/jetson-agx-orin-som-64gb</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: edge-computers/hyperedge-series/jetson-orin-nx-som-8gb -->
+  <url>
+    <loc>https://www.core-bolt.com/edge-computers/hyperedge-series/jetson-orin-nx-som-8gb</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: edge-computers/hyperedge-series/jetson-orin-nx-som-16gb -->
+  <url>
+    <loc>https://www.core-bolt.com/edge-computers/hyperedge-series/jetson-orin-nx-som-16gb</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: edge-computers/hyperedge-series/jetson-orin-nano-developer-kit-8gb -->
+  <url>
+    <loc>https://www.core-bolt.com/edge-computers/hyperedge-series/jetson-orin-nano-developer-kit-8gb</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: edge-computers/hyperedge-series/jetson-orin-nano-som-8gb -->
+  <url>
+    <loc>https://www.core-bolt.com/edge-computers/hyperedge-series/jetson-orin-nano-som-8gb</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: edge-computers/hyperedge-series/jetson-agx-thor-developer-kit-128gb -->
+  <url>
+    <loc>https://www.core-bolt.com/edge-computers/hyperedge-series/jetson-agx-thor-developer-kit-128gb</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: edge-computers/hyperedge-series/jetson-t5000-SOM-128gb -->
+  <url>
+    <loc>https://www.core-bolt.com/edge-computers/hyperedge-series/jetson-t5000-som-128gb</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Subcategory: edge-computers/hypercore-series -->
+  <url>
+    <loc>https://www.core-bolt.com/edge-computers/hypercore-series</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- Product: edge-computers/hypercore-series/hypercore-m300 -->
+  <url>
+    <loc>https://www.core-bolt.com/edge-computers/hypercore-series/hypercore-m300</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: edge-computers/hypercore-series/hypercore-M300X -->
+  <url>
+    <loc>https://www.core-bolt.com/edge-computers/hypercore-series/hypercore-m300x</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: edge-computers/hypercore-series/hypercore-m500 -->
+  <url>
+    <loc>https://www.core-bolt.com/edge-computers/hypercore-series/hypercore-m500</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: edge-computers/hypercore-series/hypercore-m500x -->
+  <url>
+    <loc>https://www.core-bolt.com/edge-computers/hypercore-series/hypercore-m500x</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: edge-computers/hypercore-series/hypercore-700r -->
+  <url>
+    <loc>https://www.core-bolt.com/edge-computers/hypercore-series/hypercore-700r</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Category: industrial-panel-pc -->
+  <url>
+    <loc>https://www.core-bolt.com/industrial-panel-pc</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- Subcategory Selection: industrial-panel-pc -->
+  <url>
+    <loc>https://www.core-bolt.com/industrial-panel-pc/subcategories</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Product: industrial-panel-pc/hypercore-ipc-s-series -->
+  <url>
+    <loc>https://www.core-bolt.com/industrial-panel-pc/hypercore-ipc-s-series</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: industrial-panel-pc/hypercore-ipc-g-series -->
+  <url>
+    <loc>https://www.core-bolt.com/industrial-panel-pc/hypercore-ipc-g-series</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: industrial-panel-pc/hypercore-ipc-t-series -->
+  <url>
+    <loc>https://www.core-bolt.com/industrial-panel-pc/hypercore-ipc-t-series</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Category: vision-systems-cameras -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- Subcategory Selection: vision-systems-cameras -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras-for-automation</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Subcategory: vision-systems-cameras/sensing-cameras -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/sensing-cameras</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- Product group: /vision-systems-cameras/sensing-cameras/gmsl -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/sensing-cameras/gmsl</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <!-- Product group: /vision-systems-cameras/sensing-cameras/gmsl/gmsl -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/sensing-cameras/gmsl/gmsl</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <!-- Product: /vision-systems-cameras/sensing-cameras/gmsl/gmsl/2mp-sg2-ar0231c-0202-gmsl -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/sensing-cameras/gmsl/gmsl/2mp-sg2-ar0231c-0202-gmsl</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: /vision-systems-cameras/sensing-cameras/gmsl/gmsl/1mp-sg1s-ox01f10c-g1g -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/sensing-cameras/gmsl/gmsl/1mp-sg1s-ox01f10c-g1g</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: /vision-systems-cameras/sensing-cameras/gmsl/gmsl/1mp-sg1-ox01f10c-gmsl -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/sensing-cameras/gmsl/gmsl/1mp-sg1-ox01f10c-gmsl</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product group: /vision-systems-cameras/sensing-cameras/gmsl/gmsl2 -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/sensing-cameras/gmsl/gmsl2</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <!-- Product: /vision-systems-cameras/sensing-cameras/gmsl/gmsl2/8mp-sg8-isx028c-g2g -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/sensing-cameras/gmsl/gmsl2/8mp-sg8-isx028c-g2g</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: /vision-systems-cameras/sensing-cameras/gmsl/gmsl2/8mp-sg8-ox08dc-5300-g2g -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/sensing-cameras/gmsl/gmsl2/8mp-sg8-ox08dc-5300-g2g</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: /vision-systems-cameras/sensing-cameras/gmsl/gmsl2/8mp-sg8-ox08dc-g2g -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/sensing-cameras/gmsl/gmsl2/8mp-sg8-ox08dc-g2g</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: /vision-systems-cameras/sensing-cameras/gmsl/gmsl2/8mp-sg8-imx728c-g2g -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/sensing-cameras/gmsl/gmsl2/8mp-sg8-imx728c-g2g</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: /vision-systems-cameras/sensing-cameras/gmsl/gmsl2/8mp-sg8s-ar0820c-5300-g2a -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/sensing-cameras/gmsl/gmsl2/8mp-sg8s-ar0820c-5300-g2a</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: /vision-systems-cameras/sensing-cameras/gmsl/gmsl2/5mp-sg5-imx490c-5300-gmsl2 -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/sensing-cameras/gmsl/gmsl2/5mp-sg5-imx490c-5300-gmsl2</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: /vision-systems-cameras/sensing-cameras/gmsl/gmsl2/3mp-monocular-camera-shw3h -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/sensing-cameras/gmsl/gmsl2/3mp-monocular-camera-shw3h</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: /vision-systems-cameras/sensing-cameras/gmsl/gmsl2/3mp-monocular-camera-shw3g -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/sensing-cameras/gmsl/gmsl2/3mp-monocular-camera-shw3g</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: /vision-systems-cameras/sensing-cameras/gmsl/gmsl2/3mp-monocular-camera-shf3l -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/sensing-cameras/gmsl/gmsl2/3mp-monocular-camera-shf3l</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: /vision-systems-cameras/sensing-cameras/gmsl/gmsl2/3mp-sg3s-isx031c-gmsl2f -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/sensing-cameras/gmsl/gmsl2/3mp-sg3s-isx031c-gmsl2f</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: /vision-systems-cameras/sensing-cameras/gmsl/gmsl2/3mp-sg3s-imx623c-g2f -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/sensing-cameras/gmsl/gmsl2/3mp-sg3s-imx623c-g2f</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: /vision-systems-cameras/sensing-cameras/gmsl/gmsl2/2mp-sg2-imx390c-5200-g2a -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/sensing-cameras/gmsl/gmsl2/2mp-sg2-imx390c-5200-g2a</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: /vision-systems-cameras/sensing-cameras/gmsl/gmsl2/2mpsg2s-ox03cc-g2f -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/sensing-cameras/gmsl/gmsl2/2mpsg2s-ox03cc-g2f</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: /vision-systems-cameras/sensing-cameras/gmsl/gmsl2/2mp-sg2-ar0233c-5200-g2a -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/sensing-cameras/gmsl/gmsl2/2mp-sg2-ar0233c-5200-g2a</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product group: /vision-systems-cameras/sensing-cameras/gmsl/gmsl3 -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/sensing-cameras/gmsl/gmsl3</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <!-- Product: /vision-systems-cameras/sensing-cameras/gmsl/gmsl3/8mp-sg8s-ar0820c-5300-g3a -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/sensing-cameras/gmsl/gmsl3/8mp-sg8s-ar0820c-5300-g3a</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: /vision-systems-cameras/sensing-cameras/gmsl/gmsl3/17mp-sg17-imx735c-g3a -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/sensing-cameras/gmsl/gmsl3/17mp-sg17-imx735c-g3a</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: /vision-systems-cameras/sensing-cameras/gmsl/gmsl3/8mp-sg8-imx728c-g3a -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/sensing-cameras/gmsl/gmsl3/8mp-sg8-imx728c-g3a</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product group: /vision-systems-cameras/sensing-cameras/ti-fpdlink-iii-cameras -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/sensing-cameras/ti-fpdlink-iii-cameras</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <!-- Product: /vision-systems-cameras/sensing-cameras/ti-fpdlink-iii-cameras/3mp-sg3s-isx031c-f3a -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/sensing-cameras/ti-fpdlink-iii-cameras/3mp-sg3s-isx031c-f3a</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: /vision-systems-cameras/sensing-cameras/ti-fpdlink-iii-cameras/2mp-sg2-ar0233c-5200-f3a -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/sensing-cameras/ti-fpdlink-iii-cameras/2mp-sg2-ar0233c-5200-f3a</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product group: /vision-systems-cameras/sensing-cameras/mipi-csi-2-camera -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/sensing-cameras/mipi-csi-2-camera</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <!-- Product: /vision-systems-cameras/sensing-cameras/mipi-csi-2-camera/3mp-sg3-imx900c-mipi -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/sensing-cameras/mipi-csi-2-camera/3mp-sg3-imx900c-mipi</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: /vision-systems-cameras/sensing-cameras/mipi-csi-2-camera/3mp-sg3-isx031c-mipi -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/sensing-cameras/mipi-csi-2-camera/3mp-sg3-isx031c-mipi</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product group: /vision-systems-cameras/sensing-cameras/starlight-camera -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/sensing-cameras/starlight-camera</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <!-- Product: /vision-systems-cameras/sensing-cameras/starlight-camera/sensing2mp-sn2m4efgd-starlight-camera -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/sensing-cameras/starlight-camera/sensing2mp-sn2m4efgd-starlight-camera</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product group: /vision-systems-cameras/sensing-cameras/automatic-defogging-camera -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/sensing-cameras/automatic-defogging-camera</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <!-- Product: /vision-systems-cameras/sensing-cameras/automatic-defogging-camera/automatic-defogging-camera-3mp-redfox-d3gx -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/sensing-cameras/automatic-defogging-camera/automatic-defogging-camera-3mp-redfox-d3gx</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product group: /vision-systems-cameras/sensing-cameras/low-latency-camera -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/sensing-cameras/low-latency-camera</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <!-- Product: /vision-systems-cameras/sensing-cameras/low-latency-camera/2mp-sh2-n1b60-g2a -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/sensing-cameras/low-latency-camera/2mp-sh2-n1b60-g2a</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: /vision-systems-cameras/sensing-cameras/low-latency-camera/3mp-sh3-s11a60-g2a -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/sensing-cameras/low-latency-camera/3mp-sh3-s11a60-g2a</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product group: /vision-systems-cameras/sensing-cameras/gige-cameras -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/sensing-cameras/gige-cameras</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <!-- Product group: /vision-systems-cameras/sensing-cameras/gige-cameras/area-scan-cameras -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/sensing-cameras/gige-cameras/area-scan-cameras</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <!-- Product: /vision-systems-cameras/sensing-cameras/gige-cameras/area-scan-cameras/0.3mp-sgige-e3-s1mc -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/sensing-cameras/gige-cameras/area-scan-cameras/0.3mp-sgige-e3-s1mc</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: /vision-systems-cameras/sensing-cameras/gige-cameras/area-scan-cameras/20mp-sgige-l200-s1mc -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/sensing-cameras/gige-cameras/area-scan-cameras/20mp-sgige-l200-s1mc</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: /vision-systems-cameras/sensing-cameras/gige-cameras/area-scan-cameras/1.3mp-sgige-e13-s1mc -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/sensing-cameras/gige-cameras/area-scan-cameras/1.3mp-sgige-e13-s1mc</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: /vision-systems-cameras/sensing-cameras/gige-cameras/area-scan-cameras/5mp-sgige-e50-h2mc -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/sensing-cameras/gige-cameras/area-scan-cameras/5mp-sgige-e50-h2mc</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product group: /vision-systems-cameras/sensing-cameras/gige-cameras/line-scan-cameras -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/sensing-cameras/gige-cameras/line-scan-cameras</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <!-- Product: /vision-systems-cameras/sensing-cameras/gige-cameras/line-scan-cameras/4k-sgige-l041-n1xmc -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/sensing-cameras/gige-cameras/line-scan-cameras/4k-sgige-l041-n1xmc</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: /vision-systems-cameras/sensing-cameras/gige-cameras/line-scan-cameras/8k-sgige-l081-n1xmm -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/sensing-cameras/gige-cameras/line-scan-cameras/8k-sgige-l081-n1xmm</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: /vision-systems-cameras/sensing-cameras/gige-cameras/line-scan-cameras/16k-sgige-l161-n1xmm -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/sensing-cameras/gige-cameras/line-scan-cameras/16k-sgige-l161-n1xmm</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Subcategory: vision-systems-cameras/zed-cameras -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/zed-cameras</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- Product group: /vision-systems-cameras/zed-cameras/neural-stereo-depth-sensing -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/zed-cameras/neural-stereo-depth-sensing</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <!-- Product: /vision-systems-cameras/zed-cameras/neural-stereo-depth-sensing/zed-x-nano -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/zed-cameras/neural-stereo-depth-sensing/zed-x-nano</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: /vision-systems-cameras/zed-cameras/neural-stereo-depth-sensing/zed-x-mini -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/zed-cameras/neural-stereo-depth-sensing/zed-x-mini</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: /vision-systems-cameras/zed-cameras/neural-stereo-depth-sensing/zed-x-gs -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/zed-cameras/neural-stereo-depth-sensing/zed-x-gs</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: /vision-systems-cameras/zed-cameras/neural-stereo-depth-sensing/zed-2i -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/zed-cameras/neural-stereo-depth-sensing/zed-2i</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product group: /vision-systems-cameras/zed-cameras/stereo-depth-sensing -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/zed-cameras/stereo-depth-sensing</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <!-- Product: /vision-systems-cameras/zed-cameras/stereo-depth-sensing/zed-mini -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/zed-cameras/stereo-depth-sensing/zed-mini</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Subcategory: vision-systems-cameras/realsense-cameras -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/realsense-cameras</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- Product group: /vision-systems-cameras/realsense-cameras/stereo-depth-with-ir-pass-filter -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/realsense-cameras/stereo-depth-with-ir-pass-filter</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <!-- Product: /vision-systems-cameras/realsense-cameras/stereo-depth-with-ir-pass-filter/intel-real-sense-depth-camera-d435if -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/realsense-cameras/stereo-depth-with-ir-pass-filter/intel-real-sense-depth-camera-d435if</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: /vision-systems-cameras/realsense-cameras/stereo-depth-with-ir-pass-filter/intel-real-sense-depth-camera-d435f -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/realsense-cameras/stereo-depth-with-ir-pass-filter/intel-real-sense-depth-camera-d435f</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: /vision-systems-cameras/realsense-cameras/stereo-depth-with-ir-pass-filter/intel-realsense-depth-camera-d455f -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/realsense-cameras/stereo-depth-with-ir-pass-filter/intel-realsense-depth-camera-d455f</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product group: /vision-systems-cameras/realsense-cameras/facial-authentication -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/realsense-cameras/facial-authentication</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <!-- Product: /vision-systems-cameras/realsense-cameras/facial-authentication/intel-realsense-f450 -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/realsense-cameras/facial-authentication/intel-realsense-f450</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: /vision-systems-cameras/realsense-cameras/facial-authentication/intel-realsense-f455 -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/realsense-cameras/facial-authentication/intel-realsense-f455</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: /vision-systems-cameras/realsense-cameras/facial-authentication/intel-realsense-f500 -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/realsense-cameras/facial-authentication/intel-realsense-f500</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product group: /vision-systems-cameras/realsense-cameras/ruggedized-industrial-stereo-depth -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/realsense-cameras/ruggedized-industrial-stereo-depth</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <!-- Product: /vision-systems-cameras/realsense-cameras/ruggedized-industrial-stereo-depth/intel-realsense-depth-camera-d456 -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/realsense-cameras/ruggedized-industrial-stereo-depth/intel-realsense-depth-camera-d456</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: /vision-systems-cameras/realsense-cameras/ruggedized-industrial-stereo-depth/intel-realsense-depth-camera-d457 -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/realsense-cameras/ruggedized-industrial-stereo-depth/intel-realsense-depth-camera-d457</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: /vision-systems-cameras/realsense-cameras/ruggedized-industrial-stereo-depth/intel-realsense-depth-camera-d555 -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/realsense-cameras/ruggedized-industrial-stereo-depth/intel-realsense-depth-camera-d555</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product group: /vision-systems-cameras/realsense-cameras/stereo-depth-cameras -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/realsense-cameras/stereo-depth-cameras</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <!-- Product: /vision-systems-cameras/realsense-cameras/stereo-depth-cameras/intel-real-sense-depth-camera-d415 -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/realsense-cameras/stereo-depth-cameras/intel-real-sense-depth-camera-d415</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: /vision-systems-cameras/realsense-cameras/stereo-depth-cameras/intel-real-sense-depth-camera-d435 -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/realsense-cameras/stereo-depth-cameras/intel-real-sense-depth-camera-d435</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: /vision-systems-cameras/realsense-cameras/stereo-depth-cameras/intel-real-sense-depth-camera-d435i -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/realsense-cameras/stereo-depth-cameras/intel-real-sense-depth-camera-d435i</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: /vision-systems-cameras/realsense-cameras/stereo-depth-cameras/intel-realsense-depth-camera-d421 -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/realsense-cameras/stereo-depth-cameras/intel-realsense-depth-camera-d421</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: /vision-systems-cameras/realsense-cameras/stereo-depth-cameras/intel-realsense-depth-camera-d405 -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/realsense-cameras/stereo-depth-cameras/intel-realsense-depth-camera-d405</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: /vision-systems-cameras/realsense-cameras/stereo-depth-cameras/intel-realsense-depth-camera-d401 -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/realsense-cameras/stereo-depth-cameras/intel-realsense-depth-camera-d401</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: /vision-systems-cameras/realsense-cameras/stereo-depth-cameras/intel-realsense-depth-camera-d430 -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/realsense-cameras/stereo-depth-cameras/intel-realsense-depth-camera-d430</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Product: /vision-systems-cameras/realsense-cameras/stereo-depth-cameras/intel-realsense-depth-camera-d455 -->
+  <url>
+    <loc>https://www.core-bolt.com/vision-systems-cameras/realsense-cameras/stereo-depth-cameras/intel-realsense-depth-camera-d455</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+</urlset>

@@ -1,0 +1,20 @@
+# CoreBolt
+
+> CoreBolt is a Hyderabad, India-based supplier of industrial sensing and edge-compute hardware for robotics, automation, and AI applications — 3D LiDAR sensors, AI edge computers, industrial panel PCs, and machine vision/GMSL cameras — alongside linear actuators, servo lift columns, and wiring harness & connector solutions for industrial automation and motion control.
+
+## Products
+
+- [LiDAR Sensors](https://www.core-bolt.com/lidar): 3D LiDAR sensors from Ouster, Velodyne, Hesai, Livox, RoboSense, and SICK for robotics, AMRs, drones, and autonomous navigation.
+- [Edge Computers](https://www.core-bolt.com/edge-computers): NVIDIA Jetson and Intel-based edge computing platforms (HyperEdge, HyperCore series) for AI, machine vision, robotics, and Industrial IoT.
+- [Industrial Panel Computers](https://www.core-bolt.com/industrial-panel-pc): Rugged, fanless industrial touch panel PCs (HyperCore IPC S/G/T series) for factory automation, HMI, and process monitoring.
+- [Vision Systems & Cameras](https://www.core-bolt.com/vision-systems-cameras): GMSL, MIPI CSI-2, GigE, ZED, and Intel RealSense cameras for machine vision, depth sensing, and autonomous navigation.
+
+## Resources
+
+- [Blog](https://www.core-bolt.com/blog): Technical guides and product comparisons covering LiDAR, edge computing, vision cameras, industrial panel PCs, linear actuators, servo lift columns, and wiring harness & connector solutions.
+
+## Company
+
+- [About](https://www.core-bolt.com/about-us)
+- [Contact](https://www.core-bolt.com/contact)
+- [Perception Kits](https://www.core-bolt.com/perception-kits)

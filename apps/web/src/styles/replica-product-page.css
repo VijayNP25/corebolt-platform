@@ -1,0 +1,619 @@
+/* Product detail — extends replica-site / replica-page tokens */
+
+.replica-product-top {
+  padding-top: 0;
+  padding-bottom: 64px;
+}
+
+.replica-product-crumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--ink3);
+  margin-bottom: 28px;
+}
+
+.replica-product-crumb a {
+  color: var(--ink3);
+  transition: color 0.2s;
+}
+
+.replica-product-crumb a:hover {
+  color: var(--g-dk);
+}
+
+.replica-product-crumb-sep {
+  color: var(--ink4);
+  user-select: none;
+}
+
+.replica-product-crumb-current {
+  color: var(--ink);
+  font-weight: 400;
+}
+
+.replica-product-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: 64px;
+  align-items: stretch;
+}
+
+.replica-product-gallery {
+  position: sticky;
+  top: 96px;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 14px;
+  min-height: 100%;
+}
+
+.replica-product-main-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+}
+
+.replica-product-main-image img {
+  width: 100%;
+  max-width: 100%;
+  max-height: 320px;
+  object-fit: contain;
+}
+
+.replica-product-thumbs {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.replica-product-thumb {
+  width: 80px;
+  height: 64px;
+  object-fit: contain;
+  border: 1px solid var(--bd);
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 6px;
+  background: #fff;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s,
+    transform 0.2s;
+}
+
+.replica-product-thumb:hover,
+.replica-product-thumb.is-active {
+  border-color: rgba(118, 185, 0, 0.45);
+  box-shadow: 0 0 0 1px rgba(118, 185, 0, 0.12);
+  transform: translateY(-1px);
+}
+
+.replica-product-info .lbl {
+  margin-bottom: 14px;
+}
+
+.replica-product-info .replica-page-title {
+  font-size: clamp(32px, 3.6vw, 48px);
+  font-weight: 400;
+  letter-spacing: -1.2px;
+  margin-bottom: 16px;
+}
+
+.replica-page .replica-product-info .replica-page-sub {
+  max-width: none;
+  margin-bottom: 28px;
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+.replica-product-price {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: -8px 0 28px;
+}
+
+.replica-product-price-value {
+  font-size: clamp(28px, 3vw, 36px);
+  font-weight: 500;
+  letter-spacing: -0.5px;
+  color: var(--ink);
+  line-height: 1;
+}
+
+.replica-product-price-note {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--ink3);
+}
+
+.replica-product-som-section {
+  width: 100%;
+  margin-bottom: 32px;
+}
+
+.replica-product-som-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--ink3);
+  margin-bottom: 12px;
+}
+
+.replica-product-som-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.replica-product-som-card {
+  width: 124px;
+  background: var(--bg);
+  border: 1px solid var(--bd);
+  border-radius: 8px;
+  overflow: hidden;
+  transition:
+    border-color 0.25s,
+    box-shadow 0.25s,
+    transform 0.25s;
+}
+
+.replica-product-som-card:hover {
+  border-color: rgba(118, 185, 0, 0.35);
+  box-shadow: var(--shm);
+  transform: translateY(-2px);
+}
+
+.replica-product-som-card img {
+  width: 100%;
+  height: 76px;
+  object-fit: contain;
+  padding: 8px;
+  background: #fff;
+}
+
+.replica-product-som-card div {
+  background: var(--bg);
+  color: var(--ink);
+  min-height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 500;
+  white-space: nowrap;
+  border-top: 1px solid var(--bd);
+  padding: 8px 6px;
+}
+
+.replica-product-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.replica-product-actions .btn {
+  gap: 8px;
+}
+
+.replica-product-actions a.replica-product-download-btn,
+.replica-product-actions a.replica-product-download-btn:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+.replica-product-actions .replica-product-download-icon {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  color: #fff;
+  stroke: currentColor;
+}
+
+.replica-product-overview-section {
+  padding-top: 72px;
+  padding-bottom: 88px;
+}
+
+.replica-product-overview {
+  max-width: none;
+  margin: 0;
+}
+
+.replica-page .replica-product-overview-title {
+  margin: 0 0 28px;
+  max-width: none;
+  text-align: left;
+  font-size: clamp(22px, 2.4vw, 24px);
+  font-weight: 300;
+  letter-spacing: -0.6px;
+  line-height: 1.25;
+  color: var(--ink);
+}
+
+.replica-product-overview-prose {
+  margin: 0;
+  max-width: none;
+}
+
+.replica-product-specs-section {
+  padding-top: 72px;
+  padding-bottom: 88px;
+}
+
+.replica-product-specs-hd {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 56px;
+}
+
+.replica-product-specs-title {
+  margin: 0;
+  color: var(--ink);
+  font-weight: 300;
+}
+
+.replica-product-specs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 44px;
+  max-width: none;
+  margin: 0;
+}
+
+.replica-product-spec-heading {
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: -0.25px;
+  line-height: 1.35;
+  color: var(--ink);
+  margin: 0 0 14px;
+  padding: 0;
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.replica-product-spec-heading::before {
+  content: "";
+  width: 5px;
+  height: 20px;
+  border-radius: 999px;
+  background: linear-gradient(
+    180deg,
+    #9ed62a 0%,
+    var(--g) 45%,
+    var(--g-dk) 100%
+  );
+  box-shadow: 0 0 10px rgba(118, 185, 0, 0.35);
+  flex-shrink: 0;
+}
+
+.replica-product-spec-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  border: 1px solid var(--bd);
+  border-radius: var(--r);
+  background: var(--bg);
+}
+
+.replica-product-spec-table-wrap .replica-product-spec-table {
+  border: none;
+  border-radius: 0;
+  overflow: visible;
+}
+
+.replica-product-spec-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid var(--bd);
+  border-radius: var(--r);
+  overflow: hidden;
+  background: var(--bg);
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  font-size: 14px;
+  color: var(--ink2);
+}
+
+.replica-product-spec-table--scroll {
+  width: max-content;
+  min-width: 100%;
+}
+
+.replica-product-spec-table--scroll th,
+.replica-product-spec-table--scroll td {
+  white-space: nowrap;
+  min-width: 108px;
+}
+
+.replica-product-spec-table--scroll td:first-child,
+.replica-product-spec-table--scroll th:first-child {
+  width: auto;
+  max-width: none;
+  min-width: 120px;
+  position: sticky;
+  left: 0;
+  z-index: 1;
+}
+
+.replica-product-spec-table--scroll thead th:first-child {
+  background: #000;
+  z-index: 2;
+}
+
+.replica-product-spec-table--scroll tbody td:first-child {
+  background: var(--bg);
+}
+
+.replica-product-spec-table--scroll
+  tbody
+  tr:nth-child(even):not(.replica-product-spec-section-row)
+  td:first-child {
+  background: #fafafa;
+}
+
+.replica-product-spec-table--scroll
+  tbody
+  tr:not(.replica-product-spec-section-row):hover
+  td:first-child {
+  background: rgba(118, 185, 0, 0.04);
+}
+
+.replica-product-spec-table--scroll .replica-product-spec-section-row th {
+  position: static;
+}
+
+.replica-product-spec-table--scroll .replica-product-spec-action-cell {
+  min-width: 112px;
+}
+
+.replica-product-spec-block.rv.in .replica-product-spec-table,
+.replica-product-spec-table.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.replica-product-spec-block.rv.in .replica-product-spec-table {
+  transition-delay: 0.08s;
+}
+
+.replica-product-spec-table thead th {
+  background: #000;
+  color: #fff;
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-bottom: none;
+}
+
+.replica-product-spec-table--merged-header thead th {
+  text-align: left;
+}
+
+.replica-product-spec-section-row th {
+  background: rgba(0, 0, 0, 0.03);
+  color: var(--ink);
+  padding: 10px 16px;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--bd);
+}
+
+.replica-product-spec-section-row--accent th {
+  background: rgba(0, 0, 0);
+  color: #fff;
+  border-bottom-color: rgba(118, 185, 0, 0.4);
+}
+
+.replica-product-spec-table td {
+  border-bottom: 1px solid var(--bd);
+  padding: 12px 16px;
+  vertical-align: top;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+.replica-product-spec-table td:first-child {
+  font-weight: 400;
+  color: var(--ink);
+  width: 30%;
+  max-width: 240px;
+}
+
+.replica-product-spec-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.replica-product-spec-table
+  tbody
+  tr:nth-child(even):not(.replica-product-spec-section-row)
+  td {
+  background: rgba(0, 0, 0, 0.015);
+}
+
+.replica-product-spec-table
+  tbody
+  tr:not(.replica-product-spec-section-row):hover
+  td {
+  background: rgba(118, 185, 0, 0.04);
+}
+
+.replica-product-spec-action-cell {
+  width: 1%;
+  white-space: nowrap;
+  vertical-align: middle;
+  text-align: right;
+}
+
+.replica-product-spec-buy-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 999px;
+  background: var(--ink);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.replica-product-spec-buy-btn:hover {
+  background: #1a1a1a;
+}
+
+.replica-product-spec-buy-btn:active {
+  transform: scale(0.98);
+}
+
+@keyframes replica-spec-row-in {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.replica-product-spec-block.rv.in .replica-product-spec-table tbody tr {
+  animation: replica-spec-row-in 0.38s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.replica-product-spec-block.rv.in
+  .replica-product-spec-table
+  tbody
+  tr:nth-child(1) {
+  animation-delay: 0.14s;
+}
+.replica-product-spec-block.rv.in
+  .replica-product-spec-table
+  tbody
+  tr:nth-child(2) {
+  animation-delay: 0.17s;
+}
+.replica-product-spec-block.rv.in
+  .replica-product-spec-table
+  tbody
+  tr:nth-child(3) {
+  animation-delay: 0.2s;
+}
+.replica-product-spec-block.rv.in
+  .replica-product-spec-table
+  tbody
+  tr:nth-child(4) {
+  animation-delay: 0.23s;
+}
+.replica-product-spec-block.rv.in
+  .replica-product-spec-table
+  tbody
+  tr:nth-child(5) {
+  animation-delay: 0.26s;
+}
+.replica-product-spec-block.rv.in
+  .replica-product-spec-table
+  tbody
+  tr:nth-child(6) {
+  animation-delay: 0.29s;
+}
+.replica-product-spec-block.rv.in
+  .replica-product-spec-table
+  tbody
+  tr:nth-child(7) {
+  animation-delay: 0.32s;
+}
+.replica-product-spec-block.rv.in
+  .replica-product-spec-table
+  tbody
+  tr:nth-child(8) {
+  animation-delay: 0.35s;
+}
+.replica-product-spec-block.rv.in
+  .replica-product-spec-table
+  tbody
+  tr:nth-child(9) {
+  animation-delay: 0.38s;
+}
+.replica-product-spec-block.rv.in
+  .replica-product-spec-table
+  tbody
+  tr:nth-child(10) {
+  animation-delay: 0.41s;
+}
+.replica-product-spec-block.rv.in
+  .replica-product-spec-table
+  tbody
+  tr:nth-child(n + 11) {
+  animation-delay: 0.44s;
+}
+
+.replica-product-spec-empty {
+  text-align: center;
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--ink3);
+}
+
+@media (max-width: 900px) {
+  .replica-product-layout {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .replica-product-gallery {
+    position: static;
+    justify-content: flex-start;
+    min-height: 0;
+  }
+
+  .replica-product-main-image {
+    min-height: 0;
+    padding: 0;
+  }
+
+  .replica-product-main-image img {
+    max-height: 260px;
+  }
+
+  .replica-product-spec-table-wrap {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(118, 185, 0, 0.5) transparent;
+  }
+}

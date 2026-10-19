@@ -1,0 +1,117 @@
+# CoreBolt — Full Site Content Index
+
+> Detailed reference for AI systems and crawlers. CoreBolt (core-bolt.com) is a Hyderabad, India-based
+> supplier of industrial sensing, edge-compute hardware, and motion/connectivity components for robotics,
+> automation, and AI applications.
+
+---
+
+## Product Categories
+
+### LiDAR Sensors
+URL: https://www.core-bolt.com/lidar
+CoreBolt provides 3D LiDAR sensors from Livox, Hesai, RoboSense, Ouster, Velodyne, and SICK for robotics, industrial automation, autonomous vehicles, drones, intelligent transportation, and smart infrastructure. Brand lines include Ouster & Velodyne, Hesai, Livox, RoboSense, and SICK, covering mechanical and solid-state 3D LiDAR for AMRs, AGVs, and autonomous navigation.
+
+### Edge Computers
+URL: https://www.core-bolt.com/edge-computers
+CoreBolt Edge Computers deliver scalable edge computing for AI, machine vision, robotics, automation, and Industrial IoT, powered by NVIDIA Jetson and Intel architectures. Product lines include the HyperEdge and HyperCore series for real-time processing in demanding environments.
+
+### Industrial Panel Computers
+URL: https://www.core-bolt.com/industrial-panel-pc
+Rugged, fanless industrial touch panel PCs (HyperCore IPC S, G, and T series) combining industrial-grade computing with touchscreen interfaces for HMI, machine control, process visualization, and factory automation. Built for 24/7 operation in manufacturing, warehousing, and Industry 4.0 environments.
+
+### Vision Systems & Cameras
+URL: https://www.core-bolt.com/vision-systems-cameras
+Industrial cameras, stereo depth cameras, and GMSL cameras for automation, robotics, and AI applications, designed for integration with NVIDIA Jetson and Intel-based edge platforms. Includes the Sensing Cameras subcategory (GMSL, GMSL2, TI FPD-Link III, MIPI CSI-2, GigE) plus ZED and Intel RealSense stereo depth cameras, used for quality inspection, object detection, autonomous navigation, and SLAM.
+
+### Motion Control & Connectivity (blog-documented, catalog listing in progress)
+CoreBolt also supplies linear actuators, custom servo lift columns, and wiring harness & connector solutions for industrial automation, robotics, and OEM/ODM applications. These are currently documented on the blog; dedicated catalog pages are not yet live.
+
+### Perception Kits
+URL: https://www.core-bolt.com/perception-kits
+Integrated perception kits pairing edge compute with sensing hardware for robotics and automation development.
+
+---
+
+## Blog Posts
+
+### AI Edge Computer + GMSL Cameras Integration | Complete Vision System for Robotics & Automation
+URL: https://www.core-bolt.com/blog/ai-edge-computer-gmsl-cameras-integration
+What if your machines could not only see—but instantly understand and act in real time?
+
+### Custom Servo Lift Column for Robotics and Automation
+URL: https://www.core-bolt.com/blog/custom-servo-lift-column-for-robotics-and-automation
+Modern industries require custom servo lift column for robotics solutions that deliver precision, flexibility, and seamless integration. Traditional lifting systems often fall short in advanced automation environments.
+
+### Industrial Panel PC Guide for Factory Automation
+URL: https://www.core-bolt.com/blog/industrial-panel-pc-guide-for-factory-automation
+In today's competitive manufacturing landscape, downtime is not an option. The industrial panel PC has become the computing backbone of modern factories driving everything from SCADA systems and PLC automation to CNC machine control and warehouse operations. As an industrial computer for manufacturing, it bridges the gap between human operators and complex automated systems, delivering the reliability and performance that production environments demand.
+
+### Complete Guide to Edge AI, GPU Computing & NVIDIA Jetson
+URL: https://www.core-bolt.com/blog/ai-edge-comuter-complete-guide-to-edge-ai-gpu-computing-nvidia-jetson
+AI Edge Computers are specialized computing systems that process artificial intelligence workloads locally, near the source of data generation. Instead of sending data to remote cloud servers, they perform AI inference directly on devices such as cameras, sensors, robots, and industrial equipment. This enables real-time decision-making, reduces latency, improves data security, and supports intelligent automation across industries.
+
+### RoboSense Airy 96 Beam LiDAR Sensor
+URL: https://www.core-bolt.com/blog/robosense-airy-96-beam-lidar-sensor
+The Future of 360° Perception for Robotics.
+
+### Livox Mid-360S LiDAR Sensor
+URL: https://www.core-bolt.com/blog/livox-mid-360-lidar-sensor
+Discover the Livox Mid-360S LiDAR sensor and its compact 360° 3D perception for robotics, SLAM, and autonomous navigation.
+
+### Actuator Selection for Robotics & Automated Machinery
+URL: https://www.core-bolt.com/blog/actuator-selection-robotics-automated-machinery
+Modern robots and automated machines rely on precise, repeatable motion to perform complex tasks. The success of any automation system depends heavily on proper actuator selection for robotics & automated machinery, ensuring optimal force, speed, and control across applications.
+
+### How to Select Compute for Vision & LiDAR Workloads
+URL: https://www.core-bolt.com/blog/compute-for-vision-lidar-workloads
+Modern robots, autonomous vehicles, and smart machines rely heavily on Vision & LiDAR workloads to understand and interact with their environment. Cameras capture rich visual details, while LiDAR delivers precise depth and spatial awareness. But all this data is only useful if the compute platform behind it can process information fast, reliably, and efficiently.
+
+### LiDAR vs Vision Systems: How Machines Decide What to See
+URL: https://www.core-bolt.com/blog/lidar-vs-vision-systems
+For a robot, “seeing” is not the same as human vision. Machines rely on perception technologies to measure space, detect objects, and make decisions in real time. Two technologies dominate this space: LiDAR and Vision Systems. Instead of asking which one is better, the real question is how LiDAR vs Vision Systems shapes machine intelligence across different environments and tasks.
+
+### Choosing the Right Vision Cameras for Outdoor & Industrial Applications
+URL: https://www.core-bolt.com/blog/gmsl-depth-camera-outdoor-vision-systems
+Modern automation, robotics, and intelligent machines rely heavily on vision systems that perform reliably in demanding environments. Whether it’s an autonomous vehicle, industrial robot, or outdoor inspection system, selecting the right camera technology directly impacts accuracy, safety, and uptime.
+
+### Wiring Harness & Connectors: The Blueprint Behind Intelligent Machines
+URL: https://www.core-bolt.com/blog/wiring-harness-and-connectors
+Every high-performance machine begins with a map. Not a digital file, not a blueprint on a drawing board, but the physical network of routes that carry energy and information. At the centre of this hidden map lie the Wiring Harness & Connectors, shaping how each component communicates, reacts, and performs.
+
+### Rugged Computing for Modern Industries:The 2025 Guide to India’s Best IPC Suppliers
+URL: https://www.core-bolt.com/blog/rugged-computing-for-modern-industries
+Industrial operations today rely heavily on stable, rugged, and long-lasting computing. From manufacturing plants and automated assembly lines to logistics, healthcare, and energy systems, industrial PCs (IPCs) keep vital processes running smoothly. Unlike consumer computers, industrial PCs are designed to endure dust, heat, vibration, constant usage, and demanding workloads.
+
+### Top Linear Actuator Manufacturers & Suppliers
+URL: https://www.core-bolt.com/blog/top-linear-actuator-manufacturers-suppliers
+Linear actuators are key parts of modern automation. They are used in industrial machinery, medical devices, home automation, robotics, and furniture systems. These devices allow precise linear motion by converting electrical energy into controlled push-pull movement.
+
+### Next-Gen Wiring & Connector Solutions
+URL: https://www.core-bolt.com/blog/next-gen-wiring-connector-solutions
+Modern industries rely on safe, efficient, and reliable electrical connections. From automotive to robotics and medical devices, every product needs organized wiring to function smoothly.OEM/ODM Wiring Harness & Connectors provide customized and durable connectivity solutions designed for today’s advanced technologies.
+
+### RoboSense Ruby Plus LiDAR: Premium Long-Range 3D Perception Sensor for Autonomous Systems
+URL: https://www.core-bolt.com/blog/robosense-ruby-plus
+Discover the power of RoboSense Ruby Plus LiDAR with its long-range, high-resolution sensing and advanced 3D perception for autonomous vehicles and robotics.
+
+### RoboSense M1 Plus vs M2: A Complete Comparison of Two Advanced Automotive-Grade LiDARs
+URL: https://www.core-bolt.com/blog/robosense-m1plus-vs-m2-comparison
+Compare RoboSense M1 Plus vs M2 LiDAR sensors. Understand differences in design, detection range, performance, and applications for robotics and automation.
+
+### RoboSense E1R vs E1 – The Ultimate RoboSense LiDAR Comparison for Robotics & Automotive
+URL: https://www.core-bolt.com/blog/robosense-e1r-vs-e1-comparison
+Explore the full comparison of RoboSense E1R vs E1 LiDAR sensors. Learn differences in specs, range, performance, and use cases to choose the right LiDAR for robotics.
+
+### Top 10 Reasons to Use NVIDIA Developer Kits
+URL: https://www.core-bolt.com/blog/nvidia-developer-kits
+Explore why NVIDIA Developer Kits are essential for AI, robotics, and edge computing. Learn about their benefits, ecosystem, and performance advantages.
+
+---
+
+## Company
+
+- About: https://www.core-bolt.com/about-us
+- Contact: https://www.core-bolt.com/contact
+- Location: D/no. 18-78/35/108, Madhapur, Hyderabad, 500098, Telangana, India
+- Phone: +91 81435 29595

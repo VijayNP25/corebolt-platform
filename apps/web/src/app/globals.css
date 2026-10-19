@@ -1,0 +1,363 @@
+@import '../styles/replica-home.css';
+@import '../styles/replica-nav.css';
+@import '../styles/replica-footer.css';
+@import '../styles/replica-pages.css';
+@import '../styles/replica-site-content.css';
+@import '../styles/replica-product-page.css';
+@import '../styles/replica-perception-kits.css';
+@import '../styles/contact-modal.css';
+@import '../styles/perception-kit-contact-modal.css';
+@import '../styles/xcard.css';
+@import '../styles/home-page.css';
+@import '../styles/currency-switcher.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(210, 40%, 2%);
+  --foreground: hsl(210, 40%, 98%);
+  --card: hsl(222, 84%, 4.9%);
+  --card-foreground: hsl(210, 40%, 98%);
+  --popover: hsl(222, 84%, 4.9%);
+  --popover-foreground: hsl(210, 40%, 98%);
+  --primary: #76b900;
+  --primary-foreground: hsl(222, 84%, 4.9%);
+  --secondary: #91c733;
+  --secondary-foreground: hsl(210, 40%, 98%);
+  --muted: hsl(217, 32%, 17%);
+  --muted-foreground: #ffffff;
+  --accent: hsl(217, 32%, 17%);
+  --accent-foreground: hsl(210, 40%, 98%);
+  --destructive: hsl(0, 62%, 30%);
+  --destructive-foreground: hsl(210, 40%, 98%);
+  --border: hsl(217, 32%, 17%);
+  --input: hsl(217, 32%, 17%);
+  --ring: hsl(207, 90%, 54%);
+  --radius: 0.75rem;
+  --chart-1: hsl(207, 90%, 54%);
+  --chart-2: hsl(173, 58%, 39%);
+  --chart-3: hsl(197, 37%, 24%);
+  --chart-4: hsl(43, 74%, 66%);
+  --chart-5: hsl(27, 87%, 67%);
+  --neon-cyan: hsl(187, 100%, 50%);
+  --neon-magenta: hsl(300, 100%, 50%);
+  --dark-slate: hsl(215, 28%, 17%);
+  --slate-850: hsl(215, 25%, 27%);
+}
+
+.dark {
+  --background: hsl(210, 40%, 2%);
+  --foreground: hsl(210, 40%, 98%);
+  --card: hsl(222, 84%, 4.9%);
+  --card-foreground: hsl(210, 40%, 98%);
+  --popover: hsl(222, 84%, 4.9%);
+  --popover-foreground: hsl(210, 40%, 98%);
+  --primary: hsl(207, 90%, 54%);
+  --primary-foreground: hsl(222, 84%, 4.9%);
+  --secondary: hsl(217, 32%, 17%);
+  --secondary-foreground: hsl(210, 40%, 98%);
+  --muted: hsl(217, 32%, 17%);
+  --muted-foreground: hsl(215, 20%, 65%);
+  --accent: hsl(217, 32%, 17%);
+  --accent-foreground: hsl(210, 40%, 98%);
+  --destructive: hsl(0, 62%, 30%);
+  --destructive-foreground: hsl(210, 40%, 98%);
+  --border: hsl(217, 32%, 17%);
+  --input: hsl(217, 32%, 17%);
+  --ring: hsl(207, 90%, 54%);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-weight: 300;
+  }
+}
+
+@layer components {
+  .gradient-text {
+    @apply bg-gradient-to-r from-[#76b900] to-[#91c733] bg-clip-text text-transparent;
+  }
+
+  .neon-border {
+    @apply border border-primary shadow-lg;
+    box-shadow: 0 0 10px rgba(118, 185, 0, 0.35);
+  }
+
+  .neon-glow {
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+}
+
+@layer utilities {
+  @keyframes glow {
+    from {
+      box-shadow: 0 0 20px rgba(118, 185, 0, 0.4);
+    }
+    to {
+      box-shadow:
+        0 0 30px rgba(118, 185, 0, 0.5),
+        0 0 40px rgba(145, 199, 51, 0.35);
+    }
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 200;
+  font-display: swap;
+  src: url("/fonts/inter-latin-200.woff2") format("woff2"), url("/fonts/inter-latin-200.woff") format("woff");
+}
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("/fonts/inter-latin-300.woff2") format("woff2"), url("/fonts/inter-latin-300.woff") format("woff");
+}
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/inter-latin-400.woff2") format("woff2"), url("/fonts/inter-latin-400.woff") format("woff");
+}
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/fonts/inter-latin-500.woff2") format("woff2"), url("/fonts/inter-latin-500.woff") format("woff");
+}
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/fonts/inter-latin-600.woff2") format("woff2"), url("/fonts/inter-latin-600.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Inter Fallback";
+  src: local("Arial"), local("ArialMT"), local("Liberation Sans"), local("Arimo");
+  ascent-override: 90.49%;
+  descent-override: 22.56%;
+  line-gap-override: 0%;
+  size-adjust: 107.06%;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Bank Gothic Medium BT";
+  src:
+    url("/fonts/bank-gothic-medium-bt.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.corebolt-logo {
+  font-family: "Bank Gothic Medium BT", sans-serif;
+  font-size: 1.75rem;
+  font-weight: 700 !important;
+  line-height: 1;
+  color: #fff;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.corebolt-logo-tm {
+  font-family: "Bank Gothic Medium BT", sans-serif;
+  font-size: 0.32em;
+  font-weight: 500;
+  line-height: 0;
+  letter-spacing: 0;
+  vertical-align: super;
+  position: relative;
+  top: -1em;
+  margin-left: 0.6em;
+}
+
+.corebolt-logo--footer {
+  color: #fff;
+  cursor: default;
+}
+
+.replica-site .corebolt-logo,
+.replica-home .corebolt-logo,
+.replica-page .corebolt-logo {
+  font-family: "Bank Gothic Medium BT", sans-serif !important;
+}
+
+#replica-nav.scrolled.tone-light .corebolt-logo {
+  color: var(--ink);
+}
+#replica-nav.scrolled.tone-dark .corebolt-logo {
+  color: #fff;
+}
+#replica-nav.scrolled:not(.tone-light):not(.tone-dark) .corebolt-logo {
+  color: #fff;
+}
+
+.replica-home[data-theme="dark"]
+  #replica-nav.scrolled.tone-light
+  .corebolt-logo,
+.replica-page[data-theme="dark"]
+  #replica-nav.scrolled.tone-light
+  .corebolt-logo {
+  color: var(--ink);
+}
+.replica-home[data-theme="dark"] #replica-nav.scrolled.tone-dark .corebolt-logo,
+.replica-page[data-theme="dark"]
+  #replica-nav.scrolled.tone-dark
+  .corebolt-logo {
+  color: #fff;
+}
+
+#replica-nav.tone-light .corebolt-logo {
+  color: var(--ink);
+}
+#replica-nav.tone-dark .corebolt-logo {
+  color: #fff;
+}
+
+.replica-site.replica-site--light-top #replica-nav.tone-light .corebolt-logo {
+  color: var(--ink);
+}
+.replica-site.replica-site--light-top #replica-nav.tone-dark .corebolt-logo {
+  color: #fff;
+}
+
+.replica-site[data-theme="dark"].replica-site--light-top
+  #replica-nav.tone-light
+  .corebolt-logo {
+  color: #fff;
+}
+
+/* Shell pages (cart/checkout/account/admin) share replica page tokens */
+.cb-shell {
+  min-height: 60vh;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 128px 24px 80px;
+}
+.cb-shell h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--ink, #0f1419);
+  margin-bottom: 0.5rem;
+}
+.cb-shell p.lead {
+  color: var(--ink3, #4b5563);
+  margin-bottom: 2rem;
+}
+.cb-shell-card {
+  border: 1px solid var(--bd, rgba(0, 0, 0, 0.09));
+  background: #fff;
+  padding: 24px;
+  margin-bottom: 16px;
+}
+.cb-shell-card h2 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--ink, #0f1419);
+}
+.cb-admin-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+.cb-admin-nav a {
+  padding: 8px 14px;
+  border: 1px solid var(--bd, #e5e7eb);
+  color: var(--ink2, #333);
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+}
+.cb-admin-nav a:hover,
+.cb-admin-nav a[aria-current="page"] {
+  border-color: var(--g, #76b900);
+  color: var(--g-dk, #5c9200);
+  background: rgba(118, 185, 0, 0.08);
+}
+.cb-auth-form {
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.cb-auth-form label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink2, #333);
+}
+.cb-auth-form input,
+.cb-auth-form select,
+.cb-auth-form textarea {
+  border: 1px solid var(--bd, #e5e7eb);
+  padding: 10px 12px;
+  font-size: 14px;
+  width: 100%;
+  background: #fff;
+}
+.cb-auth-form button[type="submit"] {
+  margin-top: 8px;
+  background: var(--g, #76b900);
+  color: #fff;
+  border: none;
+  padding: 12px 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.cb-auth-form button[type="submit"]:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.cb-auth-error {
+  color: #b91c1c;
+  font-size: 13px;
+}
+.cb-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.cb-table th,
+.cb-table td {
+  text-align: left;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--bd, #e5e7eb);
+}
+.cb-table th {
+  font-weight: 600;
+  color: var(--ink3, #4b5563);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
