@@ -6,6 +6,7 @@ import ReplicaSiteLayout from "@/components/replica-pages/replica-site-layout";
 import ReplicaInnerHero from "@/components/replica-pages/replica-inner-hero";
 import { categories, Category, Subcategory } from "@/data/products";
 import { getSubcategoryProductsFlat } from "@/lib/subcategory-products";
+import { ORDER_CATEGORIES, getPricedGroups } from "@/lib/lidar-order";
 import { navSiblingForCategory } from "@/components/replica-home/replica-nav";
 import { categorySelectionHref } from "@/lib/replica-product-routes";
 import CdnImage from "@/components/cdn-image";
@@ -118,11 +119,22 @@ export default function SubcategorySelectionPage() {
         <section className="replica-site-section" id="subcategories" data-nav-tone="light">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {(category.subcategories ?? []).map(
+              {(category.subcategories ?? [])
+                .filter((subcategory) => !subcategory.hidden)
+                .map(
                 (subcategory: Subcategory, index: number) => {
                   const subcategoryImage = getSubcategoryImage(subcategory);
-                  const productCount =
-                    getSubcategoryProductsFlat(subcategory).length;
+                  const productCount = getSubcategoryProductsFlat(subcategory).filter(
+                    (product) => !product.hidden,
+                  ).length;
+                  const orderCategory = Object.values(ORDER_CATEGORIES).find(
+                    (entry) => entry.categoryId === category.id,
+                  );
+                  const orderHref =
+                    orderCategory &&
+                    getPricedGroups(category.id).some((group) => group.id === subcategory.id)
+                      ? `${orderCategory.path}/${subcategory.id}`
+                      : null;
 
                   return (
                     <motion.div
@@ -203,6 +215,19 @@ export default function SubcategorySelectionPage() {
                               >
                                 Explore Products →
                               </button>
+                              {orderHref && (
+                                <button
+                                  type="button"
+                                  onClick={(e) => {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                    setLocation(orderHref);
+                                  }}
+                                  className="lidar-order-link"
+                                >
+                                  Order Now →
+                                </button>
+                              )}
                               <span className="mx-only mx-cost">
                                 {`${productCount} ${productCount === 1 ? "Product" : "Products"}`}
                               </span>

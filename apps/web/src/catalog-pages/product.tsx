@@ -16,7 +16,8 @@ import {
 } from "@/lib/subcategory-products";
 import { categorySelectionHref, subcategoryHref } from "@/lib/replica-product-routes";
 import { navSiblingForCategory } from "@/components/replica-home/replica-nav";
-import { isOrderInformationTable } from "@/lib/product-order-info";
+import { findMinimumOrder, isOrderInformationTable } from "@/lib/product-order-info";
+import { Link as LocaleLink } from "@/i18n/routing";
 import { useSeo, type SeoData } from "@/lib/seo";
 import { useServerRedirect, useServerNotFound } from "@/lib/redirect";
 import { Button } from "@/components/ui/button";
@@ -26,6 +27,7 @@ import {
 } from "@/components/ui/dialog";
 import CatalogBuyNowButton from "@/components/catalog/catalog-buy-now-button";
 import CatalogProductPrice from "@/components/catalog/catalog-product-price";
+import { useCatalogOffer } from "@/hooks/use-catalog-offer";
 import ProductReviews from "@/components/catalog/product-reviews";
 import RelatedProducts from "@/components/catalog/related-products";
 import "@/styles/replica-product-page.css";
@@ -56,10 +58,6 @@ function formatSpecDisplayTitle(text: string): string {
 function productContactLabel(product: Product) {
   const category = categories.find((c) => c.id === product.category);
   return category ? `${product.name} (${category.name})` : product.name;
-}
-
-function hasProductPrice(price: Product["price"]): price is number {
-  return typeof price === "number" && price > 0;
 }
 
 /** Body uses parameter + value (2 cells) when the table defines a single merged header. */
@@ -168,6 +166,17 @@ export default function ProductPage() {
   const nestedProductGroupId = loc?.productGroupPath?.[1] ?? null;
   const categoryName = loc?.category.name ?? null;
   const subcategoryName = loc?.subcategory?.name ?? null;
+
+  const offer = useCatalogOffer(
+    product
+      ? {
+          id: product.id,
+          name: product.name,
+          image: product.image,
+          price: product.price,
+        }
+      : null,
+  );
 
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const [selectedSystemCore, setSelectedSystemCore] = useState<string | null>(
@@ -444,7 +453,7 @@ export default function ProductPage() {
     const mergedHeader = columns.length === 1;
     const isOrderTable = isOrderInformationTable(table);
     const tableColCount = layoutColCount + (isOrderTable ? 1 : 0);
-    const contactCtaLabel = product?.price ? "Buy Now" : "Request Quote";
+    const contactCtaLabel = offer.status === "buy" ? "Buy Now" : "Request Quote";
     const needsHorizontalScroll =
       isOrderTable ||
       layoutColCount > 2 ||
@@ -670,8 +679,8 @@ export default function ProductPage() {
                 <h1 className="replica-page-title">{product.name}</h1>
                 <p className="replica-page-sub">{product.description}</p>
 
-                {hasProductPrice(product.price) && (
-                  <CatalogProductPrice inr={product.price} />
+                {offer.status === "buy" && (
+                  <CatalogProductPrice inr={Number(offer.priceInr)} />
                 )}
 
                 {product.compatibleModulesSection &&
@@ -721,15 +730,17 @@ export default function ProductPage() {
                       Technical Details
                     </button>
                   )}
-                  {hasProductPrice(product.price) ? (
+                  {offer.status === "buy" ? (
                     <CatalogBuyNowButton
-                      productId={product.id}
-                      slug={product.id}
-                      name={product.name}
-                      imageUrl={product.image}
-                      priceInr={Number(product.price).toFixed(2)}
+                      productId={offer.productId}
+                      slug={offer.slug}
+                      name={offer.name}
+                      imageUrl={offer.imageUrl}
+                      priceInr={offer.priceInr}
+                      shippingInr={offer.shippingInr}
+                      shippingUsd={offer.shippingUsd}
                     />
-                  ) : (
+                  ) : offer.status === "quote" ? (
                     <button
                       type="button"
                       className="btn replica-btn-dark"
@@ -738,8 +749,17 @@ export default function ProductPage() {
                       <ShoppingCart className="w-4 h-4" />
                       Request Quote
                     </button>
-                  )}
+                  ) : null}
                 </div>
+                <p className="text-sm mt-4" style={{ color: "var(--ink3)" }}>
+                  {findMinimumOrder(product)
+                    ? `Minimum order: ${findMinimumOrder(product)} pieces. `
+                    : null}
+                  Shipping for this product is shown with the price and again at checkout. Lead time is confirmed when the order is accepted.{" "}
+                  <LocaleLink href="/shipping-policy" className="underline">
+                    Shipping details
+                  </LocaleLink>
+                </p>
               </div>
             </div>
           </div>
@@ -874,7 +894,7 @@ export default function ProductPage() {
         )}
 
         <RelatedProducts product={product} />
-        <ProductReviews productId={product.id} productSlug={product.id} />
+        <ProductReviews catalogId={product.id} />
       </main>
 
       <Dialog open={isContactModalOpen} onOpenChange={handleContactModalChange}>

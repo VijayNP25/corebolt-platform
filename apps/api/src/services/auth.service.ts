@@ -10,6 +10,7 @@ import { sessions, users, type User } from '../db/schema.js';
 import {
   ConflictError,
   ForbiddenError,
+  NotFoundError,
   UnauthorizedError,
   ValidationError,
 } from '../lib/errors.js';
@@ -35,7 +36,12 @@ export async function register(input: {
   password: string;
   name: string;
   phone?: string;
-}): Promise<{ user: PublicUser; verifyToken: string }> {
+}): Promise<{
+  user: PublicUser;
+  verifyUrl: string;
+  accessToken: string;
+  refreshToken: string;
+}> {
   const existing = await db.query.users.findFirst({
     where: eq(users.email, input.email.toLowerCase()),
   });
@@ -58,10 +64,32 @@ export async function register(input: {
   if (!user) throw new Error('Failed to create user');
 
   const verifyToken = signEmailVerifyToken(user.id);
-  const verifyUrl = `http://localhost:3000/verify-email?token=${verifyToken}`;
+  const verifyUrl = buildVerifyUrl(verifyToken);
   await emailService.sendVerificationEmail(user.email, verifyUrl);
 
-  return { user: toPublicUser(user), verifyToken };
+  const tokens = await issueTokens(user);
+  return { user: toPublicUser(user), verifyUrl, ...tokens };
+}
+
+export async function resendVerification(
+  userId: string,
+): Promise<{ alreadyVerified: boolean; verifyUrl: string | null }> {
+  const user = await db.query.users.findFirst({ where: eq(users.id, userId) });
+  if (!user) throw new NotFoundError('User not found');
+  if (user.emailVerifiedAt) return { alreadyVerified: true, verifyUrl: null };
+
+  const verifyUrl = buildVerifyUrl(signEmailVerifyToken(user.id));
+  await emailService.sendVerificationEmail(user.email, verifyUrl);
+  return { alreadyVerified: false, verifyUrl };
+}
+
+export async function startSession(
+  userId: string,
+  meta?: { userAgent?: string; ipAddress?: string },
+): Promise<{ accessToken: string; refreshToken: string }> {
+  const user = await db.query.users.findFirst({ where: eq(users.id, userId) });
+  if (!user || !user.isActive) throw new UnauthorizedError('User inactive');
+  return issueTokens(user, meta);
 }
 
 export async function login(
@@ -169,6 +197,23 @@ export async function verifyEmail(token: string): Promise<PublicUser> {
   return toPublicUser(user);
 }
 
+export async function updateProfile(
+  userId: string,
+  input: { name: string; phone?: string },
+): Promise<PublicUser> {
+  const phone = input.phone?.trim() ?? '';
+  if (phone && phone.length < 6) {
+    throw new ValidationError('Phone must be at least 6 characters');
+  }
+  const [updated] = await db
+    .update(users)
+    .set({ name: input.name.trim(), phone: phone || null })
+    .where(eq(users.id, userId))
+    .returning();
+  if (!updated) throw new NotFoundError('User not found');
+  return toPublicUser(updated);
+}
+
 export async function getUserById(id: string): Promise<PublicUser | null> {
   const user = await db.query.users.findFirst({ where: eq(users.id, id) });
   return user ? toPublicUser(user) : null;
@@ -250,6 +295,11 @@ async function issueTokens(
     .where(eq(sessions.id, session.id));
 
   return { accessToken, refreshToken };
+}
+
+function buildVerifyUrl(token: string): string {
+  const origin = env.WEB_ORIGIN.replace(/\/$/, '');
+  return `${origin}/en/verify-email?token=${encodeURIComponent(token)}`;
 }
 
 function signEmailVerifyToken(userId: string): string {

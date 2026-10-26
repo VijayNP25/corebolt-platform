@@ -8,6 +8,7 @@ import CdnImage from '@/components/cdn-image';
 import { apiFetch, type ApiProduct } from '@/lib/api';
 import { getRequestCurrency } from '@/lib/server-currency';
 import { JsonLd, productJsonLd } from '@/lib/seo-jsonld';
+import { loadPublishedCatalog } from '@/lib/published-catalog';
 import { locateProduct, slugify } from '@/lib/subcategory-products';
 
 function staticProduct(slug: string, currency: 'INR' | 'USD'): ApiProduct | null {
@@ -36,6 +37,7 @@ async function loadProduct(
   slug: string,
   currency: 'INR' | 'USD',
 ): Promise<ApiProduct | null> {
+  await loadPublishedCatalog();
   try {
     const res = await apiFetch<{ data: { product: ApiProduct } }>(
       `/products/${encodeURIComponent(slug)}`,

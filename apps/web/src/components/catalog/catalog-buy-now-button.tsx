@@ -11,12 +11,16 @@ export default function CatalogBuyNowButton({
   name,
   imageUrl,
   priceInr,
+  shippingInr = '0',
+  shippingUsd = '0',
 }: {
   productId: string;
   slug: string;
   name: string;
   imageUrl?: string | null;
   priceInr: string;
+  shippingInr?: string;
+  shippingUsd?: string;
 }) {
   const { addItem } = useLocalCart();
   const { toast } = useToast();
@@ -34,8 +38,8 @@ export default function CatalogBuyNowButton({
             name,
             imageUrl,
             priceInr,
-            shippingInr: '0',
-            shippingUsd: '0',
+            shippingInr,
+            shippingUsd,
             quantity: 1,
           });
           toast({ title: 'Added to cart', description: name });

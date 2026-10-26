@@ -1,4 +1,9 @@
+"use client";
+
+import { formatMoney } from "@corebolt/shared";
 import { Link } from "@/lib/wouter-compat";
+import { useCurrency } from "@/hooks/use-currency";
+import { convertInrToDisplay } from "@/lib/local-cart";
 import { ArrowRight } from "lucide-react";
 import CdnImage from "@/components/cdn-image";
 import { locateProduct, buildProductPath } from "@/lib/subcategory-products";
@@ -30,6 +35,7 @@ function truncateDescription(text: string | null): string {
  * products (see blog-related-products.ts for why some posts are omitted).
  */
 export default function BlogRelatedProducts({ slug }: BlogRelatedProductsProps) {
+  const { currency } = useCurrency();
   const ids = blogRelatedProductIds[slug];
   if (!ids || ids.length === 0) return null;
 
@@ -70,7 +76,10 @@ export default function BlogRelatedProducts({ slug }: BlogRelatedProductsProps) 
                 <div className="replica-related-product-footer">
                   <span className="replica-related-product-price">
                     {product.price
-                      ? `₹${product.price.toLocaleString("en-IN")}`
+                      ? formatMoney(
+                          convertInrToDisplay(product.price.toFixed(2), currency),
+                          currency,
+                        )
                       : "Get Quote"}
                   </span>
                   <span className="replica-related-product-link">

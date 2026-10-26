@@ -26,6 +26,7 @@ import ContactFormMini from "@/components/contact-form-mini";
 import { getCategoryInfoFromNewRoute, getNewRoute } from "@/lib/route-mapping";
 import { categorySelectionHref, subcategoryHref } from "@/lib/replica-product-routes";
 import { navSiblingForCategory } from "@/components/replica-home/replica-nav";
+import { hasConfirmedPrice } from "@/lib/lidar-order";
 import "@/styles/replica-product-page.css";
 
 interface CategoryPageProps {
@@ -342,7 +343,7 @@ export default function CategoryPage({
       return activeLeafGroup.products;
     }
     return getSubcategoryProductsFlat(subcategory);
-  })();
+  })().filter((product) => !product.hidden);
 
   const showGroupPicker =
     Boolean(subcategory?.productGroups?.length) && !productGroupId;
@@ -528,7 +529,12 @@ export default function CategoryPage({
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
                   {displayProducts.map((product: Product, index: number) => (
                     <div key={product.id} className="h-full">
-                      <ProductCard product={product} index={index} />
+                      <ProductCard
+                        product={product}
+                        index={index}
+                        addToCart={hasConfirmedPrice(product)}
+                        manufacturer={subcategory?.name}
+                      />
                     </div>
                   ))}
                 </div>

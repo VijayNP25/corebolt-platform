@@ -13,6 +13,7 @@ const LINKS = [
   { href: '/admin/reviews', label: 'Reviews' },
   { href: '/admin/currency', label: 'Currency' },
   { href: '/admin/reports', label: 'Reports' },
+  { href: '/admin/audit', label: 'Audit log' },
 ] as const;
 
 export default function AdminShell({

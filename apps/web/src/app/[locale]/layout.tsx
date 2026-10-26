@@ -3,8 +3,10 @@ import { getMessages, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import type { ReactNode } from 'react';
 import LocaleHtmlLang from '@/components/locale-html-lang';
+import CatalogProvider from '@/components/catalog-provider';
 import Providers from '@/components/providers';
 import { routing, type AppLocale } from '@/i18n/routing';
+import { loadPublishedCatalog } from '@/lib/published-catalog';
 import { JsonLd, organizationJsonLd, websiteJsonLd } from '@/lib/seo-jsonld';
 
 export function generateStaticParams() {
@@ -25,6 +27,7 @@ export default async function LocaleLayout({
 
   setRequestLocale(locale);
   const messages = await getMessages();
+  const catalog = await loadPublishedCatalog();
 
   return (
     <>
@@ -32,7 +35,9 @@ export default async function LocaleLayout({
       <JsonLd data={organizationJsonLd()} />
       <JsonLd data={websiteJsonLd()} />
       <NextIntlClientProvider messages={messages}>
-        <Providers>{children}</Providers>
+        <Providers>
+          <CatalogProvider categories={catalog}>{children}</CatalogProvider>
+        </Providers>
       </NextIntlClientProvider>
     </>
   );

@@ -19,6 +19,7 @@ const envSchema = z.object({
     .optional()
     .transform((v) => v === 'true'),
 
+  WEB_ORIGIN: z.string().default('http://localhost:3000'),
   CORS_ORIGINS: z
     .string()
     .default('http://localhost:3000')
@@ -42,7 +43,9 @@ const envSchema = z.object({
   STRIPE_SECRET_KEY: z.string().optional().default(''),
   STRIPE_WEBHOOK_SECRET: z.string().optional().default(''),
 
-  SES_FROM_EMAIL: z.string().email().default('noreply@core-bolt.com'),
+  AWS_ACCESS_KEY_ID: z.string().optional().default(''),
+  AWS_SECRET_ACCESS_KEY: z.string().optional().default(''),
+  SES_FROM_EMAIL: z.string().email().default('sales@core-bolt.com'),
   SES_REGION: z.string().default('ap-south-1'),
   OPS_NOTIFY_EMAIL: z.string().email().default('sales@core-bolt.com'),
 

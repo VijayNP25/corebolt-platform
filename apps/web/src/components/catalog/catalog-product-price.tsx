@@ -13,7 +13,9 @@ export default function CatalogProductPrice({ inr }: { inr: number }) {
       <span className="replica-product-price-value">
         {formatMoney(display, currency)}
       </span>
-      <span className="replica-product-price-note">Excl. GST</span>
+      {currency === "INR" ? (
+        <span className="replica-product-price-note">Excl. GST</span>
+      ) : null}
     </div>
   );
 }

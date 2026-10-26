@@ -5,6 +5,8 @@ import { asyncHandler } from '../lib/asyncHandler.js';
 import { routeParam } from '../lib/params.js';
 import { requireAuth, requireRoles } from '../middleware/auth.js';
 import { validate } from '../middleware/validate.js';
+import { buildInvoiceHtml } from '../services/invoice.service.js';
+import { recordAudit } from '../services/audit.service.js';
 import * as ordersService from '../services/orders.service.js';
 
 const router = Router();
@@ -15,6 +17,36 @@ router.get(
   asyncHandler(async (req, res) => {
     const items = await ordersService.listOrdersForUser(req.user!.sub);
     res.json({ data: { orders: items } });
+  }),
+);
+
+router.get(
+  '/me/:orderId/invoice',
+  requireAuth,
+  asyncHandler(async (req, res) => {
+    const order = await ordersService.getOrderForUser(
+      routeParam(req.params.orderId, 'orderId'),
+      req.user!.sub,
+    );
+    const html = buildInvoiceHtml(order, order.items);
+    res.setHeader('Content-Type', 'text/html; charset=utf-8');
+    res.setHeader(
+      'Content-Disposition',
+      `attachment; filename="COREBOLT-${order.orderNumber}.html"`,
+    );
+    res.send(html);
+  }),
+);
+
+router.post(
+  '/me/:orderId/pay',
+  requireAuth,
+  asyncHandler(async (req, res) => {
+    const order = await ordersService.confirmStubPayment(
+      routeParam(req.params.orderId, 'orderId'),
+      req.user!.sub,
+    );
+    res.json({ data: { order } });
   }),
 );
 
@@ -62,6 +94,18 @@ router.patch(
       note: req.body.note,
       carrier: req.body.carrier,
       trackingNumber: req.body.trackingNumber,
+    });
+    await recordAudit({
+      actorUserId: req.user!.sub,
+      action: 'order.status_changed',
+      entityType: 'order',
+      entityId: order.id,
+      metadata: {
+        orderNumber: order.orderNumber,
+        status: order.status,
+        note: req.body.note ?? null,
+      },
+      ipAddress: req.ip,
     });
     res.json({ data: { order } });
   }),

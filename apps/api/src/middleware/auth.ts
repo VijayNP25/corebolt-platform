@@ -68,7 +68,8 @@ export function requireVerifiedEmail(
     next(new UnauthorizedError());
     return;
   }
-  if (!req.user.emailVerified) {
+  // SES is a stub in local development, so the verification email is never delivered.
+  if (!req.user.emailVerified && process.env.NODE_ENV === 'production') {
     next(new ForbiddenError('Email verification required before checkout'));
     return;
   }

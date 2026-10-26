@@ -53,7 +53,7 @@ export default function AdminProductsClient() {
         apiFetch<{
           data: { items: AdminProductRow[]; total: number };
         }>('/products/admin/list', {
-          searchParams: { pageSize: 100, q: q.trim() || undefined },
+          searchParams: { pageSize: 200, q: q.trim() || undefined },
         }),
         apiFetch<{ data: { items: AdminCategoryOption[] } }>(
           '/categories/admin/list',

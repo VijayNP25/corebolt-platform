@@ -1,22 +1,22 @@
 "use client";
 
-import { useState, type CSSProperties, type MouseEvent } from "react";
+import { useEffect, useState, type CSSProperties } from "react";
 import { UserRound } from "lucide-react";
 import { Link, useLocation } from "@/lib/wouter-compat";
+import { AUTH_CHANGED_EVENT, getMe } from "@/lib/auth";
 import CoreBoltLogo from "@/components/core-bolt-logo";
 import CurrencySwitcher from "@/components/currency-switcher";
 import CartNavLink from "@/components/commerce/cart-nav-link";
+import CatalogSearch from "@/components/catalog/catalog-search";
 import ReplicaProductsMenu from "@/components/replica-home/replica-products-menu";
-import { navCategories as categories } from "@/lib/catalog-nav";
+import { getNavCategories } from "@/lib/catalog-nav";
 import { categorySelectionHref } from "@/lib/replica-product-routes";
-import { getMe } from "@/lib/auth";
-import { useRouter } from "@/i18n/routing";
 import "@/styles/currency-switcher.css";
 
 const SECTION_LINKS = [
   { id: "computing", label: "Compute" },
-  { id: "vision", label: "Vision" },
-  { id: "kits", label: "Kits" },
+  { id: "vision", label: "Vision sensor systems" },
+  { id: "kits", label: "Perception Kits" },
 ] as const;
 
 export type ReplicaPageId = "about" | "contact";
@@ -52,7 +52,7 @@ export function navSiblingForCategory(
 ): NavTrailItem | undefined {
   const siblingId = categoryId ? SIBLING_CATEGORY[categoryId] : undefined;
   if (!siblingId) return undefined;
-  const sibling = categories.find((c) => c.id === siblingId);
+  const sibling = getNavCategories().find((c) => c.id === siblingId);
   if (!sibling) return undefined;
   return { label: sibling.name, href: categorySelectionHref(sibling.id) };
 }
@@ -74,22 +74,32 @@ export function ReplicaNav({
   themeIcon?: string;
 }) {
   const [location] = useLocation();
-  const router = useRouter();
   const onHome = location === "/";
   const [menuOpen, setMenuOpen] = useState(false);
+  const [signedIn, setSignedIn] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    getMe().then((user) => {
+      if (!cancelled) setSignedIn(Boolean(user));
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [location]);
+
+  useEffect(() => {
+    const refresh = () => {
+      getMe().then((user) => setSignedIn(Boolean(user)));
+    };
+    window.addEventListener(AUTH_CHANGED_EVENT, refresh);
+    return () => window.removeEventListener(AUTH_CHANGED_EVENT, refresh);
+  }, []);
+
+  const accountHref = signedIn ? "/account" : "/login";
+  const accountLabel = signedIn ? "Account" : "Sign in";
 
   const closeMenu = () => setMenuOpen(false);
-
-  const goCartMobile = async (e: MouseEvent) => {
-    e.preventDefault();
-    closeMenu();
-    const user = await getMe();
-    if (!user) {
-      router.push("/login?next=/cart");
-      return;
-    }
-    router.push("/cart");
-  };
 
   const scrollTo = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
@@ -133,19 +143,17 @@ export function ReplicaNav({
         <div className="nav-utility-inner">
           <CurrencySwitcher dark={dark} />
           <div className="nav-utility-actions">
+            <CatalogSearch />
             <Link
-              href="/login"
+              href={accountHref}
               className="nav-icon-btn"
-              aria-label="Sign in"
+              aria-label={accountLabel}
               onClick={closeMenu}
             >
               <UserRound size={18} strokeWidth={1.75} aria-hidden />
-              <span className="nav-icon-btn__label">Sign in</span>
+              <span className="nav-icon-btn__label">{accountLabel}</span>
             </Link>
             <CartNavLink variant="icon" onClick={closeMenu} />
-            <Link href="/contact-us" className="nav-cta" onClick={closeMenu}>
-              Contact
-            </Link>
           </div>
         </div>
       </div>
@@ -215,7 +223,7 @@ export function ReplicaNav({
                 {showBlogs && (
                   <li>
                     <Link href="/blog" style={linkStyle} onClick={closeMenu}>
-                      Blog
+                      Blogs
                     </Link>
                   </li>
                 )}
@@ -238,7 +246,7 @@ export function ReplicaNav({
                 </li>
                 <li>
                   <Link href="/blog" style={linkStyle} onClick={closeMenu}>
-                    Blog
+                    Blogs
                   </Link>
                 </li>
                 <li>
@@ -248,7 +256,7 @@ export function ReplicaNav({
                     style={linkStyle}
                     onClick={closeMenu}
                   >
-                    About
+                    About Us
                   </Link>
                 </li>
               </>
@@ -257,11 +265,11 @@ export function ReplicaNav({
               <div className="replica-nav-currency-mobile">
                 <CurrencySwitcher dark={dark} style={linkStyle} />
               </div>
-              <Link href="/cart" style={linkStyle} onClick={goCartMobile}>
+              <Link href="/cart" style={linkStyle} onClick={closeMenu}>
                 Cart
               </Link>
-              <Link href="/login" style={linkStyle} onClick={closeMenu}>
-                Sign in
+              <Link href={accountHref} style={linkStyle} onClick={closeMenu}>
+                {accountLabel}
               </Link>
               <Link
                 href="/contact-us"
@@ -273,6 +281,9 @@ export function ReplicaNav({
               </Link>
             </li>
           </ul>
+          <Link href="/contact-us" className="nav-cta nav-main-cta" onClick={closeMenu}>
+            Contact Us
+          </Link>
           <div
             className="ham"
             role="button"

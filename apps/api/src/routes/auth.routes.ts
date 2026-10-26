@@ -1,7 +1,8 @@
 import { Router } from 'express';
 import rateLimit from 'express-rate-limit';
-import { loginSchema, registerSchema } from '@corebolt/shared';
+import { loginSchema, registerSchema, updateProfileSchema } from '@corebolt/shared';
 import { z } from 'zod';
+import { env } from '../config/env.js';
 import { asyncHandler } from '../lib/asyncHandler.js';
 import { optionalAuth, requireAuth } from '../middleware/auth.js';
 import { validate } from '../middleware/validate.js';
@@ -24,7 +25,13 @@ router.post(
   validate(registerSchema),
   asyncHandler(async (req, res) => {
     const result = await auth.register(req.body);
-    res.status(201).json({ data: { user: result.user } });
+    auth.setAuthCookies(res, result.accessToken, result.refreshToken);
+    res.status(201).json({
+      data: {
+        user: result.user,
+        ...(env.NODE_ENV === 'production' ? {} : { verifyUrl: result.verifyUrl }),
+      },
+    });
   }),
 );
 
@@ -86,12 +93,47 @@ router.get(
   }),
 );
 
+router.patch(
+  '/me',
+  requireAuth,
+  validate(updateProfileSchema),
+  asyncHandler(async (req, res) => {
+    const user = await auth.updateProfile(req.user!.sub, req.body);
+    res.json({ data: { user } });
+  }),
+);
+
 router.post(
   '/verify-email',
+  optionalAuth,
   validate(z.object({ token: z.string().min(1) })),
   asyncHandler(async (req, res) => {
     const user = await auth.verifyEmail(req.body.token);
+    if (req.user?.sub === user.id) {
+      const tokens = await auth.startSession(user.id, {
+        userAgent: req.get('user-agent') ?? undefined,
+        ipAddress: req.ip,
+      });
+      auth.setAuthCookies(res, tokens.accessToken, tokens.refreshToken);
+    }
     res.json({ data: { user } });
+  }),
+);
+
+router.post(
+  '/resend-verification',
+  authLimiter,
+  requireAuth,
+  asyncHandler(async (req, res) => {
+    const result = await auth.resendVerification(req.user!.sub);
+    res.json({
+      data: {
+        alreadyVerified: result.alreadyVerified,
+        ...(env.NODE_ENV === 'production' || !result.verifyUrl
+          ? {}
+          : { verifyUrl: result.verifyUrl }),
+      },
+    });
   }),
 );
 

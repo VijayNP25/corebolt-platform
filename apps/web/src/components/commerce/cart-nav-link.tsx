@@ -1,10 +1,9 @@
 'use client';
 
-import type { CSSProperties, MouseEvent } from 'react';
+import type { CSSProperties } from 'react';
 import { ShoppingCart } from 'lucide-react';
-import { Link, useRouter } from '@/i18n/routing';
+import { Link } from '@/i18n/routing';
 import { useLocalCart } from '@/hooks/use-local-cart';
-import { getMe } from '@/lib/auth';
 
 export default function CartNavLink({
   style,
@@ -19,18 +18,6 @@ export default function CartNavLink({
   variant?: 'text' | 'icon';
 }) {
   const { itemCount } = useLocalCart();
-  const router = useRouter();
-
-  const goCart = async (e: MouseEvent) => {
-    e.preventDefault();
-    onClick?.();
-    const user = await getMe();
-    if (!user) {
-      router.push('/login?next=/cart');
-      return;
-    }
-    router.push('/cart');
-  };
 
   if (variant === 'icon') {
     return (
@@ -38,7 +25,7 @@ export default function CartNavLink({
         href="/cart"
         className={['nav-icon-btn', className].filter(Boolean).join(' ')}
         style={style}
-        onClick={goCart}
+        onClick={onClick}
         aria-label={itemCount > 0 ? `Cart, ${itemCount} items` : 'Cart'}
       >
         <ShoppingCart size={18} strokeWidth={1.75} aria-hidden />
@@ -56,7 +43,7 @@ export default function CartNavLink({
       href="/cart"
       className={className}
       style={style}
-      onClick={goCart}
+      onClick={onClick}
       aria-label={itemCount > 0 ? `Cart, ${itemCount} items` : 'Cart'}
     >
       Cart

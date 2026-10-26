@@ -287,18 +287,18 @@ export function getAllProductsFlat(): Product[] {
   const seen = new Set<string>();
   const out: Product[] = [];
   for (const category of categories) {
+    if (category.hidden) continue;
     for (const product of category.products ?? []) {
-      if (!seen.has(product.id)) {
-        seen.add(product.id);
-        out.push(product);
-      }
+      if (product.hidden || seen.has(product.id)) continue;
+      seen.add(product.id);
+      out.push(product);
     }
     for (const subcategory of category.subcategories ?? []) {
+      if (subcategory.hidden) continue;
       for (const product of getSubcategoryProductsFlat(subcategory)) {
-        if (!seen.has(product.id)) {
-          seen.add(product.id);
-          out.push(product);
-        }
+        if (product.hidden || seen.has(product.id)) continue;
+        seen.add(product.id);
+        out.push(product);
       }
     }
   }

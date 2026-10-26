@@ -67,8 +67,8 @@
   --nav-shadow: 0 1px 12px rgba(0, 0, 0, 0.05);
 }
 /* ── Two-tier layout ──
-   Top: currency + account/cart/contact
-   Bottom: logo + browse links
+   Top: currency + account/cart
+   Bottom: logo + browse links + contact
 */
 .nav-utility {
   border-bottom: 1px solid var(--nav-border, transparent);
@@ -104,17 +104,42 @@
 
 .nav-main {
   position: relative;
+  background: #050505;
 }
 
 .nav-inner {
-  max-width: 1200px;
+  max-width: 1280px;
   margin: 0 auto;
   padding: 0 40px;
-  height: 56px;
+  height: 68px;
   display: flex;
   align-items: center;
   gap: 28px;
   overflow: visible;
+}
+
+/* Bottom bar stays black with white type, matching the reference, on every page tone. */
+#replica-nav .nav-main .corebolt-logo,
+#replica-nav.tone-light .nav-main .corebolt-logo,
+#replica-nav.scrolled.tone-light .nav-main .corebolt-logo,
+#replica-nav.tone-dark .nav-main .corebolt-logo {
+  color: #fff !important;
+}
+#replica-nav .nav-main .ham span {
+  background: #fff;
+}
+@media (min-width: 1001px) {
+  #replica-nav .nav-main .nav-links a,
+  #replica-nav .nav-main .replica-nav-products-trigger {
+    color: rgba(255, 255, 255, 0.92) !important;
+  }
+  #replica-nav .nav-main .nav-links a:hover,
+  #replica-nav .nav-main .nav-links a.active,
+  #replica-nav .nav-main .replica-nav-products:hover .replica-nav-products-trigger,
+  #replica-nav .nav-main .replica-nav-products-trigger:hover {
+    color: #fff !important;
+    background: rgba(255, 255, 255, 0.08);
+  }
 }
 
 .nav-logo {
@@ -186,15 +211,26 @@
   align-items: center;
   justify-content: center;
   gap: 6px;
-  height: 30px;
-  min-width: 30px;
+  height: 21px;
+  min-width: 21px;
   padding: 0 8px;
   border-radius: 999px;
   color: var(--nav-fg);
   text-decoration: none;
+  line-height: 1;
   transition:
     color 0.2s ease,
     background 0.2s ease;
+}
+button.nav-icon-btn {
+  appearance: none;
+  margin: 0;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  line-height: 1;
+  color: inherit;
+  cursor: pointer;
 }
 .nav-icon-btn:hover {
   color: var(--nav-fg-strong);
@@ -208,6 +244,71 @@
   font-size: 12px;
   font-weight: 500;
   white-space: nowrap;
+}
+
+.nav-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.nav-search-panel {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: min(360px, calc(100vw - 24px));
+  background: #fff;
+  color: #0f1419;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.16);
+  z-index: 30;
+}
+.nav-search-input {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 12px 14px;
+  font-size: 14px;
+  color: #0f1419;
+  background: #fff;
+  outline: none;
+}
+.nav-search-results {
+  max-height: 320px;
+  overflow: auto;
+}
+.nav-search-results ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.nav-search-result {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  width: 100%;
+  padding: 10px 14px;
+  color: #0f1419;
+  text-decoration: none;
+  border-radius: 0;
+  white-space: normal;
+}
+.nav-search-result:hover {
+  background: rgba(118, 185, 0, 0.1);
+  color: #0f1419;
+}
+.nav-search-name {
+  font-size: 14px;
+  font-weight: 600;
+}
+.nav-search-group,
+.nav-search-empty {
+  font-size: 12px;
+  color: #4b5563;
+}
+.nav-search-empty {
+  margin: 0;
+  padding: 12px 14px;
 }
 .nav-cart-badge {
   position: absolute;
@@ -272,6 +373,22 @@ button.nav-cta {
   border: none;
   cursor: pointer;
   font-family: inherit;
+}
+
+.nav-main-cta {
+  margin-left: 8px;
+  flex-shrink: 0;
+  padding: 11px 22px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  border-radius: 999px;
+  background: #91c733;
+  color: #111;
+}
+.nav-main-cta:hover {
+  background: #91c733;
+  color: #111;
 }
 
 /* Products dropdown */
@@ -575,25 +692,33 @@ button.nav-cta {
   font-family: inherit;
 }
 
-@media (min-width: 901px) and (max-width: 1100px) {
+@media (min-width: 1001px) and (max-width: 1360px) {
   .nav-utility-inner,
   .nav-inner {
-    padding: 0 24px;
+    padding: 0 20px;
+    gap: 12px;
   }
   .nav-links a,
   .replica-nav-products-trigger {
-    padding: 7px 10px;
+    padding: 7px 8px;
     font-size: 12px;
+  }
+  .nav-main-cta {
+    padding: 10px 14px;
+    letter-spacing: 0.06em;
   }
 }
 
 /* Tablet / phone: browse links collapse; utility icons stay */
-@media (max-width: 900px) {
+@media (max-width: 1000px) {
   .nav-utility-inner,
   .nav-inner {
     padding: 0 20px;
   }
   .nav-icon-btn__label {
+    display: none;
+  }
+  .nav-main-cta {
     display: none;
   }
   #replica-nav .nav-links:not(.nav-links--open) {
@@ -676,11 +801,13 @@ button.nav-cta {
     text-align: center;
     text-decoration: none;
     border-radius: 8px;
+    background: #b6ef1a;
+    color: #111;
   }
 }
 
 @media (max-width: 640px) {
-  .nav-utility .nav-cta {
+  .nav-main-cta {
     display: none;
   }
 }

@@ -4,17 +4,28 @@ import { asyncHandler } from '../lib/asyncHandler.js';
 import { routeParam } from '../lib/params.js';
 import { requireAuth, requireRoles } from '../middleware/auth.js';
 import { validate } from '../middleware/validate.js';
+import { recordAudit } from '../services/audit.service.js';
 import * as reviewsService from '../services/reviews.service.js';
 
 const router = Router();
 
 router.get(
-  '/product/:productId',
+  '/product/:slug',
   asyncHandler(async (req, res) => {
-    const items = await reviewsService.listApprovedReviews(
-      routeParam(req.params.productId, 'productId'),
+    const items = await reviewsService.listApprovedReviewsBySlug(
+      routeParam(req.params.slug, 'slug'),
     );
     res.json({ data: { reviews: items } });
+  }),
+);
+
+router.get(
+  '/eligible',
+  requireAuth,
+  asyncHandler(async (req, res) => {
+    const slug = typeof req.query.slug === 'string' ? req.query.slug : '';
+    const orders = await reviewsService.listReviewableOrders(req.user!.sub, slug);
+    res.json({ data: { orders } });
   }),
 );
 
@@ -54,6 +65,14 @@ router.patch(
       reviewId: routeParam(req.params.reviewId, 'reviewId'),
       status: req.body.status,
       moderatorId: req.user!.sub,
+    });
+    await recordAudit({
+      actorUserId: req.user!.sub,
+      action: 'review.moderated',
+      entityType: 'review',
+      entityId: review.id,
+      metadata: { status: review.status },
+      ipAddress: req.ip,
     });
     res.json({ data: { review } });
   }),

@@ -2,6 +2,7 @@ import { and, eq, ilike, or, sql } from 'drizzle-orm';
 import { db } from '../db/client.js';
 import { products, type Product } from '../db/schema.js';
 import { NotFoundError } from '../lib/errors.js';
+import { syncProductToCatalog } from './catalog-sync.js';
 import { convertProductPrice } from './currency.service.js';
 
 export interface ProductListQuery {
@@ -15,7 +16,7 @@ export interface ProductListQuery {
 
 export async function listProducts(query: ProductListQuery) {
   const page = Math.max(1, query.page ?? 1);
-  const pageSize = Math.min(100, Math.max(1, query.pageSize ?? 24));
+  const pageSize = Math.min(300, Math.max(1, query.pageSize ?? 24));
   const currency = query.currency ?? 'INR';
 
   const conditions = [eq(products.isActive, true)];
@@ -127,7 +128,7 @@ export type AdminProductInput = {
 
 export async function adminListProducts(query: ProductListQuery & { includeInactive?: boolean }) {
   const page = Math.max(1, query.page ?? 1);
-  const pageSize = Math.min(100, Math.max(1, query.pageSize ?? 50));
+  const pageSize = Math.min(300, Math.max(1, query.pageSize ?? 50));
   const conditions = [];
   if (!query.includeInactive) conditions.push(eq(products.isActive, true));
   if (query.categoryId) conditions.push(eq(products.categoryId, query.categoryId));
@@ -176,7 +177,13 @@ export async function createProduct(input: AdminProductInput) {
       shippingUsd: input.shippingUsd ?? '0',
       imageUrl: input.imageUrl ?? null,
       images: input.images ?? [],
-      specs: input.specs ?? {},
+      specs: {
+        ...(input.specs ?? {}),
+        sourceId:
+          typeof input.specs?.sourceId === 'string' && input.specs.sourceId
+            ? input.specs.sourceId
+            : input.slug,
+      },
       relatedProductIds: input.relatedProductIds ?? [],
       isActive: input.isActive ?? true,
       searchVector: [input.name, input.description, input.shortDescription]
@@ -184,6 +191,7 @@ export async function createProduct(input: AdminProductInput) {
         .join(' '),
     })
     .returning();
+  if (row) await syncProductToCatalog(row);
   return row;
 }
 
@@ -220,5 +228,6 @@ export async function updateProduct(id: string, input: Partial<AdminProductInput
     })
     .where(eq(products.id, id))
     .returning();
+  if (row) await syncProductToCatalog(row);
   return row;
 }

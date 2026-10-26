@@ -1,5 +1,12 @@
 import { apiFetch, type ApiUser } from './api';
 
+export const AUTH_CHANGED_EVENT = 'corebolt-auth-changed';
+
+function notifyAuthChanged() {
+  if (typeof window === 'undefined') return;
+  window.dispatchEvent(new Event(AUTH_CHANGED_EVENT));
+}
+
 export async function getMe(): Promise<ApiUser | null> {
   try {
     const res = await apiFetch<{ data: { user: ApiUser } }>('/auth/me');
@@ -14,7 +21,21 @@ export async function login(email: string, password: string): Promise<ApiUser> {
     method: 'POST',
     body: JSON.stringify({ email, password }),
   });
+  notifyAuthChanged();
   return res.data.user;
+}
+
+const VERIFY_URL_KEY = 'corebolt.verifyUrl';
+
+export function storedVerifyUrl(): string | null {
+  if (typeof window === 'undefined') return null;
+  return sessionStorage.getItem(VERIFY_URL_KEY);
+}
+
+export function storeVerifyUrl(url: string | null) {
+  if (typeof window === 'undefined') return;
+  if (url) sessionStorage.setItem(VERIFY_URL_KEY, url);
+  else sessionStorage.removeItem(VERIFY_URL_KEY);
 }
 
 export async function register(input: {
@@ -23,13 +44,16 @@ export async function register(input: {
   name: string;
   phone?: string;
 }): Promise<ApiUser> {
-  const res = await apiFetch<{ data: { user: ApiUser } }>('/auth/register', {
+  const res = await apiFetch<{ data: { user: ApiUser; verifyUrl?: string } }>('/auth/register', {
     method: 'POST',
     body: JSON.stringify(input),
   });
+  storeVerifyUrl(res.data.verifyUrl ?? null);
+  notifyAuthChanged();
   return res.data.user;
 }
 
 export async function logout(): Promise<void> {
   await apiFetch<void>('/auth/logout', { method: 'POST' });
+  notifyAuthChanged();
 }

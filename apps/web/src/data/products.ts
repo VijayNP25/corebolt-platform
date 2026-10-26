@@ -64,6 +64,8 @@ export interface Product {
   /** Compatible modules / SOM cards shown in the product hero. */
   compatibleModulesSection?: ProductCompatibleModulesSection;
   fileUrl: string | null;
+  /** Set from admin when the product should stay out of listings. */
+  hidden?: boolean;
 }
 
 export interface Category {
@@ -80,6 +82,8 @@ export interface Category {
   metaKeywords?: string;
   overview?: string;
   overviewTitle?: string;
+  /** Set from admin when the category should stay out of the menu. */
+  hidden?: boolean;
 }
 
 export interface ProductGroup {
@@ -113,9 +117,11 @@ export interface Subcategory {
   products: Product[];
   /** Optional mid-level (e.g. GMSL1 / GMSL2 / GMSL3) between subcategory and products */
   productGroups?: ProductGroup[];
+  /** Set from admin when this subcategory should stay out of the menu. */
+  hidden?: boolean;
 }
 
-export const categories: Category[] = [
+const authoredCategories: Category[] = [
   {
     id: "lidar",
     name: "3D LiDARs",
@@ -12666,3 +12672,43 @@ export const categories: Category[] = [
     ],
   },
 ];
+
+/**
+ * The arrays above are the authored catalogue. After it is published, the
+ * database copy replaces them for this process so every page reads one list.
+ */
+let publishedCategories: Category[] | null = null;
+
+export function setPublishedCatalog(next: Category[]) {
+  if (Array.isArray(next) && next.length > 0) {
+    publishedCategories = next;
+  }
+}
+
+function catalogSource(): Category[] {
+  return publishedCategories ?? authoredCategories;
+}
+
+/** Plain authored list. The seed publishes this into the database. */
+export const websiteCatalog: Category[] = authoredCategories;
+
+export const categories: Category[] = new Proxy(authoredCategories, {
+  get(_target, prop) {
+    const current = catalogSource();
+    const value = Reflect.get(current, prop, current);
+    return typeof value === 'function' ? value.bind(current) : value;
+  },
+  has(_target, prop) {
+    return Reflect.has(catalogSource(), prop);
+  },
+  ownKeys() {
+    return Reflect.ownKeys(catalogSource());
+  },
+  getOwnPropertyDescriptor(_target, prop) {
+    const descriptor = Reflect.getOwnPropertyDescriptor(catalogSource(), prop);
+    if (descriptor && !descriptor.configurable) {
+      return { ...descriptor, configurable: true };
+    }
+    return descriptor;
+  },
+});

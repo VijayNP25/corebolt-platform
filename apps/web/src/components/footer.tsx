@@ -149,6 +149,13 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/shipping-policy">
+                  <span className="text-muted-foreground hover:text-primary transition-colors duration-300 cursor-pointer">
+                    Shipping
+                  </span>
+                </Link>
+              </li>
+              <li>
                 <Link href="/privacy-policy">
                   <span className="text-muted-foreground hover:text-primary transition-colors duration-300 cursor-pointer">
                     Privacy Policy

@@ -5,6 +5,7 @@ import { asyncHandler } from '../lib/asyncHandler.js';
 import { routeParam } from '../lib/params.js';
 import { requireAuth, requireRoles } from '../middleware/auth.js';
 import { validate } from '../middleware/validate.js';
+import { recordAudit } from '../services/audit.service.js';
 import * as productsService from '../services/products.service.js';
 
 const router = Router();
@@ -14,7 +15,7 @@ const listQuerySchema = z.object({
   categoryId: z.string().uuid().optional(),
   pricingType: pricingTypeSchema.optional(),
   page: z.coerce.number().int().positive().optional(),
-  pageSize: z.coerce.number().int().positive().max(100).optional(),
+  pageSize: z.coerce.number().int().positive().max(300).optional(),
   currency: currencySchema.optional(),
   includeInactive: z
     .enum(['true', 'false'])
@@ -77,6 +78,14 @@ router.post(
   validate(adminBodySchema),
   asyncHandler(async (req, res) => {
     const product = await productsService.createProduct(req.body);
+    await recordAudit({
+      actorUserId: req.user!.sub,
+      action: 'product.created',
+      entityType: 'product',
+      entityId: product.id,
+      metadata: { name: product.name },
+      ipAddress: req.ip,
+    });
     res.status(201).json({ data: { product } });
   }),
 );
@@ -91,6 +100,14 @@ router.patch(
       routeParam(req.params.id, 'id'),
       req.body,
     );
+    await recordAudit({
+      actorUserId: req.user!.sub,
+      action: 'product.updated',
+      entityType: 'product',
+      entityId: product.id,
+      metadata: { name: product.name },
+      ipAddress: req.ip,
+    });
     res.json({ data: { product } });
   }),
 );

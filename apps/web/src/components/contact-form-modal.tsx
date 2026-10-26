@@ -14,6 +14,7 @@ import {
 } from "@/lib/product-order-info";
 import { ArrowIcon } from "@/components/replica-pages/replica-page-shared";
 import { apiFetch } from "@/lib/api";
+import { sendAskPriceEmail } from "@/lib/emailjs";
 import "@/styles/replica-pages.css";
 import "@/styles/contact-modal.css";
 
@@ -139,34 +140,52 @@ export default function ContactFormModal({
         data.message,
       ].filter(Boolean);
 
-      await apiFetch("/enquiries", {
-        method: "POST",
-        body: JSON.stringify({
+      const message = messageParts.join("\n\n");
+
+      if (action === "quote") {
+        await sendAskPriceEmail({
           name: data.name,
           email: data.email,
           mobile: data.mobile,
-          company: data.company || undefined,
-          topic: data.topic || undefined,
-          products: data.products?.length ? data.products : undefined,
-          productIds: undefined,
-          systemCore: systemCoreSelection || data.systemCore || undefined,
-          orderInformation: systemCoreSelection || undefined,
-          message: messageParts.join("\n\n") || undefined,
-          action,
-          productId: selectedProduct?.id,
-          productSlug: selectedProduct?.id,
-          productName: selectedProduct?.name,
-        }),
-      });
+          company: data.company,
+          product: selectedProduct?.name?.trim() || productLabels || "Ask Price",
+          topic: data.topic,
+          message,
+        });
+      } else {
+        await apiFetch("/enquiries", {
+          method: "POST",
+          body: JSON.stringify({
+            name: data.name,
+            email: data.email,
+            mobile: data.mobile,
+            company: data.company || undefined,
+            topic: data.topic || undefined,
+            products: data.products?.length ? data.products : undefined,
+            productIds: undefined,
+            systemCore: systemCoreSelection || data.systemCore || undefined,
+            orderInformation: systemCoreSelection || undefined,
+            message: message || undefined,
+            action,
+            productId: selectedProduct?.id,
+            productSlug: selectedProduct?.id,
+            productName: selectedProduct?.name,
+          }),
+        });
+      }
 
       toast({
         title: "Message Sent!",
         description: "We'll get back to you within one business day.",
       });
-    } catch {
+    } catch (error) {
+      const missingKeys =
+        error instanceof Error && error.message === "EmailJS is not configured";
       toast({
         title: "Failed to send",
-        description: "Please try again or email sales@core-bolt.com directly.",
+        description: missingKeys
+          ? "Quote email is not configured yet."
+          : "Please try again or email sales@core-bolt.com directly.",
         variant: "destructive",
       });
     }

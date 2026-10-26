@@ -23,6 +23,13 @@ import {
 import ContactFormModal, {
   CONTACT_DIALOG_CONTENT_CLASS,
 } from "@/components/contact-form-modal";
+import { useLocalCart } from "@/hooks/use-local-cart";
+import { readLocalCart } from "@/lib/local-cart";
+import { useToast } from "@/hooks/use-toast";
+import { catalogApiSlug } from "@/hooks/use-catalog-offer";
+import { formatMoney } from "@corebolt/shared";
+import { useCurrency } from "@/hooks/use-currency";
+import { convertInrToDisplay } from "@/lib/local-cart";
 import "@/styles/xcard.css";
 
 function productContactLabel(product: Product) {
@@ -33,9 +40,133 @@ function productContactLabel(product: Product) {
 interface ProductCardProps {
   product: Product;
   index: number;
+  /** Priced products: add to the cart and stay on the page. Unpriced cards keep Ask Price. */
+  addToCart?: boolean;
+  manufacturer?: string;
 }
 
-export default function ProductCard({ product, index }: ProductCardProps) {
+function confirmedPrice(product: Product): number | null {
+  return typeof product.price === "number" && product.price > 0 ? product.price : null;
+}
+
+function CataloguePrice({
+  amount,
+  className,
+  noteClassName,
+}: {
+  amount: number;
+  className: string;
+  noteClassName?: string;
+}) {
+  const { currency } = useCurrency();
+  const display = convertInrToDisplay(amount.toFixed(2), currency);
+  return (
+    <>
+      <span className={className}>{formatMoney(display, currency)}</span>
+      {currency === "INR" && noteClassName ? (
+        <span className={noteClassName}>(Excl. GST)</span>
+      ) : null}
+    </>
+  );
+}
+
+function LidarCartControl({
+  product,
+  manufacturer,
+  className,
+}: {
+  product: Product;
+  manufacturer?: string;
+  className?: string;
+}) {
+  const { cart, addItem, setQty, removeItem } = useLocalCart();
+  const { toast } = useToast();
+  const price = confirmedPrice(product);
+  if (price == null) return null;
+
+  const slug = catalogApiSlug(product.id);
+  const line = cart.items.find((item) => item.productId === product.id || item.slug === slug);
+  const latestLine = () =>
+    readLocalCart().items.find((item) => item.productId === product.id || item.slug === slug);
+  const stop = (event: { preventDefault: () => void; stopPropagation: () => void }) => {
+    event.preventDefault();
+    event.stopPropagation();
+  };
+
+  if (!line || line.quantity < 1) {
+    return (
+      <Button
+        type="button"
+        size="sm"
+        className={className}
+        onClick={(event) => {
+          stop(event);
+          try {
+            addItem({
+              productId: product.id,
+              slug,
+              name: product.name,
+              imageUrl: product.image,
+              priceInr: price.toFixed(2),
+              shippingInr: "0",
+              shippingUsd: "0",
+              manufacturer,
+              quantity: 1,
+            });
+            toast({ title: "Added to cart", description: product.name });
+          } catch (error) {
+            toast({
+              title: "Could not add",
+              description: error instanceof Error ? error.message : "Try again",
+              variant: "destructive",
+            });
+          }
+        }}
+      >
+        <ShoppingCart className="w-4 h-4 mr-2" />
+        Add to Cart
+      </Button>
+    );
+  }
+
+  return (
+    <div className={`lidar-qty ${className ?? ""}`} role="group" aria-label={`Quantity of ${product.name}`}>
+      <button
+        type="button"
+        aria-label={`Decrease quantity of ${product.name}`}
+        onClick={(event) => {
+          stop(event);
+          const current = latestLine();
+          if (!current) return;
+          if (current.quantity <= 1) removeItem(current.productId);
+          else setQty(current.productId, current.quantity - 1);
+        }}
+      >
+        −
+      </button>
+      <span>{line.quantity}</span>
+      <button
+        type="button"
+        aria-label={`Increase quantity of ${product.name}`}
+        onClick={(event) => {
+          stop(event);
+          const current = latestLine();
+          if (!current) return;
+          setQty(current.productId, current.quantity + 1);
+        }}
+      >
+        +
+      </button>
+    </div>
+  );
+}
+
+export default function ProductCard({
+  product,
+  index,
+  addToCart = false,
+  manufacturer,
+}: ProductCardProps) {
   const [showFullDescription, setShowFullDescription] = useState(false);
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const usesSimplePrice = [
@@ -128,8 +259,11 @@ export default function ProductCard({ product, index }: ProductCardProps) {
         <div className="mx-only mx-actions">
           {product.price ? (
             <span className="mx-cost">
-              ₹{product.price.toLocaleString("en-IN")}
-              <small>Excl. GST</small>
+              <CataloguePrice
+                amount={product.price}
+                className=""
+                noteClassName="text-[11px] font-normal"
+              />
             </span>
           ) : (
             <button
@@ -139,6 +273,13 @@ export default function ProductCard({ product, index }: ProductCardProps) {
             >
               Ask for price
             </button>
+          )}
+          {addToCart && confirmedPrice(product) != null && (
+            <LidarCartControl
+              product={product}
+              manufacturer={manufacturer}
+              className="replica-btn-dark h-9 shrink-0 font-semibold"
+            />
           )}
           <Link href={buildProductPath(product)} className="mx-pill">
             Know More
@@ -151,15 +292,23 @@ export default function ProductCard({ product, index }: ProductCardProps) {
         {/* CTAs */}
         <CardContent className="mx-desktop-actions mt-auto pt-0 pb-4">
           {product.price ? (
-            usesSimplePrice ? (
+            usesSimplePrice && !addToCart ? (
               <div className="flex items-center justify-between px-1 pt-2">
-                <span className="text-base font-semibold text-primary whitespace-nowrap">
-                  ₹{product.price.toLocaleString("en-IN")}
-                </span>
+                <CataloguePrice
+                  amount={product.price}
+                  className="text-base font-semibold text-primary whitespace-nowrap"
+                />
                 <span className="text-sm text-black">View <ChevronRight className="inline h-4 w-4" /></span>
               </div>
             ) : (
-              <div className="flex gap-2 items-stretch">
+              <div className="flex items-center justify-between gap-4">
+                {addToCart ? (
+                  <LidarCartControl
+                    product={product}
+                    manufacturer={manufacturer}
+                    className="replica-btn-dark h-9 shrink-0 font-semibold"
+                  />
+                ) : (
                 <Dialog
                   open={isContactModalOpen}
                   onOpenChange={setIsContactModalOpen}
@@ -167,7 +316,7 @@ export default function ProductCard({ product, index }: ProductCardProps) {
                   <DialogTrigger asChild>
                     <Button
                       size="sm"
-                      className="replica-btn-dark w-[calc(45%-0.25rem)] h-9 flex-shrink-0 font-semibold"
+                      className="replica-btn-dark h-9 shrink-0 font-semibold"
                       onClick={(e) => e.stopPropagation()}
                     >
                       <ShoppingCart className="w-4 h-4 mr-2" />
@@ -183,15 +332,13 @@ export default function ProductCard({ product, index }: ProductCardProps) {
                     />
                   </DialogContent>
                 </Dialog>
-                <div className="flex w-[calc(55%-0.25rem)] items-stretch">
-                  <div className="relative w-full min-h-9 flex flex-nowrap items-center justify-center gap-1.5 px-3 py-2 rounded-md bg-gradient-to-br from-primary/20 via-primary/15 to-primary/10">
-                    <span className="text-xl font-bold text-black drop-shadow-sm whitespace-nowrap">
-                      ₹{product.price.toLocaleString("en-IN")}
-                    </span>
-                    <span className="text-[10px] text-gray-500 font-medium uppercase tracking-wide whitespace-nowrap shrink-0">
-                      (Excl. GST)
-                    </span>
-                  </div>
+                )}
+                <div className="min-w-0 text-right leading-tight">
+                  <CataloguePrice
+                    amount={product.price}
+                    className="block text-base font-bold text-black"
+                    noteClassName="mt-0.5 block text-[10px] text-gray-500 font-medium uppercase tracking-wide"
+                  />
                 </div>
               </div>
             )

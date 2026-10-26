@@ -52,3 +52,18 @@ export function formatOrderInformationSelection(
 export function isOrderInformationTable(table: Pick<ProductFeatureTable, "title">) {
   return isOrderInformationTableTitle(table.title);
 }
+
+/** Reads a stated minimum quantity from the product copy, for example "MOQ 100". */
+export function findMinimumOrder(product: {
+  description?: string | null;
+  overview?: string;
+  metaDescription?: string;
+}): number | null {
+  const text = [product.description, product.overview, product.metaDescription]
+    .filter(Boolean)
+    .join(" ");
+  const match = text.match(/MOQ\s+(\d+)/i);
+  if (!match) return null;
+  const quantity = Number(match[1]);
+  return Number.isFinite(quantity) && quantity > 1 ? quantity : null;
+}

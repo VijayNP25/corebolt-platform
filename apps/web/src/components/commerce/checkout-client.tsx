@@ -1,19 +1,19 @@
 'use client';
 
-import { useMemo, useState } from 'react';
-import { formatMoney } from '@corebolt/shared';
+import { useEffect, useState } from 'react';
+import { formatMoney, type CurrencyCode } from '@corebolt/shared';
 import { Link, useRouter } from '@/i18n/routing';
 import { useCurrency } from '@/hooks/use-currency';
 import { useLocalCart } from '@/hooks/use-local-cart';
-import { sumLocalCart } from '@/lib/local-cart';
-import { apiFetch } from '@/lib/api';
+import { usePricedCart } from '@/hooks/use-priced-cart';
+import { apiFetch, ApiError } from '@/lib/api';
 import { getMe } from '@/lib/auth';
 import { useToast } from '@/hooks/use-toast';
-
-const ADDRESS_KEY = 'corebolt.checkoutAddress.v1';
+import CartLines from '@/components/commerce/cart-lines';
+import CartSummary from '@/components/commerce/cart-summary';
 
 type AddressDraft = {
-  name: string;
+  label: string;
   phone: string;
   line1: string;
   line2: string;
@@ -23,8 +23,13 @@ type AddressDraft = {
   country: string;
 };
 
+type SavedAddress = AddressDraft & {
+  id: string;
+  isDefault: boolean;
+};
+
 const emptyAddress = (): AddressDraft => ({
-  name: '',
+  label: '',
   phone: '',
   line1: '',
   line2: '',
@@ -34,23 +39,125 @@ const emptyAddress = (): AddressDraft => ({
   country: 'IN',
 });
 
+const NEW_ADDRESS = 'new';
+
+async function resolveShippingAddress(input: {
+  selectedId: string;
+  address: AddressDraft;
+  makeDefault: boolean;
+}) {
+  if (input.selectedId !== NEW_ADDRESS) {
+    if (input.makeDefault) {
+      await apiFetch(`/addresses/${input.selectedId}`, {
+        method: 'PATCH',
+        body: JSON.stringify({ isDefault: true }),
+      });
+    }
+    return input.selectedId;
+  }
+
+  const phone = input.address.phone.trim();
+  if (phone && phone.length < 6) {
+    throw new ApiError('Phone must be at least 6 characters', 400);
+  }
+
+  const created = await apiFetch<{ data: { address: { id: string } } }>('/addresses', {
+    method: 'POST',
+    body: JSON.stringify({
+      label: input.address.label.trim() || 'Shipping',
+      line1: input.address.line1.trim(),
+      line2: input.address.line2.trim() || undefined,
+      city: input.address.city.trim(),
+      state: input.address.state.trim() || 'NA',
+      postalCode: input.address.postalCode.trim(),
+      country: (input.address.country.trim() || 'IN').toUpperCase(),
+      phone: phone || undefined,
+      isDefault: input.makeDefault,
+    }),
+  });
+  return created.data.address.id;
+}
+
+async function syncLocalCart(
+  currency: CurrencyCode,
+  items: { slug: string; quantity: number; name: string }[],
+) {
+  await apiFetch('/cart/currency', {
+    method: 'PATCH',
+    body: JSON.stringify({ currency }),
+  });
+  const current = await apiFetch<{
+    data: { cart: { items: { id: string }[] } };
+  }>('/cart');
+  for (const item of current.data.cart.items) {
+    await apiFetch(`/cart/items/${item.id}`, { method: 'DELETE' });
+  }
+  for (const item of items) {
+    const found = await apiFetch<{
+      data: { product: { id: string; pricingType: string } };
+    }>(`/products/${encodeURIComponent(item.slug)}`);
+    if (found.data.product.pricingType !== 'FIXED') {
+      throw new ApiError(`${item.name} does not have a confirmed price`, 400);
+    }
+    await apiFetch('/cart/items', {
+      method: 'POST',
+      body: JSON.stringify({
+        productId: found.data.product.id,
+        quantity: item.quantity,
+      }),
+    });
+  }
+}
+
 export default function CheckoutClient() {
   const { currency } = useCurrency();
   const { cart, clear } = useLocalCart();
-  const totals = useMemo(() => sumLocalCart(cart, currency), [cart, currency]);
+  const priced = usePricedCart();
+  const totals = priced.totals;
   const { toast } = useToast();
   const router = useRouter();
-  const [address, setAddress] = useState<AddressDraft>(() => {
-    if (typeof window === 'undefined') return emptyAddress();
-    try {
-      const raw = localStorage.getItem(ADDRESS_KEY);
-      return raw ? ({ ...emptyAddress(), ...JSON.parse(raw) } as AddressDraft) : emptyAddress();
-    } catch {
-      return emptyAddress();
-    }
-  });
+  const [address, setAddress] = useState<AddressDraft>(emptyAddress);
+  const [saved, setSaved] = useState<SavedAddress[]>([]);
+  const [selectedId, setSelectedId] = useState(NEW_ADDRESS);
+  const [makeDefault, setMakeDefault] = useState(true);
   const [notes, setNotes] = useState('');
   const [submitting, setSubmitting] = useState(false);
+  const [addressesReady, setAddressesReady] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    apiFetch<{ data: { addresses: Array<SavedAddress & { line2: string | null; phone: string | null; label: string | null }> } }>(
+      '/addresses',
+    )
+      .then((res) => {
+        if (cancelled) return;
+        const items = (res.data.addresses ?? []).map((item) => ({
+          id: item.id,
+          label: item.label ?? '',
+          phone: item.phone ?? '',
+          line1: item.line1,
+          line2: item.line2 ?? '',
+          city: item.city,
+          state: item.state,
+          postalCode: item.postalCode,
+          country: item.country,
+          isDefault: item.isDefault,
+        }));
+        items.sort((a, b) => Number(b.isDefault) - Number(a.isDefault));
+        setSaved(items);
+        const preferred = items.find((item) => item.isDefault) ?? items[0];
+        setSelectedId(preferred?.id ?? NEW_ADDRESS);
+        setMakeDefault(items.length === 0);
+        setAddressesReady(true);
+      })
+      .catch(() => {
+        if (!cancelled) setSaved([]);
+        if (!cancelled) setAddressesReady(true);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   if (cart.items.length === 0) {
     return (
@@ -65,17 +172,20 @@ export default function CheckoutClient() {
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!address.name || !address.line1 || !address.city || !address.postalCode) {
-      toast({
-        title: 'Address incomplete',
-        description: 'Name, address line, city and postal code are required.',
-        variant: 'destructive',
-      });
-      return;
+    if (!addressesReady) return;
+    if (selectedId === NEW_ADDRESS) {
+      const country = address.country.trim();
+      if (!address.line1.trim() || !address.city.trim() || !address.postalCode.trim() || country.length !== 2) {
+        toast({
+          title: 'Address incomplete',
+          description: 'Address line, city, postal code, and a 2-letter country code are required.',
+          variant: 'destructive',
+        });
+        return;
+      }
     }
 
     setSubmitting(true);
-    localStorage.setItem(ADDRESS_KEY, JSON.stringify(address));
 
     try {
       const me = await getMe();
@@ -85,128 +195,171 @@ export default function CheckoutClient() {
           description: 'Create an account or sign in before placing an order.',
           variant: 'destructive',
         });
-        router.push('/login');
+        router.push('/login?next=/checkout');
         return;
       }
 
-      // Try real checkout when API + DB are available.
       try {
-        const addr = await apiFetch<{ data: { address: { id: string } } }>(
-          '/addresses',
-          {
-            method: 'POST',
-            body: JSON.stringify({
-              label: 'Checkout',
-              line1: address.line1,
-              line2: address.line2 || undefined,
-              city: address.city,
-              state: address.state || 'NA',
-              postalCode: address.postalCode,
-              country: address.country || 'IN',
-              phone: address.phone || undefined,
-              isDefault: true,
-            }),
-          },
-        );
-        await apiFetch('/checkout', {
+        const sellable = priced.cart.items.filter((item) => item.priceInr);
+        if (sellable.length === 0) {
+          throw new ApiError('Nothing in the cart has a confirmed price', 400);
+        }
+        await syncLocalCart(currency, sellable);
+        const shippingAddressId = await resolveShippingAddress({
+          selectedId,
+          address,
+          makeDefault,
+        });
+        const placed = await apiFetch<{
+          data: { order: { id: string; orderNumber: string } };
+        }>('/checkout', {
           method: 'POST',
           body: JSON.stringify({
             currency,
-            shippingAddressId: addr.data.address.id,
+            shippingAddressId,
             notes: notes || undefined,
           }),
         });
         clear();
-        toast({
-          title: 'Order placed',
-          description: 'Payment will complete via ICICI (INR) or Stripe (USD).',
-        });
-        router.push('/account');
+        router.push(`/checkout/pay/${placed.data.order.id}`);
         return;
-      } catch {
-        // Offline / no DB — store a local order receipt for UX continuity.
+      } catch (error) {
+        toast({
+          title: 'Could not place order',
+          description:
+            error instanceof ApiError
+              ? error.message
+              : 'The order was not placed. The shop has to confirm the current price first.',
+          variant: 'destructive',
+        });
+        return;
       }
-
-      const receipt = {
-        id: `LOCAL-${Date.now()}`,
-        currency,
-        totals,
-        address,
-        notes,
-        items: cart.items,
-        createdAt: new Date().toISOString(),
-        status: 'PENDING_LOCAL',
-      };
-      const prev = JSON.parse(localStorage.getItem('corebolt.localOrders.v1') || '[]');
-      localStorage.setItem(
-        'corebolt.localOrders.v1',
-        JSON.stringify([receipt, ...(Array.isArray(prev) ? prev : [])]),
-      );
-      clear();
-      toast({
-        title: 'Order saved locally',
-        description:
-          'API/database is offline. Order kept in this browser; re-submit after Postgres is up.',
-      });
-      router.push('/account');
     } finally {
       setSubmitting(false);
     }
   };
 
-  const field = (key: keyof AddressDraft, label: string, required = false) => (
-    <>
-      <label htmlFor={key}>{label}</label>
+  const field = (
+    key: keyof AddressDraft,
+    label: string,
+    required = false,
+    wide = false,
+  ) => (
+    <label className={wide ? 'wide' : undefined} htmlFor={key}>
+      {label}
       <input
         id={key}
         value={address[key]}
         required={required}
-        onChange={(e) => setAddress((a) => ({ ...a, [key]: e.target.value }))}
+        onChange={(e) => setAddress((current) => ({ ...current, [key]: e.target.value }))}
       />
-    </>
+    </label>
   );
 
   return (
-    <div className="cb-shell-card grid gap-8 lg:grid-cols-2">
-      <form className="cb-auth-form" onSubmit={onSubmit}>
-        <h2>Shipping address</h2>
-        {field('name', 'Full name', true)}
-        {field('phone', 'Phone')}
-        {field('line1', 'Address line 1', true)}
-        {field('line2', 'Address line 2')}
-        {field('city', 'City', true)}
-        {field('state', 'State')}
-        {field('postalCode', 'Postal code', true)}
-        {field('country', 'Country code', true)}
-        <label htmlFor="notes">Order notes</label>
-        <input
-          id="notes"
-          value={notes}
-          onChange={(e) => setNotes(e.target.value)}
-          placeholder="Optional"
-        />
-        <button type="submit" disabled={submitting}>
-          {submitting ? 'Placing order…' : `Pay ${formatMoney(totals.total, currency)}`}
-        </button>
-        <p className="text-xs text-[var(--ink3)]">
-          Login required. INR → ICICI · USD → Stripe (when gateways are configured).
-        </p>
-      </form>
-
-      <div>
-        <h2 className="text-lg font-semibold mb-3">Order summary</h2>
-        <ul className="space-y-2 text-sm mb-4">
-          {cart.items.map((i) => (
-            <li key={i.productId}>
-              {i.name} × {i.quantity}
-            </li>
-          ))}
-        </ul>
-        <p>Subtotal: {formatMoney(totals.subtotal, currency)}</p>
-        <p>Shipping: {formatMoney(totals.shipping, currency)}</p>
-        {currency === 'INR' && <p>GST: {formatMoney(totals.tax, currency)}</p>}
-        <p className="mt-2 font-semibold">Total: {formatMoney(totals.total, currency)}</p>
+    <div className="cb-cart-layout">
+      <div className="space-y-5">
+        <CartLines />
+        <form id="cb-checkout" className="cb-cart-panel cb-ship-form" onSubmit={onSubmit}>
+          <h2>Shipping address</h2>
+          {!addressesReady ? (
+            <p className="wide text-sm m-0">Loading saved addresses…</p>
+          ) : saved.length > 0 ? (
+            <div className="wide space-y-2">
+              {saved.map((item) => (
+                <label key={item.id} className="cb-ship-choice">
+                  <input
+                    type="radio"
+                    name="saved-address"
+                    checked={selectedId === item.id}
+                    onChange={() => {
+                      setSelectedId(item.id);
+                      setMakeDefault(item.isDefault);
+                    }}
+                  />
+                  <span>
+                    <strong>{item.label || 'Address'}</strong>
+                    {item.isDefault ? ' · Default' : ''}
+                    <span className="block text-sm font-normal text-[#555]">
+                      {[item.line1, item.line2, item.city, item.state, item.postalCode, item.country]
+                        .filter(Boolean)
+                        .join(', ')}
+                    </span>
+                  </span>
+                </label>
+              ))}
+              <label className="cb-ship-choice">
+                <input
+                  type="radio"
+                  name="saved-address"
+                  checked={selectedId === NEW_ADDRESS}
+                  onChange={() => {
+                    setSelectedId(NEW_ADDRESS);
+                    setMakeDefault(false);
+                  }}
+                />
+                <span>Use a new address</span>
+              </label>
+            </div>
+          ) : (
+            <p className="wide text-sm m-0">No saved address yet. This one is stored on your account.</p>
+          )}
+          {addressesReady && selectedId === NEW_ADDRESS ? (
+            <>
+              {field('label', 'Label (Home, Office)')}
+              {field('phone', 'Phone')}
+              {field('line1', 'Address line 1', true, true)}
+              {field('line2', 'Address line 2', false, true)}
+              {field('city', 'City', true)}
+              {field('state', 'State')}
+              {field('postalCode', 'Postal code', true)}
+              {field('country', 'Country code', true)}
+            </>
+          ) : null}
+          {addressesReady ? (
+          <label className="wide cb-ship-check">
+            <input
+              type="checkbox"
+              checked={makeDefault || saved.find((item) => item.id === selectedId)?.isDefault === true}
+              disabled={saved.find((item) => item.id === selectedId)?.isDefault === true}
+              onChange={(event) => setMakeDefault(event.target.checked)}
+            />
+            Use as my default address
+          </label>
+          ) : null}
+          <label className="wide" htmlFor="notes">
+            Order notes
+            <input
+              id="notes"
+              value={notes}
+              onChange={(e) => setNotes(e.target.value)}
+              placeholder="Optional"
+            />
+          </label>
+        </form>
       </div>
+      <CartSummary
+        action={
+          <button
+            type="submit"
+            form="cb-checkout"
+            className="cb-checkout-btn"
+            disabled={submitting || !priced.ready || !addressesReady}
+          >
+            {submitting
+              ? 'Placing order…'
+              : priced.ready
+                ? `Place order · ${formatMoney(totals.total, currency)}`
+                : 'Confirming price…'}
+          </button>
+        }
+        note={
+          <>
+            You are signed in. The address you choose is saved on your account.{" "}
+            <Link href="/shipping-policy">Shipping and lead time</Link>
+          </>
+        }
+      />
     </div>
   );
 }

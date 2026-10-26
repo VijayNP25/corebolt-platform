@@ -216,8 +216,8 @@ export default function ReplicaHomePage() {
                   industrial automation systems.
                 </p>
                 <div className="ccard-foot">
-                  <Link href="/contact-us" className="btn btn-primary">
-                    Request Specs →
+                  <Link href="/order-edge-computers" className="btn btn-primary">
+                    Order Now →
                   </Link>
                   <Link href={COMPUTING_LINKS.edgeComputers} className="btn-ghost">
                     Learn More →
@@ -312,8 +312,8 @@ export default function ReplicaHomePage() {
                   modelling.
                 </p>
                 <div className="vcard-foot">
-                  <Link href="/contact-us" className="btn btn-primary">
-                    Request Specs →
+                  <Link href="/order-3d-lidar" className="btn btn-primary">
+                    Order Now →
                   </Link>
                   <Link href={VISION_LINKS.lidarRadar} className="btn-ghost-dk">
                     Browse LiDAR →

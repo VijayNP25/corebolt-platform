@@ -1,5 +1,6 @@
 import { setRequestLocale } from 'next-intl/server';
 import AdminShell from '@/components/admin/admin-shell';
+import AdminReportsClient from '@/components/admin/admin-reports-client';
 
 export default async function AdminReportsPage({
   params,
@@ -10,9 +11,7 @@ export default async function AdminReportsPage({
   setRequestLocale(locale);
   return (
     <AdminShell title="Reports">
-      <div className="cb-shell-card">
-        <p>Reports stub — charts and exports will call API aggregates.</p>
-      </div>
+      <AdminReportsClient />
     </AdminShell>
   );
 }

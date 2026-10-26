@@ -38,7 +38,8 @@ function mapGroup(g: ProductGroup): NavProductGroup {
   };
 }
 
-function mapSub(s: Subcategory): NavSubcategory {
+function mapSub(s: Subcategory): NavSubcategory | null {
+  if (s.hidden) return null;
   return {
     id: s.id,
     name: s.name,
@@ -50,12 +51,18 @@ function mapCategory(c: Category): NavCategory {
   return {
     id: c.id,
     name: c.name,
-    products: c.products?.map((p) => ({ id: p.id, name: p.name })),
-    subcategories: c.subcategories?.map(mapSub),
+    products: c.products
+      ?.filter((p) => !p.hidden)
+      .map((p) => ({ id: p.id, name: p.name })),
+    subcategories: c.subcategories
+      ?.map(mapSub)
+      .filter((s): s is NavSubcategory => s !== null),
   };
 }
 
-export const navCategories: NavCategory[] = categories.map(mapCategory);
+export function getNavCategories(): NavCategory[] {
+  return categories.filter((category) => !category.hidden).map(mapCategory);
+}
 
 /** Legacy / mistyped category ids -> canonical id */
 export const CATEGORY_ALIASES: Record<string, string> = {
@@ -64,7 +71,7 @@ export const CATEGORY_ALIASES: Record<string, string> = {
 
 export function navCategoryHasDirectProducts(categoryId: string): boolean {
   const id = CATEGORY_ALIASES[categoryId] ?? categoryId;
-  const cat = navCategories.find((c) => c.id === id);
+  const cat = getNavCategories().find((c) => c.id === id);
   return Boolean(cat?.products?.length && !cat.subcategories?.length);
 }
 
@@ -132,6 +139,7 @@ export function navMenuCategories(links: MenuLinkBuilders): NavCategory[] {
       n.children.map((c) => c.id).filter((id) => id !== parent),
     ),
   );
+  const navCategories = getNavCategories();
   return navCategories
     .filter((c) => !nestedIds.has(c.id))
     .map((c) => {

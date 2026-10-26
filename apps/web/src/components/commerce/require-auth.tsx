@@ -8,9 +8,13 @@ import { getMe } from '@/lib/auth';
 export default function RequireAuth({
   children,
   nextPath,
+  title = 'Sign in required',
+  message = 'Please sign in to continue.',
 }: {
   children: ReactNode;
   nextPath: string;
+  title?: string;
+  message?: string;
 }) {
   const router = useRouter();
   const [ready, setReady] = useState(false);
@@ -40,8 +44,8 @@ export default function RequireAuth({
   if (!ok) {
     return (
       <div className="cb-shell-card">
-        <h2>Sign in required</h2>
-        <p className="lead mt-2">Please sign in to continue.</p>
+        <h2>{title}</h2>
+        <p className="lead mt-2">{message}</p>
         <Link
           href={`/login?next=${encodeURIComponent(nextPath)}`}
           className="inline-block mt-4 bg-[var(--g)] text-white px-5 py-3 font-semibold"

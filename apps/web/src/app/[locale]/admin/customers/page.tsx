@@ -1,5 +1,6 @@
 import { setRequestLocale } from 'next-intl/server';
 import AdminShell from '@/components/admin/admin-shell';
+import AdminCustomersClient from '@/components/admin/admin-customers-client';
 
 export default async function AdminCustomersPage({
   params,
@@ -10,11 +11,7 @@ export default async function AdminCustomersPage({
   setRequestLocale(locale);
   return (
     <AdminShell title="Customers">
-      <div className="cb-shell-card">
-        <p>
-          Customers admin stub — list users via staff API when endpoint is added.
-        </p>
-      </div>
+      <AdminCustomersClient />
     </AdminShell>
   );
 }

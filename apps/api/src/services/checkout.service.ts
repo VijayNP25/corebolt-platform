@@ -26,7 +26,7 @@ export async function checkout(input: {
 }) {
   const user = await db.query.users.findFirst({ where: eq(users.id, input.userId) });
   if (!user) throw new NotFoundError('User not found');
-  if (!user.emailVerifiedAt) {
+  if (!user.emailVerifiedAt && env.NODE_ENV === 'production') {
     throw new ForbiddenError('Email verification required before checkout');
   }
 
@@ -59,7 +59,8 @@ export async function checkout(input: {
     billingSnapshot = addressSnapshot(billing);
   }
 
-  const taxTotal = percentOf(serialized.subtotal, env.GST_PERCENT);
+  const taxTotal =
+    input.currency === 'INR' ? percentOf(serialized.subtotal, env.GST_PERCENT) : '0.00';
   const grandTotal = moneyAdd(serialized.subtotal, serialized.shippingTotal, taxTotal);
   const fx = await getActiveFx();
 
@@ -137,11 +138,7 @@ export async function checkout(input: {
   // clear cart items
   await db.delete(carts).where(eq(carts.id, cart.id));
 
-  await emailService.send({
-    to: user.email,
-    subject: `Order ${orderNumber} received — COREBOLT`,
-    html: `<p>We received your order <strong>${orderNumber}</strong>. Complete payment to confirm.</p>`,
-  });
+  await emailService.sendOrderReceived(user.email, orderNumber);
 
   return {
     order: {

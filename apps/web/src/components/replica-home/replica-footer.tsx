@@ -145,6 +145,7 @@ export default function ReplicaFooter() {
         <div className="footer-bot">
           <p>© 2026 CORE BOLT™. All rights reserved.</p>
           <div className="footer-legal">
+            <Link href="/shipping-policy">Shipping</Link>
             <Link href="/privacy-policy">Privacy</Link>
             <Link href="/return-warranty-policy">Terms</Link>
           </div>

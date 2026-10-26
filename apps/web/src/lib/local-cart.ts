@@ -11,6 +11,8 @@ export type LocalCartItem = {
   priceInr: string | null;
   shippingInr: string;
   shippingUsd: string;
+  /** Catalogue manufacturer, when the ordering page knows it. */
+  manufacturer?: string;
   quantity: number;
 };
 
@@ -51,9 +53,13 @@ export function addLocalCartItem(
     throw new Error('Price-on-request products cannot be added to the cart');
   }
   const qty = Math.max(1, item.quantity ?? 1);
-  const existing = cart.items.find((i) => i.productId === item.productId);
+  const existing = cart.items.find(
+    (i) => i.productId === item.productId || (item.slug.length > 0 && i.slug === item.slug),
+  );
   if (existing) {
     existing.quantity += qty;
+    if (!existing.manufacturer && item.manufacturer) existing.manufacturer = item.manufacturer;
+    if (!existing.imageUrl && item.imageUrl) existing.imageUrl = item.imageUrl;
   } else {
     cart.items.push({
       productId: item.productId,
@@ -63,6 +69,7 @@ export function addLocalCartItem(
       priceInr: item.priceInr,
       shippingInr: item.shippingInr || '0',
       shippingUsd: item.shippingUsd || '0',
+      manufacturer: item.manufacturer,
       quantity: qty,
     });
   }
@@ -113,13 +120,15 @@ export function convertInrToDisplay(
 export function sumLocalCart(
   cart: LocalCart,
   currency: CurrencyCode,
+  inrPerUsd = FALLBACK_INR_PER_USD,
+  markupPercent = FALLBACK_FX_MARKUP_PERCENT,
 ): { subtotal: string; shipping: string; tax: string; total: string } {
   const gst = 0.18;
   let subtotal = 0;
   let shipping = 0;
   for (const item of cart.items) {
     if (!item.priceInr) continue;
-    const unit = Number(convertInrToDisplay(item.priceInr, currency));
+    const unit = Number(convertInrToDisplay(item.priceInr, currency, inrPerUsd, markupPercent));
     subtotal += unit * item.quantity;
     const ship =
       currency === 'USD'

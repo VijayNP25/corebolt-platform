@@ -3,11 +3,13 @@ import { asc, eq } from 'drizzle-orm';
 import { z } from 'zod';
 import { db } from '../db/client.js';
 import { categories } from '../db/schema.js';
+import { recordAudit } from '../services/audit.service.js';
 import { asyncHandler } from '../lib/asyncHandler.js';
 import { NotFoundError } from '../lib/errors.js';
 import { routeParam } from '../lib/params.js';
 import { requireAuth, requireRoles } from '../middleware/auth.js';
 import { validate } from '../middleware/validate.js';
+import { syncCategoryToCatalog, syncNewSubcategory } from '../services/catalog-sync.js';
 
 const router = Router();
 
@@ -43,6 +45,24 @@ router.get(
   }),
 );
 
+async function publishCategory(row: {
+  id: string;
+  name: string;
+  slug: string;
+  description: string | null;
+  parentId: string | null;
+  isActive: boolean;
+}) {
+  if (row.parentId) {
+    const parent = await db.query.categories.findFirst({
+      where: eq(categories.id, row.parentId),
+    });
+    if (parent) await syncNewSubcategory(row, parent.slug);
+    return;
+  }
+  await syncCategoryToCatalog(row);
+}
+
 router.post(
   '/',
   requireAuth,
@@ -50,6 +70,16 @@ router.post(
   validate(bodySchema),
   asyncHandler(async (req, res) => {
     const [row] = await db.insert(categories).values(req.body).returning();
+    if (!row) throw new NotFoundError('Category not found');
+    await publishCategory(row);
+    await recordAudit({
+      actorUserId: req.user!.sub,
+      action: 'category.created',
+      entityType: 'category',
+      entityId: row.id,
+      metadata: { name: row.name },
+      ipAddress: req.ip,
+    });
     res.status(201).json({ data: { category: row } });
   }),
 );
@@ -61,12 +91,24 @@ router.patch(
   validate(bodySchema.partial()),
   asyncHandler(async (req, res) => {
     const id = routeParam(req.params.id, 'id');
+    const { slug: _slug, parentId: _parentId, ...changes } = req.body as z.infer<
+      typeof bodySchema
+    >;
     const [row] = await db
       .update(categories)
-      .set(req.body)
+      .set(changes)
       .where(eq(categories.id, id))
       .returning();
     if (!row) throw new NotFoundError('Category not found');
+    await publishCategory(row);
+    await recordAudit({
+      actorUserId: req.user!.sub,
+      action: 'category.updated',
+      entityType: 'category',
+      entityId: row.id,
+      metadata: { name: row.name },
+      ipAddress: req.ip,
+    });
     res.json({ data: { category: row } });
   }),
 );

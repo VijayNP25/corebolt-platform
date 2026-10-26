@@ -1,6 +1,7 @@
 import { Router } from 'express';
-import { eq } from 'drizzle-orm';
+import { and, eq } from 'drizzle-orm';
 import { addressSchema } from '@corebolt/shared';
+import { z } from 'zod';
 import { asyncHandler } from '../lib/asyncHandler.js';
 import { routeParam } from '../lib/params.js';
 import { requireAuth } from '../middleware/auth.js';
@@ -52,16 +53,55 @@ router.post(
   }),
 );
 
+const patchSchema = z
+  .object({
+    label: z.string().max(100).optional(),
+    line1: z.string().min(1).max(255).optional(),
+    line2: z.string().max(255).nullable().optional(),
+    city: z.string().min(1).max(100).optional(),
+    state: z.string().min(1).max(100).optional(),
+    postalCode: z.string().min(1).max(20).optional(),
+    country: z.string().length(2).optional(),
+    phone: z.string().min(6).max(20).nullable().optional(),
+    isDefault: z.boolean().optional(),
+  })
+  .strict();
+
+router.patch(
+  '/:id',
+  validate(patchSchema),
+  asyncHandler(async (req, res) => {
+    const id = routeParam(req.params.id, 'id');
+    const existing = await db.query.addresses.findFirst({
+      where: and(eq(addresses.id, id), eq(addresses.userId, req.user!.sub)),
+    });
+    if (!existing) throw new NotFoundError('Address not found');
+
+    if (req.body.isDefault) {
+      await db
+        .update(addresses)
+        .set({ isDefault: false })
+        .where(eq(addresses.userId, req.user!.sub));
+    }
+
+    const [updated] = await db
+      .update(addresses)
+      .set(req.body)
+      .where(eq(addresses.id, id))
+      .returning();
+    res.json({ data: { address: updated } });
+  }),
+);
+
 router.delete(
   '/:id',
   asyncHandler(async (req, res) => {
-    const [deleted] = await db
-      .delete(addresses)
-      .where(eq(addresses.id, routeParam(req.params.id, 'id')))
-      .returning();
-    if (!deleted || deleted.userId !== req.user!.sub) {
-      throw new NotFoundError('Address not found');
-    }
+    const id = routeParam(req.params.id, 'id');
+    const existing = await db.query.addresses.findFirst({
+      where: and(eq(addresses.id, id), eq(addresses.userId, req.user!.sub)),
+    });
+    if (!existing) throw new NotFoundError('Address not found');
+    await db.delete(addresses).where(eq(addresses.id, id));
     res.status(204).send();
   }),
 );

@@ -100,6 +100,13 @@ export const updateOrderStatusSchema = z.object({
   trackingNumber: z.string().max(100).optional(),
 });
 
+export const updateProfileSchema = z
+  .object({
+    name: z.string().min(1).max(200),
+    phone: z.string().max(20).optional(),
+  })
+  .strict();
+
 export const reviewSchema = z.object({
   productId: z.string().uuid(),
   orderId: z.string().uuid(),

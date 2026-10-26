@@ -617,3 +617,67 @@
     scrollbar-color: rgba(118, 185, 0, 0.5) transparent;
   }
 }
+
+a.lidar-order-chip {
+  background: #fff;
+  color: #111;
+  border: 1px solid rgba(0, 0, 0, 0.16);
+}
+a.lidar-order-chip[aria-current="page"] {
+  background: var(--g, #76b900);
+  color: #0d0d0d;
+  border-color: transparent;
+}
+
+button.lidar-order-link {
+  background: none;
+  border: 0;
+  padding: 0;
+  color: #111;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+button.lidar-order-link:hover {
+  color: #3d7a00;
+  gap: 8px;
+}
+
+.lidar-qty,
+.replica-site .lidar-qty.replica-btn-dark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2px;
+  min-width: 96px;
+  padding: 0 4px;
+  border-radius: 8px;
+  background: #1f8a32 !important;
+  color: #fff !important;
+}
+.lidar-qty button {
+  width: 28px;
+  height: 28px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+}
+.lidar-qty button:hover {
+  background: rgba(255, 255, 255, 0.16);
+}
+.lidar-qty span {
+  min-width: 1.25rem;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+}

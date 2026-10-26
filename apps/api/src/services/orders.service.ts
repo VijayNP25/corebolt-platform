@@ -4,6 +4,7 @@ import { db } from '../db/client.js';
 import { orders, orderStatusHistory, users } from '../db/schema.js';
 import { ForbiddenError, NotFoundError, ValidationError } from '../lib/errors.js';
 import { emailService } from './email.service.js';
+import { isLocalStubPayment } from './payments/index.js';
 
 const STAFF_TRANSITIONS: Partial<Record<OrderStatus, OrderStatus[]>> = {
   CONFIRMED: ['PROCESSING'],
@@ -37,11 +38,23 @@ export async function getOrderForUser(orderId: string, userId: string) {
 }
 
 export async function listOrdersAdmin(opts?: { status?: OrderStatus }) {
-  return db.query.orders.findMany({
+  const rows = await db.query.orders.findMany({
     where: opts?.status ? eq(orders.status, opts.status) : undefined,
     orderBy: [desc(orders.createdAt)],
-    with: { items: true },
+    with: { items: true, user: true },
   });
+
+  return rows.map(({ user, ...order }) => ({
+    ...order,
+    customer: user
+      ? {
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          phone: user.phone,
+        }
+      : null,
+  }));
 }
 
 export async function updateOrderStatus(input: {
@@ -73,12 +86,18 @@ export async function updateOrderStatus(input: {
     );
   }
 
+  const carrier = (input.carrier ?? order.carrier ?? '').trim();
+  const trackingNumber = (input.trackingNumber ?? order.trackingNumber ?? '').trim();
+  if (input.toStatus === 'SHIPPED' && (!carrier || !trackingNumber)) {
+    throw new ValidationError('Carrier and tracking number are required to mark an order shipped');
+  }
+
   const [updated] = await db
     .update(orders)
     .set({
       status: input.toStatus,
-      carrier: input.carrier ?? order.carrier,
-      trackingNumber: input.trackingNumber ?? order.trackingNumber,
+      carrier: carrier || null,
+      trackingNumber: trackingNumber || null,
     })
     .where(eq(orders.id, order.id))
     .returning();
@@ -91,7 +110,34 @@ export async function updateOrderStatus(input: {
     changedByUserId: input.actorUserId,
   });
 
+  const user = await db.query.users.findFirst({
+    where: eq(users.id, order.userId),
+  });
+  if (user && updated) {
+    await emailService.sendOrderStatus({
+      to: user.email,
+      orderNumber: order.orderNumber,
+      status: input.toStatus,
+      carrier: updated.carrier,
+      trackingNumber: updated.trackingNumber,
+      note: input.note,
+    });
+  }
+
   return updated;
+}
+
+/** Customer confirms a local order while the bank keys are still empty. */
+export async function confirmStubPayment(orderId: string, userId: string) {
+  const order = await getOrderForUser(orderId, userId);
+  if (order.status !== 'PENDING' || order.paymentStatus === 'paid') {
+    throw new ValidationError('This order is not waiting for payment');
+  }
+  if (!isLocalStubPayment(order.currency)) {
+    throw new ValidationError('Payment is completed with the bank');
+  }
+  await markOrderPaid(order.id, order.paymentIntentId ?? undefined);
+  return getOrderForUser(orderId, userId);
 }
 
 /** Called from payment webhooks: PENDING → CONFIRMED */

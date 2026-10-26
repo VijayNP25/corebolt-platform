@@ -1,4 +1,5 @@
 import { setRequestLocale } from 'next-intl/server';
+import AdminCategoriesClient from '@/components/admin/admin-categories-client';
 import AdminShell from '@/components/admin/admin-shell';
 
 export default async function AdminCategoriesPage({
@@ -10,12 +11,7 @@ export default async function AdminCategoriesPage({
   setRequestLocale(locale);
   return (
     <AdminShell title="Categories">
-      <div className="cb-shell-card">
-        <p>
-          Categories admin stub — wire to API category endpoints when available.
-          Static catalog remains in <code>src/data/products.ts</code> for nav.
-        </p>
-      </div>
+      <AdminCategoriesClient />
     </AdminShell>
   );
 }

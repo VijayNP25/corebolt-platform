@@ -48,7 +48,10 @@ export default function LoginClient({
           : await register({ email, password, name });
       toast({
         title: mode === 'login' ? 'Signed in' : 'Account created',
-        description: user.email,
+        description:
+          mode === 'login'
+            ? user.email
+            : 'Confirm your email from the link on your account before you place an order.',
       });
       router.push(nextPath);
     } catch (err) {

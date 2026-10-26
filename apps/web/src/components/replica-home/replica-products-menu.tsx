@@ -12,12 +12,6 @@ import {
 } from "@/lib/catalog-nav";
 import { productGroupHref, subcategoryHref, categorySelectionHref } from "@/lib/replica-product-routes";
 
-// Menu view of the catalogue: e.g. Radars is listed under 3D LiDARs (see MENU_NESTING).
-const categories = navMenuCategories({
-  category: categorySelectionHref,
-  subcategory: subcategoryHref,
-});
-
 interface ReplicaProductsMenuProps {
   variant: "desktop" | "mobile";
   onNavigate?: () => void;
@@ -29,6 +23,10 @@ export default function ReplicaProductsMenu({
   onNavigate,
   linkStyle,
 }: ReplicaProductsMenuProps) {
+  const categories = navMenuCategories({
+    category: categorySelectionHref,
+    subcategory: subcategoryHref,
+  });
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [mobileGroupParent, setMobileGroupParent] = useState<string | null>(null);

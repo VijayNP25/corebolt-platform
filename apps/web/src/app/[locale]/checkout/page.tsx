@@ -19,10 +19,13 @@ export default async function CheckoutPage({
 
   return (
     <ReplicaSiteLayout lightNav>
-      <main className="cb-shell">
+      <main className="cb-shell cb-shell--wide">
         <h1>Checkout</h1>
-        <p className="lead">Confirm shipping and place your order. Sign in required.</p>
-        <RequireAuth nextPath="/checkout">
+        <RequireAuth
+          nextPath="/checkout"
+          title="Sign in to checkout"
+          message="An account is required before the address form. After you sign in, you come back here and can choose a saved address."
+        >
           <CheckoutClient />
         </RequireAuth>
       </main>

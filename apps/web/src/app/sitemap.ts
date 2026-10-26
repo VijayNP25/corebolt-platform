@@ -1,12 +1,14 @@
 import type { MetadataRoute } from 'next';
 import { getAllBlogPosts } from '@/lib/blog';
+import { loadPublishedCatalog } from '@/lib/published-catalog';
 import { getAllProductsFlat, slugify } from '@/lib/subcategory-products';
 
 const SITE =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, '') ??
   'https://www.core-bolt.com';
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  await loadPublishedCatalog();
   const staticPaths = [
     '',
     '/about',

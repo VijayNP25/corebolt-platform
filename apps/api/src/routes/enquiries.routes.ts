@@ -5,6 +5,7 @@ import { asyncHandler } from '../lib/asyncHandler.js';
 import { routeParam } from '../lib/params.js';
 import { optionalAuth, requireAuth, requireRoles } from '../middleware/auth.js';
 import { validate } from '../middleware/validate.js';
+import { recordAudit } from '../services/audit.service.js';
 import * as enquiriesService from '../services/enquiries.service.js';
 
 const router = Router();
@@ -59,6 +60,14 @@ router.patch(
       toStatus: req.body.status,
       actorUserId: req.user!.sub,
       note: req.body.note,
+    });
+    await recordAudit({
+      actorUserId: req.user!.sub,
+      action: 'enquiry.status_changed',
+      entityType: 'enquiry',
+      entityId: enquiry.id,
+      metadata: { status: enquiry.status, name: enquiry.name },
+      ipAddress: req.ip,
     });
     res.json({ data: { enquiry } });
   }),

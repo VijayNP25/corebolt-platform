@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import SiteAnalytics from '@/components/site-analytics';
 import './globals.css';
 
 /**
@@ -9,7 +10,19 @@ import './globals.css';
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body suppressHydrationWarning>{children}</body>
+      <body suppressHydrationWarning>
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-KCR255ZZ"
+            height="0"
+            width="0"
+            style={{ display: 'none', visibility: 'hidden' }}
+            title="Google Tag Manager"
+          />
+        </noscript>
+        <SiteAnalytics />
+        {children}
+      </body>
     </html>
   );
 }

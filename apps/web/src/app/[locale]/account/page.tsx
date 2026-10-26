@@ -20,7 +20,7 @@ export default async function AccountPage({
     <ReplicaSiteLayout lightNav>
       <main className="cb-shell">
         <h1>My Account</h1>
-        <p className="lead">Profile, orders, and account settings.</p>
+        <p className="lead">Profile, saved addresses, and orders.</p>
         <AccountClient />
       </main>
     </ReplicaSiteLayout>

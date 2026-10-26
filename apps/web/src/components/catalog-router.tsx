@@ -11,8 +11,10 @@ import Product from '@/catalog-pages/product';
 import SubcategoryThirdSegment from '@/catalog-pages/subcategory-third-segment';
 import SubcategoryFourthSegment from '@/catalog-pages/subcategory-fourth-segment';
 import LidarRadarSelection from '@/catalog-pages/lidar-radar-selection';
+import LidarOrderPage from '@/catalog-pages/lidar-order';
 import PerceptionKits from '@/catalog-pages/perception-kits';
 import PrivacyPolicy from '@/catalog-pages/privacy-policy';
+import ShippingPolicy from '@/catalog-pages/shipping-policy';
 import ReturnWarrantyPolicy from '@/catalog-pages/return-warranty-policy';
 import NotFound from '@/catalog-pages/not-found';
 
@@ -49,6 +51,9 @@ function subcategoryIdFromOldRoute(oldRoute: string): string | undefined {
 }
 
 function resolveCatalogView(path: string, segments: string[]): CatalogView {
+  if (path === '/shipping-policy') {
+    return { kind: 'page', params: {}, node: <ShippingPolicy /> };
+  }
   if (path === '/privacy-policy') {
     return { kind: 'page', params: {}, node: <PrivacyPolicy /> };
   }
@@ -60,6 +65,22 @@ function resolveCatalogView(path: string, segments: string[]): CatalogView {
   }
   if (path === '/3d-lidar-radar-sensors') {
     return { kind: 'page', params: {}, node: <LidarRadarSelection /> };
+  }
+  if (path === '/order-3d-lidar' || path === '/order-edge-computers') {
+    const orderKey = path === '/order-edge-computers' ? 'edge-computers' : 'lidar';
+    return { kind: 'page', params: { orderKey }, node: <LidarOrderPage /> };
+  }
+  if (
+    (segments[0] === 'order-3d-lidar' || segments[0] === 'order-edge-computers') &&
+    segments.length === 2 &&
+    segments[1]
+  ) {
+    const orderKey = segments[0] === 'order-edge-computers' ? 'edge-computers' : 'lidar';
+    return {
+      kind: 'page',
+      params: { orderKey, manufacturerId: segments[1] },
+      node: <LidarOrderPage />,
+    };
   }
 
   const seoSelection = routeMappings.find(

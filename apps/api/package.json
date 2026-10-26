@@ -16,6 +16,7 @@
     "db:studio": "drizzle-kit studio"
   },
   "dependencies": {
+    "@aws-sdk/client-ses": "^3.1156.0",
     "@corebolt/shared": "workspace:*",
     "@electric-sql/pglite": "^0.5.10",
     "bcryptjs": "^2.4.3",

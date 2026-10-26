@@ -186,6 +186,18 @@ export const exchangeRates = pgTable(
   ],
 );
 
+/** Full storefront tree (categories, groups, product pages) published from the site catalogue. */
+export const catalogSnapshots = pgTable(
+  'catalog_snapshots',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    key: varchar('key', { length: 64 }).notNull(),
+    document: jsonb('document').$type<unknown>().notNull(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [uniqueIndex('catalog_snapshots_key_uidx').on(t.key)],
+);
+
 export const carts = pgTable(
   'carts',
   {
@@ -396,6 +408,13 @@ export const auditLogs = pgTable(
   ],
 );
 
+export const auditLogsRelations = relations(auditLogs, ({ one }) => ({
+  actor: one(users, {
+    fields: [auditLogs.actorUserId],
+    references: [users.id],
+  }),
+}));
+
 // Relations
 export const usersRelations = relations(users, ({ many }) => ({
   addresses: many(addresses),
@@ -431,6 +450,22 @@ export const ordersRelations = relations(orders, ({ one, many }) => ({
   user: one(users, { fields: [orders.userId], references: [users.id] }),
   items: many(orderItems),
   statusHistory: many(orderStatusHistory),
+}));
+
+export const orderItemsRelations = relations(orderItems, ({ one }) => ({
+  order: one(orders, { fields: [orderItems.orderId], references: [orders.id] }),
+}));
+
+export const reviewsRelations = relations(reviews, ({ one }) => ({
+  user: one(users, { fields: [reviews.userId], references: [users.id] }),
+  product: one(products, { fields: [reviews.productId], references: [products.id] }),
+}));
+
+export const orderStatusHistoryRelations = relations(orderStatusHistory, ({ one }) => ({
+  order: one(orders, {
+    fields: [orderStatusHistory.orderId],
+    references: [orders.id],
+  }),
 }));
 
 export type User = typeof users.$inferSelect;

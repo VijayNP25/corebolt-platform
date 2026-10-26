@@ -1,6 +1,6 @@
 import { setRequestLocale } from 'next-intl/server';
 import AdminShell from '@/components/admin/admin-shell';
-import AdminListStub from '@/components/admin/admin-list-stub';
+import AdminOrdersClient from '@/components/admin/admin-orders-client';
 
 export default async function AdminOrdersPage({
   params,
@@ -11,17 +11,7 @@ export default async function AdminOrdersPage({
   setRequestLocale(locale);
   return (
     <AdminShell title="Orders">
-      <AdminListStub
-        endpoint="/orders"
-        dataKey="orders"
-        emptyLabel="No orders yet."
-        columns={[
-          { key: 'id', label: 'ID' },
-          { key: 'status', label: 'Status' },
-          { key: 'currency', label: 'Currency' },
-          { key: 'total', label: 'Total' },
-        ]}
-      />
+      <AdminOrdersClient />
     </AdminShell>
   );
 }

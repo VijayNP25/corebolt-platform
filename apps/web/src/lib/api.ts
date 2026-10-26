@@ -83,6 +83,8 @@ export type ApiProduct = {
   price: string | null;
   priceInr: string | null;
   shipping: string | null;
+  shippingInr?: string | null;
+  shippingUsd?: string | null;
   imageUrl: string | null;
   categoryId: string | null;
   isActive: boolean;
@@ -94,4 +96,5 @@ export type ApiUser = {
   name: string;
   role: 'customer' | 'admin' | 'staff';
   phone?: string | null;
+  emailVerified?: boolean;
 };
