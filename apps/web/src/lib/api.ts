@@ -87,6 +87,7 @@ export type ApiProduct = {
   shippingUsd?: string | null;
   imageUrl: string | null;
   categoryId: string | null;
+  categoryName?: string | null;
   isActive: boolean;
 };
 

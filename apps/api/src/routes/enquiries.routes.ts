@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import rateLimit from 'express-rate-limit';
 import { enquirySchema, updateEnquiryStatusSchema } from '@corebolt/shared';
+import { NotFoundError } from '../lib/errors.js';
 import { asyncHandler } from '../lib/asyncHandler.js';
 import { routeParam } from '../lib/params.js';
 import { optionalAuth, requireAuth, requireRoles } from '../middleware/auth.js';
@@ -61,6 +62,7 @@ router.patch(
       actorUserId: req.user!.sub,
       note: req.body.note,
     });
+    if (!enquiry) throw new NotFoundError('Enquiry not found');
     await recordAudit({
       actorUserId: req.user!.sub,
       action: 'enquiry.status_changed',

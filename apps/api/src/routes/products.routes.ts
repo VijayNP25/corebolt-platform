@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { z } from 'zod';
 import { currencySchema, pricingTypeSchema } from '@corebolt/shared';
+import { NotFoundError } from '../lib/errors.js';
 import { asyncHandler } from '../lib/asyncHandler.js';
 import { routeParam } from '../lib/params.js';
 import { requireAuth, requireRoles } from '../middleware/auth.js';
@@ -13,7 +14,9 @@ const router = Router();
 const listQuerySchema = z.object({
   q: z.string().optional(),
   categoryId: z.string().uuid().optional(),
+  categorySlug: z.string().min(1).max(200).optional(),
   pricingType: pricingTypeSchema.optional(),
+  sort: z.enum(['name', 'price']).optional(),
   page: z.coerce.number().int().positive().optional(),
   pageSize: z.coerce.number().int().positive().max(300).optional(),
   currency: currencySchema.optional(),
@@ -78,6 +81,7 @@ router.post(
   validate(adminBodySchema),
   asyncHandler(async (req, res) => {
     const product = await productsService.createProduct(req.body);
+    if (!product) throw new NotFoundError('Product not found');
     await recordAudit({
       actorUserId: req.user!.sub,
       action: 'product.created',
@@ -100,6 +104,7 @@ router.patch(
       routeParam(req.params.id, 'id'),
       req.body,
     );
+    if (!product) throw new NotFoundError('Product not found');
     await recordAudit({
       actorUserId: req.user!.sub,
       action: 'product.updated',

@@ -390,36 +390,35 @@ export default function CategoryPage({
 
   const imageFallback = category.image ?? "";
 
-  const breadcrumbNavItems: { label: string; href?: string }[] = [
-    { label: "Home", href: "/" },
-    {
-      label: category.name,
-      href: subcategory ? categorySelectionHref(category.id) : undefined,
-    },
-  ];
+  const navTrail: { label: string; href: string }[] = [];
   if (subcategory) {
-    breadcrumbNavItems.push({
-      label: subcategory.name,
-      href: productGroupId ? subcategoryHref(category.id, subcategory.id) : undefined,
+    navTrail.push({
+      label: category.name,
+      href: categorySelectionHref(category.id),
     });
-    if (productGroupId && activeParentGroup) {
-      breadcrumbNavItems.push({
-        label: activeParentGroup.name,
-        href: nestedProductGroupId
-          ? `/${category.id}/${subcategory.id}/${productGroupId}`
-          : undefined,
-      });
-      if (nestedProductGroupId && activeLeafGroup) {
-        breadcrumbNavItems.push({ label: activeLeafGroup.name });
-      }
-    }
   }
+  if (subcategory && productGroupId) {
+    navTrail.push({
+      label: subcategory.name,
+      href: subcategoryHref(category.id, subcategory.id),
+    });
+  }
+  if (subcategory && productGroupId && activeParentGroup && nestedProductGroupId) {
+    navTrail.push({
+      label: activeParentGroup.name,
+      href: `/${category.id}/${subcategory.id}/${productGroupId}`,
+    });
+  }
+  const currentCrumb =
+    (nestedProductGroupId && activeLeafGroup?.name) ||
+    (productGroupId && activeParentGroup?.name) ||
+    subcategory?.name ||
+    category.name;
+  navTrail.push({ label: currentCrumb, href: location });
 
   return (
     <ReplicaSiteLayout
-      navTrail={breadcrumbNavItems
-        .slice(1)
-        .map((item) => ({ label: item.label, href: item.href ?? location }))}
+      navTrail={navTrail}
       navSibling={navSiblingForCategory(category.id)}
     >
       <ReplicaInnerHero

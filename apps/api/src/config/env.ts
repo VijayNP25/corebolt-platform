@@ -36,6 +36,11 @@ const envSchema = z.object({
     .default('https://v6.exchangerate-api.com/v6'),
   DEFAULT_FX_MARKUP_PERCENT: z.string().default('2.5'),
   GST_PERCENT: z.string().default('18'),
+  /** Seller details printed on GST invoices. Set SELLER_GSTIN and SELLER_STATE before going live. */
+  SELLER_NAME: z.string().default('CORE BOLT'),
+  SELLER_GSTIN: z.string().optional().default('36AAUFC3215H1ZE'),
+  SELLER_STATE: z.string().default('Telangana'),
+  SELLER_ADDRESS: z.string().default('Hyderabad, India'),
 
   ICICI_MERCHANT_ID: z.string().optional().default(''),
   ICICI_SECRET_KEY: z.string().optional().default(''),
@@ -46,6 +51,7 @@ const envSchema = z.object({
   AWS_ACCESS_KEY_ID: z.string().optional().default(''),
   AWS_SECRET_ACCESS_KEY: z.string().optional().default(''),
   SES_FROM_EMAIL: z.string().email().default('sales@core-bolt.com'),
+  SES_FROM_NAME: z.string().default('COREBOLT'),
   SES_REGION: z.string().default('ap-south-1'),
   OPS_NOTIFY_EMAIL: z.string().email().default('sales@core-bolt.com'),
 

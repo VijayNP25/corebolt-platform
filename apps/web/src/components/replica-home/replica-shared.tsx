@@ -8,15 +8,13 @@ export type { ReplicaPageId } from "@/components/replica-home/replica-nav";
 const SUN_ICON = `<path d="M7.5 1v1M7.5 13v1M1 7.5H2M13 7.5h1M3.2 3.2l.7.7M11.1 11.1l.7.7M3.2 11.8l.7-.7M11.1 3.9l.7-.7M10 7.5a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>`;
 const MOON_ICON = `<path d="M11.5 9A5 5 0 016 3.5a.5.5 0 00-.6-.6A5.5 5.5 0 1012.1 9.6a.5.5 0 00-.6-.6z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>`;
 
-const NAV_HEIGHT = 72;
-
 /**
  * Pick the smallest `[data-nav-tone]` element whose vertical span contains the
  * nav's mid-line (most specific / innermost section wins).
  */
 function applyNavTone(nav: HTMLElement, defaultTone?: "light" | "dark") {
   const zones = document.querySelectorAll<HTMLElement>("[data-nav-tone]");
-  const navMid = NAV_HEIGHT / 2;
+  const navMid = nav.getBoundingClientRect().height / 2;
   let tone: string | null = null;
   let smallestArea = Infinity;
 

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { formatMoney, isCurrencyCode } from './currency.js';
+import { formatMoney, isCurrencyCode, orderShippingFee } from './currency.js';
 
 describe('formatMoney', () => {
   it('formats INR with two decimals', () => {
@@ -13,6 +13,15 @@ describe('formatMoney', () => {
 
   it('rejects invalid amounts', () => {
     expect(() => formatMoney('abc', 'INR')).toThrow(/Invalid money/);
+  });
+});
+
+describe('orderShippingFee', () => {
+  it('charges once per order and nothing for an empty cart', () => {
+    expect(orderShippingFee('INR', 0)).toBe('0.00');
+    expect(orderShippingFee('INR', 1)).toBe('2000.00');
+    expect(orderShippingFee('INR', 4)).toBe('2000.00');
+    expect(orderShippingFee('USD', 2)).toBe('21.00');
   });
 });
 

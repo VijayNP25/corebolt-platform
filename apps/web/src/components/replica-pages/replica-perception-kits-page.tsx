@@ -8,6 +8,7 @@ import { CONTACT_DIALOG_CONTENT_CLASS } from "@/components/contact-form-modal";
 import PerceptionKitContactModal from "@/components/perception-kit-contact-modal";
 import { useSeo } from "@/lib/seo";
 import CdnImage from "@/components/cdn-image";
+import ProductBreadcrumb from "@/components/product-breadcrumb";
 import { buildBackgroundImageValue } from "@/lib/webp-image";
 import {
   ReplicaNav,
@@ -121,11 +122,7 @@ export default function ReplicaPerceptionKitsPage() {
 
   return (
     <div className="perception-kits-page min-h-screen" data-theme={dark ? "dark" : "light"}>
-      <ReplicaNav
-        dark={dark}
-        trail={[{ label: "Perception Kits", href: "/perception-kits" }]}
-        showBlogs
-      />
+      <ReplicaNav dark={dark} />
 
       <section className="pk-hero" data-nav-tone="light">
         <div className="pk-container">
@@ -170,8 +167,16 @@ export default function ReplicaPerceptionKitsPage() {
           </div>
         </div>
       </section>
-
-    
+      <div className="site-breadcrumb">
+        <div className="site-breadcrumb-inner">
+          <ProductBreadcrumb
+            items={[
+              { label: "Home", href: "/" },
+              { label: "Perception Kits", href: "/perception-kits" },
+            ]}
+          />
+        </div>
+      </div>
 
       <section className="pk-applications" data-nav-tone="dark">
         <div className="pk-container">

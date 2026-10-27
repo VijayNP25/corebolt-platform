@@ -29,6 +29,7 @@ type AdminOrder = {
   notes: string | null;
   carrier: string | null;
   trackingNumber: string | null;
+  trackingUrl?: string | null;
   paymentStatus: string;
   shippingAddressSnapshot: AddressSnap;
   customer: { name: string; email: string; phone: string | null } | null;
@@ -91,6 +92,7 @@ export default function AdminOrdersClient() {
   const [busyId, setBusyId] = useState<string | null>(null);
   const [carrier, setCarrier] = useState('');
   const [trackingNumber, setTrackingNumber] = useState('');
+  const [trackingUrl, setTrackingUrl] = useState('');
 
   const load = async () => {
     const res = await apiFetch<{ data: { orders: AdminOrder[] } }>('/orders');
@@ -134,6 +136,7 @@ export default function AdminOrdersClient() {
             ? {
                 carrier: carrier.trim() || undefined,
                 trackingNumber: trackingNumber.trim() || undefined,
+                trackingUrl: trackingUrl.trim() || undefined,
               }
             : {}),
         }),
@@ -194,6 +197,7 @@ export default function AdminOrdersClient() {
                     setOpenId(open ? null : order.id);
                     setCarrier(order.carrier ?? '');
                     setTrackingNumber(order.trackingNumber ?? '');
+                    setTrackingUrl(order.trackingUrl ?? '');
                   }}
                 >
                   <td>
@@ -284,6 +288,12 @@ export default function AdminOrdersClient() {
                                 placeholder="Tracking number"
                                 value={trackingNumber}
                                 onChange={(e) => setTrackingNumber(e.target.value)}
+                              />
+                              <input
+                                aria-label="Tracking link"
+                                placeholder="Tracking link (https://…)"
+                                value={trackingUrl}
+                                onChange={(e) => setTrackingUrl(e.target.value)}
                               />
                             </div>
                           ) : null}

@@ -197,6 +197,54 @@ export async function verifyEmail(token: string): Promise<PublicUser> {
   return toPublicUser(user);
 }
 
+const PASSWORD_RESET_TTL_MS = 60 * 60 * 1000;
+
+export async function requestPasswordReset(email: string): Promise<void> {
+  const user = await db.query.users.findFirst({
+    where: eq(users.email, email.toLowerCase()),
+  });
+  if (!user || !user.isActive) return;
+
+  const token = crypto.randomBytes(32).toString('hex');
+  await db
+    .update(users)
+    .set({
+      passwordResetTokenHash: hashToken(token),
+      passwordResetExpiresAt: new Date(Date.now() + PASSWORD_RESET_TTL_MS),
+    })
+    .where(eq(users.id, user.id));
+
+  const origin = env.WEB_ORIGIN.replace(/\/$/, '');
+  const resetUrl = `${origin}/en/reset-password?token=${encodeURIComponent(token)}`;
+  await emailService.sendPasswordResetEmail(user.email, resetUrl);
+}
+
+export async function resetPassword(token: string, password: string): Promise<void> {
+  const user = await db.query.users.findFirst({
+    where: eq(users.passwordResetTokenHash, hashToken(token)),
+  });
+  if (
+    !user ||
+    !user.isActive ||
+    !user.passwordResetExpiresAt ||
+    user.passwordResetExpiresAt.getTime() < Date.now()
+  ) {
+    throw new ValidationError('This reset link is invalid or expired');
+  }
+
+  const passwordHash = await bcrypt.hash(password, 12);
+  await db
+    .update(users)
+    .set({
+      passwordHash,
+      passwordResetTokenHash: null,
+      passwordResetExpiresAt: null,
+    })
+    .where(eq(users.id, user.id));
+
+  await db.update(sessions).set({ revokedAt: new Date() }).where(eq(sessions.userId, user.id));
+}
+
 export async function updateProfile(
   userId: string,
   input: { name: string; phone?: string },

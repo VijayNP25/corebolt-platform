@@ -31,6 +31,13 @@ export const moneySchema = z
   .string()
   .regex(/^\d+(\.\d{1,4})?$/, 'Invalid money amount');
 
+/** 15-character Indian GSTIN: state, PAN, entity, Z, checksum. */
+export const gstinSchema = z
+  .string()
+  .trim()
+  .toUpperCase()
+  .regex(/^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z][1-9A-Z]Z[0-9A-Z]$/, 'Enter a 15-character GSTIN');
+
 export const registerSchema = z.object({
   email: z.string().email(),
   password: z.string().min(8).max(128),
@@ -43,8 +50,19 @@ export const loginSchema = z.object({
   password: z.string().min(1),
 });
 
+export const forgotPasswordSchema = z.object({
+  email: z.string().email(),
+});
+
+export const resetPasswordSchema = z.object({
+  token: z.string().min(20),
+  password: z.string().min(8).max(128),
+});
+
 export const addressSchema = z.object({
   label: z.string().max(100).optional(),
+  company: z.string().max(200).optional(),
+  gstin: gstinSchema.optional(),
   line1: z.string().min(1).max(255),
   line2: z.string().max(255).optional(),
   city: z.string().min(1).max(100),
@@ -98,6 +116,7 @@ export const updateOrderStatusSchema = z.object({
   note: z.string().max(2000).optional(),
   carrier: z.string().max(100).optional(),
   trackingNumber: z.string().max(100).optional(),
+  trackingUrl: z.string().max(500).optional(),
 });
 
 export const updateProfileSchema = z
@@ -124,6 +143,8 @@ export const fxMarkupSchema = z.object({
 
 export type RegisterInput = z.infer<typeof registerSchema>;
 export type LoginInput = z.infer<typeof loginSchema>;
+export type ForgotPasswordInput = z.infer<typeof forgotPasswordSchema>;
+export type ResetPasswordInput = z.infer<typeof resetPasswordSchema>;
 export type AddressInput = z.infer<typeof addressSchema>;
 export type CartItemInput = z.infer<typeof cartItemSchema>;
 export type CheckoutInput = z.infer<typeof checkoutSchema>;

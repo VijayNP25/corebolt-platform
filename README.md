@@ -4,7 +4,7 @@ Production-oriented **3-tier** e-commerce monorepo for [www.core-bolt.com](https
 
 | Tier | App | Stack |
 |------|-----|--------|
-| Presentation | `apps/web` | Next.js 15 (App Router), SSR/ISR, next-intl (`/en`, `/hi`), Tailwind + CoreBolt replica CSS |
+| Presentation | `apps/web` | Next.js 15 (App Router), SSR/ISR, next-intl (`/en`), Tailwind + CoreBolt replica CSS |
 | Application | `apps/api` | Express (layered), REST, JWT httpOnly cookies |
 | Data | PostgreSQL | Drizzle ORM, decimal money |
 
@@ -74,7 +74,7 @@ docker-compose.yml  Local Postgres only
 - **ON_REQUEST products:** Ask Price / Request Quote — never cartable; enquiries API replaces EmailJS
 - **Shipping:** Per-product INR/USD amounts; cart sums line shipping
 - **Roles:** Customer / Staff (orders+enquiries) / Admin (full)
-- **i18n:** `/en` and `/hi` routes wired; English copy now, translations phased
+- **i18n:** English only (`/en` routes)
 - **Reviews:** Verified purchasers, admin moderation, stars + text
 
 ---

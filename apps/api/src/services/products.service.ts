@@ -1,6 +1,6 @@
 import { and, eq, ilike, or, sql } from 'drizzle-orm';
 import { db } from '../db/client.js';
-import { products, type Product } from '../db/schema.js';
+import { categories, products, type Product } from '../db/schema.js';
 import { NotFoundError } from '../lib/errors.js';
 import { syncProductToCatalog } from './catalog-sync.js';
 import { convertProductPrice } from './currency.service.js';
@@ -8,7 +8,9 @@ import { convertProductPrice } from './currency.service.js';
 export interface ProductListQuery {
   q?: string;
   categoryId?: string;
+  categorySlug?: string;
   pricingType?: 'FIXED' | 'ON_REQUEST';
+  sort?: 'name' | 'price';
   page?: number;
   pageSize?: number;
   currency?: 'INR' | 'USD';
@@ -23,6 +25,12 @@ export async function listProducts(query: ProductListQuery) {
   if (query.categoryId) {
     conditions.push(eq(products.categoryId, query.categoryId));
   }
+  if (query.categorySlug) {
+    const category = await db.query.categories.findFirst({
+      where: eq(categories.slug, query.categorySlug),
+    });
+    if (category) conditions.push(eq(products.categoryId, category.id));
+  }
   if (query.pricingType) {
     conditions.push(eq(products.pricingType, query.pricingType));
   }
@@ -32,6 +40,7 @@ export async function listProducts(query: ProductListQuery) {
       or(
         ilike(products.name, term),
         ilike(products.slug, term),
+        ilike(products.sku, term),
         ilike(products.shortDescription, term),
       )!,
     );
@@ -40,9 +49,11 @@ export async function listProducts(query: ProductListQuery) {
   const where = and(...conditions);
   const rows = await db.query.products.findMany({
     where,
+    with: { category: true },
     limit: pageSize,
     offset: (page - 1) * pageSize,
-    orderBy: (p, { asc }) => [asc(p.name)],
+    orderBy: (p, { asc }) =>
+      query.sort === 'price' ? [asc(p.priceInr)] : [asc(p.name)],
   });
 
   const countRows = await db
@@ -50,7 +61,12 @@ export async function listProducts(query: ProductListQuery) {
     .from(products)
     .where(where);
 
-  const items = await Promise.all(rows.map((p) => serializeProduct(p, currency)));
+  const items = await Promise.all(
+    rows.map(async (p) => ({
+      ...(await serializeProduct(p, currency)),
+      categoryName: p.category?.name ?? null,
+    })),
+  );
 
   return {
     items,

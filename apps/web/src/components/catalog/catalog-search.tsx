@@ -1,20 +1,27 @@
 'use client';
 
-import { useEffect, useId, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Search } from 'lucide-react';
 import { Link, useLocation } from '@/lib/wouter-compat';
-import type { CatalogSearchHit } from '@/lib/catalog-search';
+import { API_URL, type ApiProduct } from '@/lib/api';
+
+type SearchHit = {
+  id: string;
+  name: string;
+  href: string;
+  group?: string;
+};
 
 export default function CatalogSearch() {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState('');
-  const [results, setResults] = useState<CatalogSearchHit[]>([]);
+  const [results, setResults] = useState<SearchHit[]>([]);
   const [total, setTotal] = useState(0);
   const [searched, setSearched] = useState('');
   const [, navigate] = useLocation();
   const rootRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const listId = useId();
+  const listId = 'catalog-search-results';
 
   useEffect(() => {
     if (!open) return;
@@ -43,22 +50,53 @@ export default function CatalogSearch() {
       setSearched('');
       return;
     }
-    import('@/lib/catalog-search')
-      .then((mod) => {
-        if (cancelled) return;
-        const found = mod.searchCatalog(needle, 8);
-        setResults(found.hits);
-        setTotal(found.total);
-        setSearched(needle);
-      })
-      .catch(() => {
-        if (cancelled) return;
-        setResults([]);
-        setTotal(0);
-        setSearched(needle);
-      });
+    const handle = window.setTimeout(() => {
+      const url = `${API_URL.replace(/\/$/, '')}/products?q=${encodeURIComponent(needle)}&pageSize=8`;
+      fetch(url)
+        .then(async (res) => {
+          if (!res.ok) throw new Error('search failed');
+          const body = (await res.json()) as {
+            data?: { items?: ApiProduct[]; total?: number };
+          };
+          if (cancelled) return;
+          const items = body.data?.items ?? [];
+          setResults(
+            items.map((product) => ({
+              id: product.id,
+              name: product.name,
+              href: `/products/${product.slug}`,
+              group: product.categoryName ?? undefined,
+            })),
+          );
+          setTotal(body.data?.total ?? items.length);
+          setSearched(needle);
+        })
+        .catch(async () => {
+          try {
+            const mod = await import('@/lib/catalog-search');
+            if (cancelled) return;
+            const found = mod.searchCatalog(needle, 8);
+            setResults(
+              found.hits.map((hit) => ({
+                id: hit.product.id,
+                name: hit.product.name,
+                href: hit.href,
+                group: hit.group,
+              })),
+            );
+            setTotal(found.total);
+            setSearched(needle);
+          } catch {
+            if (cancelled) return;
+            setResults([]);
+            setTotal(0);
+            setSearched(needle);
+          }
+        });
+    }, 250);
     return () => {
       cancelled = true;
+      window.clearTimeout(handle);
     };
   }, [open, query]);
 
@@ -86,7 +124,7 @@ export default function CatalogSearch() {
         className="nav-icon-btn"
         aria-label="Search"
         aria-expanded={open}
-        aria-controls={listId}
+        aria-controls={open ? listId : undefined}
         onClick={() => setOpen((value) => !value)}
       >
         <Search size={18} strokeWidth={1.75} aria-hidden />
@@ -120,9 +158,9 @@ export default function CatalogSearch() {
             ) : (
               <ul>
                 {results.map((hit) => (
-                  <li key={hit.product.id}>
+                  <li key={hit.id}>
                     <Link href={hit.href} className="nav-search-result" onClick={close}>
-                      <span className="nav-search-name">{hit.product.name.trim()}</span>
+                      <span className="nav-search-name">{hit.name.trim()}</span>
                       {hit.group ? <span className="nav-search-group">{hit.group}</span> : null}
                     </Link>
                   </li>

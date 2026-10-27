@@ -1,11 +1,12 @@
 import { Router } from 'express';
 import { updateOrderStatusSchema } from '@corebolt/shared';
 import { z } from 'zod';
+import { NotFoundError } from '../lib/errors.js';
 import { asyncHandler } from '../lib/asyncHandler.js';
 import { routeParam } from '../lib/params.js';
 import { requireAuth, requireRoles } from '../middleware/auth.js';
 import { validate } from '../middleware/validate.js';
-import { buildInvoiceHtml } from '../services/invoice.service.js';
+import { buildInvoicePdf } from '../services/invoice.service.js';
 import { recordAudit } from '../services/audit.service.js';
 import * as ordersService from '../services/orders.service.js';
 
@@ -28,13 +29,13 @@ router.get(
       routeParam(req.params.orderId, 'orderId'),
       req.user!.sub,
     );
-    const html = buildInvoiceHtml(order, order.items);
-    res.setHeader('Content-Type', 'text/html; charset=utf-8');
+    const pdf = await buildInvoicePdf(order, order.items);
+    res.setHeader('Content-Type', 'application/pdf');
     res.setHeader(
       'Content-Disposition',
-      `attachment; filename="COREBOLT-${order.orderNumber}.html"`,
+      `attachment; filename="COREBOLT-${order.orderNumber}.pdf"`,
     );
-    res.send(html);
+    res.send(pdf);
   }),
 );
 
@@ -94,7 +95,9 @@ router.patch(
       note: req.body.note,
       carrier: req.body.carrier,
       trackingNumber: req.body.trackingNumber,
+      trackingUrl: req.body.trackingUrl,
     });
+    if (!order) throw new NotFoundError('Order not found');
     await recordAudit({
       actorUserId: req.user!.sub,
       action: 'order.status_changed',

@@ -14,6 +14,12 @@ function sesReady(): boolean {
   return env.AWS_ACCESS_KEY_ID.length > 0 && env.AWS_SECRET_ACCESS_KEY.length > 0;
 }
 
+function fromAddress(): string {
+  const name = env.SES_FROM_NAME.trim();
+  if (!name) return env.SES_FROM_EMAIL;
+  return `${name} <${env.SES_FROM_EMAIL}>`;
+}
+
 function getSesClient(): SESClient {
   if (!sesClient) {
     sesClient = new SESClient({
@@ -39,7 +45,7 @@ export class SesEmailService {
       const messageId = `ses-log-${Date.now()}`;
       if (env.NODE_ENV !== 'test') {
         console.info('[email] logged because SES keys are empty', {
-          from: env.SES_FROM_EMAIL,
+          from: fromAddress(),
           region: env.SES_REGION,
           to,
           subject: input.subject,
@@ -52,7 +58,7 @@ export class SesEmailService {
     try {
       const result = await getSesClient().send(
         new SendEmailCommand({
-          Source: env.SES_FROM_EMAIL,
+          Source: fromAddress(),
           Destination: { ToAddresses: to },
           Message: {
             Subject: { Data: input.subject, Charset: 'UTF-8' },
@@ -80,6 +86,18 @@ export class SesEmailService {
       subject: 'Verify your COREBOLT account',
       html: `<p>Please verify your email by visiting <a href="${verifyUrl}">${verifyUrl}</a></p>`,
       text: `Please verify your email: ${verifyUrl}`,
+    });
+  }
+
+  async sendPasswordResetEmail(to: string, resetUrl: string): Promise<void> {
+    if (env.NODE_ENV !== 'production' && env.NODE_ENV !== 'test') {
+      console.info('[email] password reset link', resetUrl);
+    }
+    await this.send({
+      to,
+      subject: 'Reset your COREBOLT password',
+      html: `<p>Reset your password by visiting <a href="${resetUrl}">${resetUrl}</a></p><p>This link expires in one hour. If you did not ask for a reset, you can ignore this email.</p>`,
+      text: `Reset your password: ${resetUrl}\n\nThis link expires in one hour. If you did not ask for a reset, you can ignore this email.`,
     });
   }
 
@@ -132,11 +150,12 @@ export class SesEmailService {
     status: string;
     carrier?: string | null;
     trackingNumber?: string | null;
+    trackingUrl?: string | null;
     note?: string | null;
   }): Promise<void> {
     const tracking =
       input.status === 'SHIPPED' && (input.carrier || input.trackingNumber)
-        ? ` Carrier: ${input.carrier ?? '—'}. Tracking: ${input.trackingNumber ?? '—'}.`
+        ? ` Carrier: ${input.carrier ?? '—'}. Tracking: ${input.trackingNumber ?? '—'}.${input.trackingUrl ? ` Track here: ${input.trackingUrl}` : ''}`
         : '';
     const note = input.note?.trim() ? ` Note: ${input.note.trim()}` : '';
     const text = `Order ${input.orderNumber} is now ${input.status}.${tracking}${note}`;

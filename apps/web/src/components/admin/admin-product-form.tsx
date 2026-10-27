@@ -249,28 +249,9 @@ export default function AdminProductForm({
             }
           />
         </label>
-        <label className="block text-sm">
-          <span className="block mb-1 font-medium">Shipping (INR)</span>
-          <input
-            className="w-full border px-3 py-2"
-            type="number"
-            min="0"
-            step="0.01"
-            value={values.shippingInr}
-            onChange={set('shippingInr')}
-          />
-        </label>
-        <label className="block text-sm">
-          <span className="block mb-1 font-medium">Shipping (USD)</span>
-          <input
-            className="w-full border px-3 py-2"
-            type="number"
-            min="0"
-            step="0.01"
-            value={values.shippingUsd}
-            onChange={set('shippingUsd')}
-          />
-        </label>
+        <p className="text-sm sm:col-span-2">
+          Shipping is ₹2,000 or $21 once per order. It is not set on each product.
+        </p>
         <label className="block text-sm sm:col-span-2">
           <span className="block mb-1 font-medium">Image URL</span>
           <input

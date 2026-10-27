@@ -30,3 +30,14 @@ export function formatMoney(amount: string, currency: CurrencyCode): string {
 export function isCurrencyCode(value: string): value is CurrencyCode {
   return value === 'INR' || value === 'USD';
 }
+
+/** One charge per order. Extra products or quantity do not add another fee. */
+const ORDER_SHIPPING: Record<CurrencyCode, string> = {
+  INR: '2000.00',
+  USD: '21.00',
+};
+
+export function orderShippingFee(currency: CurrencyCode, itemCount: number): string {
+  if (itemCount <= 0) return '0.00';
+  return ORDER_SHIPPING[currency];
+}

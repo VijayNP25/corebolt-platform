@@ -53,6 +53,21 @@ export async function register(input: {
   return res.data.user;
 }
 
+export async function requestPasswordReset(email: string): Promise<string> {
+  const res = await apiFetch<{ data: { message: string } }>('/auth/forgot-password', {
+    method: 'POST',
+    body: JSON.stringify({ email }),
+  });
+  return res.data.message;
+}
+
+export async function resetPassword(token: string, password: string): Promise<void> {
+  await apiFetch('/auth/reset-password', {
+    method: 'POST',
+    body: JSON.stringify({ token, password }),
+  });
+}
+
 export async function logout(): Promise<void> {
   await apiFetch<void>('/auth/logout', { method: 'POST' });
   notifyAuthChanged();

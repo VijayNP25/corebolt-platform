@@ -20,7 +20,7 @@ import "@/styles/replica-product-page.css";
 
 export default function LidarOrderPage() {
   const { orderKey, manufacturerId } = useParams();
-  const config = ORDER_CATEGORIES[orderKey ?? "lidar"] ?? ORDER_CATEGORIES.lidar;
+  const config = ORDER_CATEGORIES[orderKey ?? "lidar"] ?? ORDER_CATEGORIES.lidar!;
   const manufacturers = useMemo(() => getPricedGroups(config.categoryId), [config.categoryId]);
   const selected = manufacturerId ? getPricedGroup(config.categoryId, manufacturerId) : undefined;
   const unknownManufacturer = Boolean(manufacturerId) && !selected;

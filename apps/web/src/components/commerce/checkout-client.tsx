@@ -13,6 +13,8 @@ import CartLines from '@/components/commerce/cart-lines';
 import CartSummary from '@/components/commerce/cart-summary';
 
 type AddressDraft = {
+  company: string;
+  gstin: string;
   label: string;
   phone: string;
   line1: string;
@@ -29,6 +31,8 @@ type SavedAddress = AddressDraft & {
 };
 
 const emptyAddress = (): AddressDraft => ({
+  company: '',
+  gstin: '',
   label: '',
   phone: '',
   line1: '',
@@ -65,10 +69,12 @@ async function resolveShippingAddress(input: {
     method: 'POST',
     body: JSON.stringify({
       label: input.address.label.trim() || 'Shipping',
+      company: input.address.company.trim() || undefined,
+      gstin: input.address.gstin.trim().toUpperCase() || undefined,
       line1: input.address.line1.trim(),
       line2: input.address.line2.trim() || undefined,
       city: input.address.city.trim(),
-      state: input.address.state.trim() || 'NA',
+      state: input.address.state.trim(),
       postalCode: input.address.postalCode.trim(),
       country: (input.address.country.trim() || 'IN').toUpperCase(),
       phone: phone || undefined,
@@ -126,13 +132,15 @@ export default function CheckoutClient() {
 
   useEffect(() => {
     let cancelled = false;
-    apiFetch<{ data: { addresses: Array<SavedAddress & { line2: string | null; phone: string | null; label: string | null }> } }>(
+    apiFetch<{ data: { addresses: Array<SavedAddress & { line2: string | null; phone: string | null; label: string | null; company: string | null; gstin: string | null }> } }>(
       '/addresses',
     )
       .then((res) => {
         if (cancelled) return;
         const items = (res.data.addresses ?? []).map((item) => ({
           id: item.id,
+          company: item.company ?? '',
+          gstin: item.gstin ?? '',
           label: item.label ?? '',
           phone: item.phone ?? '',
           line1: item.line1,
@@ -175,10 +183,10 @@ export default function CheckoutClient() {
     if (!addressesReady) return;
     if (selectedId === NEW_ADDRESS) {
       const country = address.country.trim();
-      if (!address.line1.trim() || !address.city.trim() || !address.postalCode.trim() || country.length !== 2) {
+      if (!address.line1.trim() || !address.city.trim() || !address.postalCode.trim() || !address.state.trim() || country.length !== 2) {
         toast({
           title: 'Address incomplete',
-          description: 'Address line, city, postal code, and a 2-letter country code are required.',
+          description: 'Address line, city, state, postal code, and a 2-letter country code are required.',
           variant: 'destructive',
         });
         return;
@@ -306,12 +314,14 @@ export default function CheckoutClient() {
           )}
           {addressesReady && selectedId === NEW_ADDRESS ? (
             <>
+              {field('company', 'Company name (for business invoice)', false, true)}
+              {field('gstin', 'GSTIN (optional, 15 characters)', false, true)}
               {field('label', 'Label (Home, Office)')}
               {field('phone', 'Phone')}
               {field('line1', 'Address line 1', true, true)}
               {field('line2', 'Address line 2', false, true)}
               {field('city', 'City', true)}
-              {field('state', 'State')}
+              {field('state', 'State', true)}
               {field('postalCode', 'Postal code', true)}
               {field('country', 'Country code', true)}
             </>

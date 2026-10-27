@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { and, eq } from 'drizzle-orm';
-import { addressSchema } from '@corebolt/shared';
+import { addressSchema, gstinSchema } from '@corebolt/shared';
 import { z } from 'zod';
 import { asyncHandler } from '../lib/asyncHandler.js';
 import { routeParam } from '../lib/params.js';
@@ -39,6 +39,8 @@ router.post(
       .values({
         userId: req.user!.sub,
         label: req.body.label,
+        company: req.body.company,
+        gstin: req.body.gstin,
         line1: req.body.line1,
         line2: req.body.line2,
         city: req.body.city,
@@ -56,6 +58,8 @@ router.post(
 const patchSchema = z
   .object({
     label: z.string().max(100).optional(),
+    company: z.string().max(200).nullable().optional(),
+    gstin: gstinSchema.nullable().optional(),
     line1: z.string().min(1).max(255).optional(),
     line2: z.string().max(255).nullable().optional(),
     city: z.string().min(1).max(100).optional(),

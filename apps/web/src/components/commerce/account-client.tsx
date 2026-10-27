@@ -19,6 +19,8 @@ type ServerOrder = {
 
 type SavedAddress = {
   id: string;
+  company?: string | null;
+  gstin?: string | null;
   label: string | null;
   phone: string | null;
   line1: string;
@@ -31,6 +33,8 @@ type SavedAddress = {
 };
 
 type AddressDraft = {
+  company: string;
+  gstin: string;
   label: string;
   phone: string;
   line1: string;
@@ -43,6 +47,8 @@ type AddressDraft = {
 };
 
 const emptyAddress = (): AddressDraft => ({
+  company: '',
+  gstin: '',
   label: '',
   phone: '',
   line1: '',
@@ -155,10 +161,10 @@ export default function AccountClient() {
 
   const saveAddress = async (event: React.FormEvent) => {
     event.preventDefault();
-    if (!draft.line1.trim() || !draft.city.trim() || !draft.postalCode.trim() || draft.country.trim().length !== 2) {
+    if (!draft.line1.trim() || !draft.city.trim() || !draft.postalCode.trim() || !draft.state.trim() || draft.country.trim().length !== 2) {
       toast({
         title: 'Address incomplete',
-        description: 'Address line, city, postal code, and a 2-letter country code are required.',
+        description: 'Address line, city, state, postal code, and a 2-letter country code are required.',
         variant: 'destructive',
       });
       return;
@@ -170,10 +176,12 @@ export default function AccountClient() {
     }
     const payload: Record<string, string | boolean | null> = {
       label: draft.label.trim() || 'Shipping',
+      company: draft.company.trim() || null,
+      gstin: draft.gstin.trim().toUpperCase() || null,
       line1: draft.line1.trim(),
       line2: draft.line2.trim() || null,
       city: draft.city.trim(),
-      state: draft.state.trim() || 'NA',
+      state: draft.state.trim(),
       postalCode: draft.postalCode.trim(),
       country: draft.country.trim().toUpperCase(),
       phone: phoneValue || null,
@@ -182,6 +190,8 @@ export default function AccountClient() {
     if (!editingId) {
       if (!payload.phone) delete payload.phone;
       if (!payload.line2) delete payload.line2;
+      if (!payload.company) delete payload.company;
+      if (!payload.gstin) delete payload.gstin;
     }
     setSavingAddress(true);
     try {
@@ -326,6 +336,8 @@ export default function AccountClient() {
                     onClick={() => {
                       setEditingId(address.id);
                       setDraft({
+                        company: address.company ?? '',
+                        gstin: address.gstin ?? '',
                         label: address.label ?? '',
                         phone: address.phone ?? '',
                         line1: address.line1,
@@ -350,6 +362,10 @@ export default function AccountClient() {
         )}
         <form className="cb-auth-form mt-4" onSubmit={saveAddress}>
           <h3 className="font-semibold">{editingId ? 'Edit address' : 'Add an address'}</h3>
+          <label htmlFor="addr-company">Company name (for business invoice)</label>
+          <input id="addr-company" value={draft.company} onChange={(event) => setDraft({ ...draft, company: event.target.value })} />
+          <label htmlFor="addr-gstin">GSTIN (optional, 15 characters)</label>
+          <input id="addr-gstin" maxLength={15} value={draft.gstin} onChange={(event) => setDraft({ ...draft, gstin: event.target.value })} />
           <label htmlFor="addr-label">Label</label>
           <input id="addr-label" value={draft.label} onChange={(event) => setDraft({ ...draft, label: event.target.value })} />
           <label htmlFor="addr-phone">Phone</label>
@@ -361,7 +377,7 @@ export default function AccountClient() {
           <label htmlFor="addr-city">City</label>
           <input id="addr-city" required value={draft.city} onChange={(event) => setDraft({ ...draft, city: event.target.value })} />
           <label htmlFor="addr-state">State</label>
-          <input id="addr-state" value={draft.state} onChange={(event) => setDraft({ ...draft, state: event.target.value })} />
+          <input id="addr-state" required value={draft.state} onChange={(event) => setDraft({ ...draft, state: event.target.value })} />
           <label htmlFor="addr-postal">Postal code</label>
           <input id="addr-postal" required value={draft.postalCode} onChange={(event) => setDraft({ ...draft, postalCode: event.target.value })} />
           <label htmlFor="addr-country">Country code</label>

@@ -9,6 +9,7 @@ import {
   type BrowseSort,
 } from '@/lib/catalog-search';
 import { loadPublishedCatalog } from '@/lib/published-catalog';
+import { apiFetch, type ApiProduct } from '@/lib/api';
 import { Link } from '@/i18n/routing';
 
 export const metadata: Metadata = {
@@ -58,6 +59,59 @@ function formatInr(amount: number) {
   return `₹${amount.toLocaleString('en-IN')}`;
 }
 
+type ProductCard = {
+  id: string;
+  href: string;
+  name: string;
+  image?: string | null;
+  group?: string;
+  price: number | null;
+};
+
+async function searchLiveCatalog(state: BrowseState): Promise<{
+  items: ProductCard[];
+  total: number;
+  page: number;
+  pageCount: number;
+  pageSize: number;
+} | null> {
+  try {
+    const res = await apiFetch<{
+      data: { items: ApiProduct[]; total: number; page: number; pageSize: number };
+    }>('/products', {
+      searchParams: {
+        q: state.q,
+        page: state.page,
+        pageSize: 24,
+        categorySlug: state.category || undefined,
+        pricingType:
+          state.price === 'fixed' ? 'FIXED' : state.price === 'quote' ? 'ON_REQUEST' : undefined,
+        sort: state.sort,
+      },
+    });
+    const data = res.data;
+    return {
+      items: data.items.map((product) => {
+        const amount = product.price != null ? Number(product.price) : null;
+        return {
+          id: product.id,
+          href: `/products/${product.slug}`,
+          name: product.name,
+          image: product.imageUrl,
+          group: product.categoryName ?? undefined,
+          price: amount != null && Number.isFinite(amount) && amount > 0 ? amount : null,
+        };
+      }),
+      total: data.total,
+      page: data.page,
+      pageSize: data.pageSize,
+      pageCount: Math.max(1, Math.ceil(data.total / data.pageSize)),
+    };
+  } catch {
+    return null;
+  }
+}
+
 export default async function ProductsPage({
   params,
   searchParams,
@@ -79,15 +133,37 @@ export default async function ProductsPage({
   const state = readState(raw);
   const categories = listBrowseCategories();
   const shortQuery = state.q.length === 1;
-  const result = shortQuery
-    ? { items: [], total: 0, page: 1, pageCount: 1, pageSize: 24 }
-    : browseCatalog({
-        q: state.q,
-        categoryId: state.category || undefined,
-        price: state.price,
-        sort: state.sort,
-        page: state.page,
-      });
+  const live = !shortQuery && state.q.length >= 2 ? await searchLiveCatalog(state) : null;
+  const browsed =
+    shortQuery || live
+      ? null
+      : browseCatalog({
+          q: state.q,
+          categoryId: state.category || undefined,
+          price: state.price,
+          sort: state.sort,
+          page: state.page,
+        });
+  const result = live ??
+    (browsed
+      ? {
+          items: browsed.items.map((hit) => ({
+            id: hit.product.id,
+            href: hit.href,
+            name: hit.product.name,
+            image: hit.product.image,
+            group: hit.group,
+            price:
+              typeof hit.product.price === 'number' && hit.product.price > 0
+                ? hit.product.price
+                : null,
+          })),
+          total: browsed.total,
+          page: browsed.page,
+          pageCount: browsed.pageCount,
+          pageSize: browsed.pageSize,
+        }
+      : { items: [] as ProductCard[], total: 0, page: 1, pageCount: 1, pageSize: 24 });
 
   const from = result.total === 0 ? 0 : (result.page - 1) * result.pageSize + 1;
   const to = Math.min(result.page * result.pageSize, result.total);
@@ -147,32 +223,26 @@ export default async function ProductsPage({
 
         {result.items.length > 0 ? (
           <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 list-none m-0 p-0">
-            {result.items.map((hit) => {
-              const price =
-                typeof hit.product.price === 'number' && hit.product.price > 0
-                  ? hit.product.price
-                  : null;
-              return (
-                <li key={hit.product.id}>
-                  <Link href={hit.href} className="cb-shell-card block no-underline text-inherit h-full">
-                    {hit.product.image ? (
-                      <CdnImage
-                        src={hit.product.image}
-                        alt=""
-                        className="w-full h-40 object-contain mb-3 bg-[#f7f7f7]"
-                      />
-                    ) : null}
-                    <span className="block font-semibold">{hit.product.name.trim()}</span>
-                    {hit.group ? (
-                      <span className="block text-sm text-[var(--ink3)] mt-1">{hit.group}</span>
-                    ) : null}
-                    <span className="block text-sm mt-2">
-                      {price != null ? formatInr(price) : 'Ask for price'}
-                    </span>
-                  </Link>
-                </li>
-              );
-            })}
+            {result.items.map((hit) => (
+              <li key={hit.id}>
+                <Link href={hit.href} className="cb-shell-card block no-underline text-inherit h-full">
+                  {hit.image ? (
+                    <CdnImage
+                      src={hit.image}
+                      alt=""
+                      className="w-full h-40 object-contain mb-3 bg-[#f7f7f7]"
+                    />
+                  ) : null}
+                  <span className="block font-semibold">{hit.name.trim()}</span>
+                  {hit.group ? (
+                    <span className="block text-sm text-[var(--ink3)] mt-1">{hit.group}</span>
+                  ) : null}
+                  <span className="block text-sm mt-2">
+                    {hit.price != null ? formatInr(hit.price) : 'Ask for price'}
+                  </span>
+                </Link>
+              </li>
+            ))}
           </ul>
         ) : null}
 

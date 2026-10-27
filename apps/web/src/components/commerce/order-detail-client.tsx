@@ -29,6 +29,7 @@ type CustomerOrder = {
   notes: string | null;
   carrier: string | null;
   trackingNumber: string | null;
+  trackingUrl?: string | null;
   shippingAddressSnapshot: AddressSnap;
   items: {
     id: string;
@@ -100,7 +101,7 @@ export default function OrderDetailClient({ orderId }: { orderId: string }) {
       const url = URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = url;
-      link.download = `COREBOLT-${order.orderNumber}.html`;
+      link.download = `COREBOLT-${order.orderNumber}.pdf`;
       link.click();
       URL.revokeObjectURL(url);
     } catch (err) {
@@ -215,6 +216,18 @@ export default function OrderDetailClient({ orderId }: { orderId: string }) {
               <p>
                 {[order.carrier, order.trackingNumber].filter(Boolean).join(' · ')}
               </p>
+              {order.trackingUrl ? (
+                <p>
+                  <a
+                    href={order.trackingUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline"
+                  >
+                    Track your shipment
+                  </a>
+                </p>
+              ) : null}
             </div>
           ) : null}
           <p className="text-sm mt-4">

@@ -1,4 +1,4 @@
-import type { CurrencyCode } from '@corebolt/shared';
+import { orderShippingFee, type CurrencyCode } from '@corebolt/shared';
 
 const STORAGE_KEY = 'corebolt.localCart.v1';
 
@@ -125,17 +125,14 @@ export function sumLocalCart(
 ): { subtotal: string; shipping: string; tax: string; total: string } {
   const gst = 0.18;
   let subtotal = 0;
-  let shipping = 0;
+  let pricedCount = 0;
   for (const item of cart.items) {
     if (!item.priceInr) continue;
+    pricedCount += 1;
     const unit = Number(convertInrToDisplay(item.priceInr, currency, inrPerUsd, markupPercent));
     subtotal += unit * item.quantity;
-    const ship =
-      currency === 'USD'
-        ? Number(item.shippingUsd || 0)
-        : Number(item.shippingInr || 0);
-    shipping += ship * item.quantity;
   }
+  const shipping = Number(orderShippingFee(currency, pricedCount));
   const tax = currency === 'INR' ? subtotal * gst : 0;
   const total = subtotal + shipping + tax;
   return {

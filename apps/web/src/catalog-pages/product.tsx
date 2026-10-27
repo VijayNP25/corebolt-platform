@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useParams, Link, Redirect } from "wouter";
 import { Download, ShoppingCart } from "lucide-react";
-import ReplicaSiteLayout from "@/components/replica-pages/replica-site-layout";
+import ReplicaSiteLayout, { SiteBreadcrumb } from "@/components/replica-pages/replica-site-layout";
 import CdnImage from "@/components/cdn-image";
 import ContactFormModal, {
   CONTACT_DIALOG_CONTENT_CLASS,
@@ -634,6 +634,7 @@ export default function ProductPage() {
           data-nav-tone="light"
         >
           <div className="replica-site-wrap">
+            <SiteBreadcrumb trail={navTrail} />
             <div className="replica-product-layout">
               <div className="replica-product-gallery">
                 <div className="replica-product-main-image">
@@ -755,7 +756,7 @@ export default function ProductPage() {
                   {findMinimumOrder(product)
                     ? `Minimum order: ${findMinimumOrder(product)} pieces. `
                     : null}
-                  Shipping for this product is shown with the price and again at checkout. Lead time is confirmed when the order is accepted.{" "}
+                  Shipping is ₹2,000 on an INR order and $21 on a USD order, charged once at checkout. Lead time is confirmed when the order is accepted.{" "}
                   <LocaleLink href="/shipping-policy" className="underline">
                     Shipping details
                   </LocaleLink>

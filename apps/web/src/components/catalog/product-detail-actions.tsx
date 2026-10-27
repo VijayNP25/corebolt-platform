@@ -14,6 +14,7 @@ import ContactFormModal, {
   CONTACT_DIALOG_CONTENT_CLASS,
 } from '@/components/contact-form-modal';
 import { useToast } from '@/hooks/use-toast';
+import WishlistButton from '@/components/commerce/wishlist-button';
 
 export default function ProductDetailActions({
   product,
@@ -70,6 +71,16 @@ export default function ProductDetailActions({
 
   return (
     <div className="flex flex-wrap gap-3 mt-6">
+      <WishlistButton
+        className="inline-flex items-center justify-center rounded-md border px-3"
+        item={{
+          id: product.id,
+          name: product.name,
+          image: product.imageUrl ?? '',
+          href: `/products/${product.slug}`,
+          priceInr: isFixed && product.priceInr ? Number(product.priceInr) : null,
+        }}
+      />
       {isFixed ? (
         <>
           <Button
@@ -82,7 +93,7 @@ export default function ProductDetailActions({
           </Button>
           <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
-              <Button variant="outline">Request quote</Button>
+              <Button className="replica-btn-dark font-semibold">Request quote</Button>
             </DialogTrigger>
             <DialogContent className={CONTACT_DIALOG_CONTENT_CLASS}>
               <ContactFormModal

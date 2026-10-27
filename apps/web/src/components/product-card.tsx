@@ -23,6 +23,7 @@ import {
 import ContactFormModal, {
   CONTACT_DIALOG_CONTENT_CLASS,
 } from "@/components/contact-form-modal";
+import WishlistButton from "@/components/commerce/wishlist-button";
 import { useLocalCart } from "@/hooks/use-local-cart";
 import { readLocalCart } from "@/lib/local-cart";
 import { useToast } from "@/hooks/use-toast";
@@ -209,6 +210,16 @@ export default function ProductCard({
       viewport={{ once: true }}
     >
       <Card className="mx-card mx-card--product pcard relative h-full flex flex-col border border-[rgba(0,0,0,0.09)] hover:border-[rgba(118,185,0,0.3)] bg-white group overflow-hidden rounded-none shadow-none transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(0,0,0,0.1)]">
+        <WishlistButton
+          className="absolute top-2 right-2 z-10 rounded-full bg-white/90 p-2 text-black shadow"
+          item={{
+            id: product.id,
+            name: product.name,
+            image: product.image,
+            href: buildProductPath(product),
+            priceInr: confirmedPrice(product),
+          }}
+        />
         {/* Clickable Image - navigates to product page */}
         <Link
           href={buildProductPath(product)}

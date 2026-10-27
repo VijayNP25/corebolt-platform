@@ -4,6 +4,7 @@ import type { Response } from 'express';
 import { db } from '../db/client.js';
 import { cartItems, carts, products } from '../db/schema.js';
 import { ConflictError, NotFoundError, ValidationError } from '../lib/errors.js';
+import { orderShippingFee } from '@corebolt/shared';
 import { inrToUsd, moneyAdd, moneyMul } from '../lib/money.js';
 import { getActiveFx } from './currency.service.js';
 import { env } from '../config/env.js';
@@ -177,7 +178,6 @@ export async function serializeCart(cartId: string) {
   const fx = await getActiveFx();
 
   let subtotal = '0.00';
-  let shippingTotal = '0.00';
 
   const items = [];
   for (const item of cart.items) {
@@ -191,12 +191,8 @@ export async function serializeCart(cartId: string) {
         ? product.priceInr
         : inrToUsd(product.priceInr, fx.inrPerUsd, fx.markupPercent);
 
-    const shippingUnit = currency === 'USD' ? product.shippingUsd : product.shippingInr;
     const lineTotal = moneyMul(unitPrice, item.quantity);
-    const lineShipping = moneyMul(shippingUnit, item.quantity);
-
     subtotal = moneyAdd(subtotal, lineTotal);
-    shippingTotal = moneyAdd(shippingTotal, lineShipping);
 
     items.push({
       id: item.id,
@@ -205,11 +201,13 @@ export async function serializeCart(cartId: string) {
       slug: product.slug,
       quantity: item.quantity,
       unitPrice,
-      shippingUnit,
+      shippingUnit: '0.00',
       lineTotal,
       imageUrl: product.imageUrl,
     });
   }
+
+  const shippingTotal = orderShippingFee(currency, items.length);
 
   return {
     id: cart.id,

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 import { setRequestLocale } from 'next-intl/server';
 import ReplicaSiteLayout from '@/components/replica-pages/replica-site-layout';
 import LoginClient from '@/components/commerce/login-client';
@@ -21,7 +22,9 @@ export default async function RegisterPage({
       <main className="cb-shell">
         <h1>Create account</h1>
         <p className="lead">Register to place orders and track purchases.</p>
-        <LoginClient initialMode="register" />
+        <Suspense fallback={<p className="lead">Loading…</p>}>
+          <LoginClient initialMode="register" />
+        </Suspense>
       </main>
     </ReplicaSiteLayout>
   );

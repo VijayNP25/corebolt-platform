@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect, useState, type CSSProperties } from "react";
+import { useEffect, useState } from "react";
 import { UserRound } from "lucide-react";
 import { Link, useLocation } from "@/lib/wouter-compat";
 import { AUTH_CHANGED_EVENT, getMe } from "@/lib/auth";
 import CoreBoltLogo from "@/components/core-bolt-logo";
 import CurrencySwitcher from "@/components/currency-switcher";
 import CartNavLink from "@/components/commerce/cart-nav-link";
+import WishlistNavLink from "@/components/commerce/wishlist-nav-link";
 import CatalogSearch from "@/components/catalog/catalog-search";
 import ReplicaProductsMenu from "@/components/replica-home/replica-products-menu";
 import { getNavCategories } from "@/lib/catalog-nav";
@@ -21,14 +22,7 @@ const SECTION_LINKS = [
 
 export type ReplicaPageId = "about" | "contact";
 
-/**
- * Context menu for inner pages. When a page passes a trail, the nav shows
- * Home -> Products dropdown -> each step of the trail (the last one = current page) -> the sibling
- * category -> Blogs -> Contact Us, instead of the homepage menu. e.g.
- *   category:    Home · LiDARs · Vision Systems & Cameras · Blogs · Contact Us
- *   subcategory: Home · LiDARs · Hesai · Vision Systems & Cameras · Blogs · Contact Us
- *   product:     Home · LiDARs · Hesai · XT32M · Vision Systems & Cameras · Contact Us
- */
+/** One step in the breadcrumb shown under the header. */
 export interface NavTrailItem {
   label: string;
   href: string;
@@ -60,12 +54,10 @@ export function navSiblingForCategory(
 export function ReplicaNav({
   dark,
   currentPage,
-  trail,
-  showBlogs = true,
-  sibling,
 }: {
   dark: boolean;
   currentPage?: ReplicaPageId;
+  /** Kept so existing pages still type-check. The trail renders under the header, not in this menu. */
   trail?: NavTrailItem[];
   showBlogs?: boolean;
   /** Sibling category linked right after the trail, e.g. LiDARs -> "Vision Systems & Cameras". */
@@ -106,17 +98,12 @@ export function ReplicaNav({
     closeMenu();
   };
 
-  const linkStyle: CSSProperties | undefined = menuOpen
-    ? { color: dark ? "rgba(255,255,255,.85)" : "var(--ink)" }
-    : undefined;
-
   const sectionLink = (id: string, label: string) => {
     if (onHome) {
       return (
         <li key={id}>
           <a
             href={`#${id}`}
-            style={linkStyle}
             onClick={(e) => {
               e.preventDefault();
               scrollTo(id);
@@ -130,7 +117,7 @@ export function ReplicaNav({
 
     return (
       <li key={id}>
-        <Link href={`/#${id}`} style={linkStyle} onClick={closeMenu}>
+        <Link href={`/#${id}`} onClick={closeMenu}>
           {label}
         </Link>
       </li>
@@ -153,6 +140,7 @@ export function ReplicaNav({
               <UserRound size={18} strokeWidth={1.75} aria-hidden />
               <span className="nav-icon-btn__label">{accountLabel}</span>
             </Link>
+            <WishlistNavLink onClick={closeMenu} />
             <CartNavLink variant="icon" onClick={closeMenu} />
           </div>
         </div>
@@ -162,119 +150,60 @@ export function ReplicaNav({
         <div className="nav-inner">
           <CoreBoltLogo onClick={closeMenu} />
           <ul
-            className={`nav-links${menuOpen ? " nav-links--open" : ""}${trail?.length ? " nav-links--trail" : ""}`}
+            className={`nav-links${menuOpen ? " nav-links--open" : ""}`}
             id="replica-nav-menu"
-            style={
-              menuOpen
-                ? { background: dark ? "#141414" : "#fff" }
-                : undefined
-            }
           >
-            {trail?.length ? (
-              <>
-                <li>
-                  <Link href="/" style={linkStyle} onClick={closeMenu}>
-                    Home
-                  </Link>
-                </li>
-                <li className="replica-nav-products-li">
-                  <ReplicaProductsMenu
-                    variant="desktop"
-                    onNavigate={closeMenu}
-                  />
-                </li>
-                <li className="replica-nav-products-mobile-li">
-                  <ReplicaProductsMenu
-                    variant="mobile"
-                    linkStyle={linkStyle}
-                    onNavigate={closeMenu}
-                  />
-                </li>
-                {trail.map((item, i) => {
-                  const current = i === trail.length - 1;
-                  return (
-                    <li key={item.href + i}>
-                      <Link
-                        href={item.href}
-                        className={`nav-trail-link${current ? " active" : ""}`}
-                        aria-current={current ? "page" : undefined}
-                        title={item.label}
-                        style={linkStyle}
-                        onClick={closeMenu}
-                      >
-                        {item.label}
-                      </Link>
-                    </li>
-                  );
-                })}
-                {sibling && (
-                  <li>
-                    <Link
-                      href={sibling.href}
-                      className="nav-trail-link"
-                      title={sibling.label}
-                      style={linkStyle}
-                      onClick={closeMenu}
-                    >
-                      {sibling.label}
-                    </Link>
-                  </li>
-                )}
-                {showBlogs && (
-                  <li>
-                    <Link href="/blog" style={linkStyle} onClick={closeMenu}>
-                      Blogs
-                    </Link>
-                  </li>
-                )}
-              </>
-            ) : (
-              <>
-                {SECTION_LINKS.map(({ id, label }) => sectionLink(id, label))}
-                <li className="replica-nav-products-li">
-                  <ReplicaProductsMenu
-                    variant="desktop"
-                    onNavigate={closeMenu}
-                  />
-                </li>
-                <li className="replica-nav-products-mobile-li">
-                  <ReplicaProductsMenu
-                    variant="mobile"
-                    linkStyle={linkStyle}
-                    onNavigate={closeMenu}
-                  />
-                </li>
-                <li>
-                  <Link href="/blog" style={linkStyle} onClick={closeMenu}>
-                    Blogs
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/about-us"
-                    className={currentPage === "about" ? "active" : undefined}
-                    style={linkStyle}
-                    onClick={closeMenu}
-                  >
-                    About Us
-                  </Link>
-                </li>
-              </>
-            )}
+            <>
+              {SECTION_LINKS.map(({ id, label }) => sectionLink(id, label))}
+              <li className="replica-nav-products-li">
+                <ReplicaProductsMenu
+                  variant="desktop"
+                  onNavigate={closeMenu}
+                />
+              </li>
+              <li className="replica-nav-products-mobile-li">
+                <ReplicaProductsMenu
+                  variant="mobile"
+                  onNavigate={closeMenu}
+                />
+              </li>
+              <li>
+                <Link
+                  href="/store"
+                  className={location.startsWith("/store") ? "active" : undefined}
+                  onClick={closeMenu}
+                >
+                  Store
+                </Link>
+              </li>
+              <li>
+                <Link href="/blog" onClick={closeMenu}>
+                  Blogs
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/about-us"
+                  className={currentPage === "about" ? "active" : undefined}
+                  onClick={closeMenu}
+                >
+                  About Us
+                </Link>
+              </li>
+            </>
             <li className="replica-nav-mobile-cta-li">
               <div className="replica-nav-currency-mobile">
-                <CurrencySwitcher dark={dark} style={linkStyle} />
+                <CurrencySwitcher dark={dark} />
               </div>
-              <Link href="/cart" style={linkStyle} onClick={closeMenu}>
+              <Link href="/cart" onClick={closeMenu}>
                 Cart
               </Link>
-              <Link href={accountHref} style={linkStyle} onClick={closeMenu}>
+              <Link href={accountHref} onClick={closeMenu}>
                 {accountLabel}
               </Link>
               <Link
                 href="/contact-us"
                 className="replica-nav-mobile-cta"
-                style={linkStyle}
                 onClick={closeMenu}
               >
                 Contact Us

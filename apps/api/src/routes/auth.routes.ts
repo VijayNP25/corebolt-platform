@@ -1,6 +1,12 @@
 import { Router } from 'express';
 import rateLimit from 'express-rate-limit';
-import { loginSchema, registerSchema, updateProfileSchema } from '@corebolt/shared';
+import {
+  forgotPasswordSchema,
+  loginSchema,
+  registerSchema,
+  resetPasswordSchema,
+  updateProfileSchema,
+} from '@corebolt/shared';
 import { z } from 'zod';
 import { env } from '../config/env.js';
 import { asyncHandler } from '../lib/asyncHandler.js';
@@ -117,6 +123,30 @@ router.post(
       auth.setAuthCookies(res, tokens.accessToken, tokens.refreshToken);
     }
     res.json({ data: { user } });
+  }),
+);
+
+router.post(
+  '/forgot-password',
+  authLimiter,
+  validate(forgotPasswordSchema),
+  asyncHandler(async (req, res) => {
+    await auth.requestPasswordReset(req.body.email);
+    res.json({
+      data: {
+        message: 'If an account exists for that email, a reset link is on its way.',
+      },
+    });
+  }),
+);
+
+router.post(
+  '/reset-password',
+  authLimiter,
+  validate(resetPasswordSchema),
+  asyncHandler(async (req, res) => {
+    await auth.resetPassword(req.body.token, req.body.password);
+    res.json({ data: { reset: true } });
   }),
 );
 

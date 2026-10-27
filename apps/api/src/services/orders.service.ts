@@ -65,6 +65,7 @@ export async function updateOrderStatus(input: {
   note?: string;
   carrier?: string;
   trackingNumber?: string;
+  trackingUrl?: string;
 }) {
   if (input.actorRole === 'customer') {
     throw new ForbiddenError('Customers cannot change order status');
@@ -92,12 +93,15 @@ export async function updateOrderStatus(input: {
     throw new ValidationError('Carrier and tracking number are required to mark an order shipped');
   }
 
+  const trackingUrl = (input.trackingUrl ?? order.trackingUrl ?? '').trim();
+
   const [updated] = await db
     .update(orders)
     .set({
       status: input.toStatus,
       carrier: carrier || null,
       trackingNumber: trackingNumber || null,
+      trackingUrl: trackingUrl || null,
     })
     .where(eq(orders.id, order.id))
     .returning();
@@ -120,6 +124,7 @@ export async function updateOrderStatus(input: {
       status: input.toStatus,
       carrier: updated.carrier,
       trackingNumber: updated.trackingNumber,
+      trackingUrl: updated.trackingUrl,
       note: input.note,
     });
   }

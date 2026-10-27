@@ -53,36 +53,48 @@
   --nav-menu-chevron: 0.55;
 }
 
-/* Once the user has scrolled, the nav gets a backdrop fill matching the tone. */
-#replica-nav.scrolled {
-  --nav-bg-fill: rgba(11, 14, 20, 0.72);
-  --nav-border: rgba(255, 255, 255, 0.08);
-  --nav-shadow: 0 1px 12px rgba(0, 0, 0, 0.25);
-  backdrop-filter: blur(20px);
-  box-shadow: var(--nav-shadow);
+/* Solid fill matching the section behind the bar, including at the top of the page. */
+#replica-nav.tone-dark,
+#replica-nav.scrolled.tone-dark {
+  background: #050505;
+  --nav-bg-fill: #050505;
+  --nav-border: transparent;
+  --nav-shadow: none;
+  backdrop-filter: none;
+  box-shadow: none;
 }
-#replica-nav.scrolled.tone-light {
-  --nav-bg-fill: rgba(255, 255, 255, 0.92);
-  --nav-border: var(--bd, #e5e7eb);
-  --nav-shadow: 0 1px 12px rgba(0, 0, 0, 0.05);
+#replica-nav.tone-light,
+#replica-nav.scrolled.tone-light,
+.replica-site--light-top #replica-nav:not(.tone-dark) {
+  background: #fff;
+  --nav-bg-fill: #fff;
+  --nav-fg: #222;
+  --nav-fg-strong: #111;
+  --nav-fg-muted: #4b5563;
+  --nav-ham: #111;
+  --nav-border: rgba(0, 0, 0, 0.06);
+  --nav-shadow: none;
+  backdrop-filter: none;
+  box-shadow: none;
 }
 /* ── Two-tier layout ──
    Top: currency + account/cart
    Bottom: logo + browse links + contact
 */
 .nav-utility {
-  border-bottom: 1px solid var(--nav-border, transparent);
-  background: color-mix(in srgb, var(--nav-bg-fill, transparent) 85%, #0b0e14 15%);
+  border-bottom: 1px solid transparent;
+  background: #050505;
 }
-#replica-nav.tone-light .nav-utility {
-  background: color-mix(in srgb, #f4f6f8 92%, var(--g, #76b900) 8%);
-  border-bottom-color: rgba(15, 20, 25, 0.06);
+#replica-nav.tone-light .nav-utility,
+#replica-nav.scrolled.tone-light .nav-utility,
+.replica-site--light-top #replica-nav:not(.tone-dark) .nav-utility {
+  background: #fff;
+  border-bottom-color: transparent;
 }
-#replica-nav:not(.scrolled) .nav-utility {
-  background: rgba(11, 14, 20, 0.35);
-}
-#replica-nav.tone-light:not(.scrolled) .nav-utility {
-  background: rgba(244, 246, 248, 0.92);
+#replica-nav.tone-dark .nav-utility,
+#replica-nav.scrolled.tone-dark .nav-utility {
+  background: #050505;
+  border-bottom-color: transparent;
 }
 
 .nav-utility-inner {
@@ -106,6 +118,15 @@
   position: relative;
   background: #050505;
 }
+#replica-nav.tone-light .nav-main,
+#replica-nav.scrolled.tone-light .nav-main,
+.replica-site--light-top #replica-nav:not(.tone-dark) .nav-main {
+  background: #fff;
+}
+#replica-nav.tone-dark .nav-main,
+#replica-nav.scrolled.tone-dark .nav-main {
+  background: #050505;
+}
 
 .nav-inner {
   max-width: 1280px;
@@ -118,28 +139,48 @@
   overflow: visible;
 }
 
-/* Bottom bar stays black with white type, matching the reference, on every page tone. */
-#replica-nav .nav-main .corebolt-logo,
 #replica-nav.tone-light .nav-main .corebolt-logo,
-#replica-nav.scrolled.tone-light .nav-main .corebolt-logo,
-#replica-nav.tone-dark .nav-main .corebolt-logo {
-  color: #fff !important;
+.replica-site--light-top #replica-nav:not(.tone-dark) .nav-main .corebolt-logo {
+  color: #111;
 }
-#replica-nav .nav-main .ham span {
+#replica-nav.tone-dark .nav-main .corebolt-logo,
+#replica-nav:not(.tone-light) .nav-main .corebolt-logo {
+  color: #fff;
+}
+#replica-nav.tone-light .nav-main .ham span,
+.replica-site--light-top #replica-nav:not(.tone-dark) .nav-main .ham span {
+  background: #111;
+}
+#replica-nav.tone-dark .nav-main .ham span {
   background: #fff;
 }
-@media (min-width: 1001px) {
-  #replica-nav .nav-main .nav-links a,
-  #replica-nav .nav-main .replica-nav-products-trigger {
-    color: rgba(255, 255, 255, 0.92) !important;
-  }
-  #replica-nav .nav-main .nav-links a:hover,
-  #replica-nav .nav-main .nav-links a.active,
-  #replica-nav .nav-main .replica-nav-products:hover .replica-nav-products-trigger,
-  #replica-nav .nav-main .replica-nav-products-trigger:hover {
-    color: #fff !important;
-    background: rgba(255, 255, 255, 0.08);
-  }
+#replica-nav.tone-light .nav-main .nav-links a,
+#replica-nav.tone-light .nav-main .replica-nav-products-trigger,
+.replica-site--light-top #replica-nav:not(.tone-dark) .nav-main .nav-links a,
+.replica-site--light-top #replica-nav:not(.tone-dark) .nav-main .replica-nav-products-trigger {
+  color: #222;
+}
+#replica-nav.tone-dark .nav-main .nav-links a,
+#replica-nav.tone-dark .nav-main .replica-nav-products-trigger,
+#replica-nav:not(.tone-light) .nav-main .nav-links a,
+#replica-nav:not(.tone-light) .nav-main .replica-nav-products-trigger {
+  color: rgba(255, 255, 255, 0.92);
+}
+#replica-nav.tone-light .nav-main .nav-links a:hover,
+#replica-nav.tone-light .nav-main .nav-links a.active,
+#replica-nav.tone-light .nav-main .replica-nav-products:hover .replica-nav-products-trigger,
+#replica-nav.tone-light .nav-main .replica-nav-products-trigger:hover,
+.replica-site--light-top #replica-nav:not(.tone-dark) .nav-main .nav-links a:hover,
+.replica-site--light-top #replica-nav:not(.tone-dark) .nav-main .nav-links a.active {
+  color: #111;
+  background: rgba(0, 0, 0, 0.05);
+}
+#replica-nav.tone-dark .nav-main .nav-links a:hover,
+#replica-nav.tone-dark .nav-main .nav-links a.active,
+#replica-nav.tone-dark .nav-main .replica-nav-products:hover .replica-nav-products-trigger,
+#replica-nav.tone-dark .nav-main .replica-nav-products-trigger:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .nav-logo {
@@ -540,9 +581,12 @@ button.nav-cta {
   position: absolute;
   top: -1px;
   left: calc(100% - 4px);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
   min-width: 14rem;
   width: max-content;
-  max-width: min(18rem, calc(100vw - 2rem));
+  max-width: min(28rem, calc(100vw - 2rem));
   background: var(--nav-menu-bg);
   border: 1px solid var(--nav-menu-border);
   border-radius: 6px;
@@ -591,8 +635,11 @@ button.nav-cta {
   background: var(--nav-menu-hover-bg);
   color: var(--nav-menu-hover-fg);
 }
+.nav-links a.replica-nav-products-link,
 .replica-nav-products-link {
   display: block;
+  width: 100%;
+  border-radius: 0;
   padding: 10px 14px;
   font-size: 13px;
   font-weight: 400;
@@ -749,11 +796,19 @@ button.nav-cta {
     right: 0;
     padding: 12px 24px 20px;
     gap: 0;
-    border-bottom: 1px solid var(--bd);
+    background: #050505;
+    color: #fff;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
     z-index: 800;
     flex: none;
     justify-content: flex-start;
+  }
+  #replica-nav.tone-light .nav-links--open,
+  .replica-site--light-top #replica-nav:not(.tone-dark) .nav-links--open {
+    background: #fff;
+    color: #111;
+    border-bottom-color: rgba(0, 0, 0, 0.08);
   }
 
   #replica-nav .nav-links--open > li {
@@ -809,6 +864,40 @@ button.nav-cta {
 @media (max-width: 640px) {
   .nav-main-cta {
     display: none;
+  }
+}
+
+/* Breadcrumb under the page header, aligned with the product grid. No rule. */
+.site-breadcrumb {
+  background: transparent;
+  border: 0;
+}
+
+.site-breadcrumb-inner {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 22px 16px 4px;
+}
+
+.site-breadcrumb .replica-product-crumb {
+  margin-bottom: 0;
+}
+
+.site-breadcrumb .replica-product-crumb a {
+  text-decoration: none;
+}
+
+@media (min-width: 640px) {
+  .site-breadcrumb-inner {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .site-breadcrumb-inner {
+    padding-left: 32px;
+    padding-right: 32px;
   }
 }
 

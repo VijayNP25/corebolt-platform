@@ -67,6 +67,8 @@ export const users = pgTable(
     phone: varchar('phone', { length: 20 }),
     role: roleEnum('role').notNull().default('customer'),
     emailVerifiedAt: timestamp('email_verified_at', { withTimezone: true }),
+    passwordResetTokenHash: text('password_reset_token_hash'),
+    passwordResetExpiresAt: timestamp('password_reset_expires_at', { withTimezone: true }),
     preferredCurrency: currencyEnum('preferred_currency').default('INR'),
     isActive: boolean('is_active').notNull().default(true),
     ...timestamps,
@@ -99,6 +101,8 @@ export const addresses = pgTable(
       .notNull()
       .references(() => users.id, { onDelete: 'cascade' }),
     label: varchar('label', { length: 100 }),
+    company: varchar('company', { length: 200 }),
+    gstin: varchar('gstin', { length: 15 }),
     line1: varchar('line1', { length: 255 }).notNull(),
     line2: varchar('line2', { length: 255 }),
     city: varchar('city', { length: 100 }).notNull(),
@@ -261,6 +265,9 @@ export const orders = pgTable(
     paymentIntentId: varchar('payment_intent_id', { length: 255 }),
     carrier: varchar('carrier', { length: 100 }),
     trackingNumber: varchar('tracking_number', { length: 100 }),
+    trackingUrl: varchar('tracking_url', { length: 500 }),
+    /** GST split saved at checkout so invoices never change if rates or seller state change later. */
+    taxBreakdown: jsonb('tax_breakdown'),
     notes: text('notes'),
     ...timestamps,
   },

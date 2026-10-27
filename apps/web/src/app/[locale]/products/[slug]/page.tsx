@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { setRequestLocale } from 'next-intl/server';
 import { formatMoney } from '@corebolt/shared';
-import ReplicaSiteLayout from '@/components/replica-pages/replica-site-layout';
+import ReplicaSiteLayout, { SiteBreadcrumb } from '@/components/replica-pages/replica-site-layout';
 import ProductDetailActions from '@/components/catalog/product-detail-actions';
 import CdnImage from '@/components/cdn-image';
 import { apiFetch, type ApiProduct } from '@/lib/api';
@@ -86,6 +86,7 @@ export default async function ProductDetailPage({
     <ReplicaSiteLayout lightNav navTrail={[{ label: product.name, href: `/products/${product.slug}` }]}>
       <JsonLd data={productJsonLd(product)} />
       <main className="cb-shell">
+        <SiteBreadcrumb trail={[{ label: product.name, href: `/products/${product.slug}` }]} />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
           <div>
             {product.imageUrl ? (

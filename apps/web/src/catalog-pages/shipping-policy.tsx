@@ -9,8 +9,8 @@ const SECTIONS: { title: string; paragraphs: string[] }[] = [
   {
     title: "Shipping amount",
     paragraphs: [
-      "Each product carries its own shipping amount. That amount is shown with the price, then again in the cart and at checkout. An order with more than one product adds the shipping amount of each product.",
-      "The figure on the checkout page is the shipping charge for that order.",
+      "Every order has one shipping charge: ₹2,000 when the currency is INR, or $21 when the currency is USD. Adding more products or a higher quantity does not add another shipping charge.",
+      "The figure on the cart and at checkout is that charge.",
     ],
   },
   {

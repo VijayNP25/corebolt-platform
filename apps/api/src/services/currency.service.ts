@@ -64,37 +64,43 @@ export async function convertAmount(
   };
 }
 
-export async function refreshFromExchangeRateApi(): Promise<FxSnapshot> {
-  const previous = await getActiveFx();
+async function fetchInrPerUsd(): Promise<{ rate: number; source: string }> {
   const key = env.EXCHANGE_RATE_API_KEY;
-
-  if (!key) {
-    console.warn('[currency] EXCHANGE_RATE_API_KEY missing — keeping last-known rate');
-    return previous;
-  }
-
-  try {
+  if (key) {
     const url = `${env.EXCHANGE_RATE_API_URL}/${key}/pair/USD/INR`;
     const res = await fetch(url);
-    if (!res.ok) {
-      throw new Error(`ExchangeRate-API HTTP ${res.status}`);
-    }
-    const data = (await res.json()) as {
-      result?: string;
-      conversion_rate?: number;
-    };
+    if (!res.ok) throw new Error(`ExchangeRate-API HTTP ${res.status}`);
+    const data = (await res.json()) as { result?: string; conversion_rate?: number };
     if (data.result !== 'success' || typeof data.conversion_rate !== 'number') {
       throw new Error('Unexpected ExchangeRate-API response');
     }
+    return { rate: data.conversion_rate, source: 'exchangerate-api' };
+  }
+
+  const res = await fetch('https://open.er-api.com/v6/latest/USD');
+  if (!res.ok) throw new Error(`Open ExchangeRate-API HTTP ${res.status}`);
+  const data = (await res.json()) as { result?: string; rates?: { INR?: number } };
+  const rate = data.rates?.INR;
+  if (data.result !== 'success' || typeof rate !== 'number') {
+    throw new Error('Unexpected open exchange-rate response');
+  }
+  return { rate, source: 'open.er-api' };
+}
+
+export async function refreshFromExchangeRateApi(): Promise<FxSnapshot> {
+  const previous = await getActiveFx();
+
+  try {
+    const quote = await fetchInrPerUsd();
 
     const [row] = await db
       .insert(exchangeRates)
       .values({
         baseCurrency: 'INR',
         quoteCurrency: 'USD',
-        rate: money(data.conversion_rate),
+        rate: money(quote.rate),
         markupPercent: previous.markupPercent,
-        source: 'exchangerate-api',
+        source: quote.source,
         fetchedAt: new Date(),
       })
       .returning();

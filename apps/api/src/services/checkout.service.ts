@@ -10,7 +10,8 @@ import {
   users,
 } from '../db/schema.js';
 import { ForbiddenError, NotFoundError, ValidationError } from '../lib/errors.js';
-import { moneyAdd, percentOf, usdToInr } from '../lib/money.js';
+import { computeGst } from '../lib/gst.js';
+import { moneyAdd, usdToInr } from '../lib/money.js';
 import { serializeCart } from './cart.service.js';
 import { getActiveFx } from './currency.service.js';
 import { emailService } from './email.service.js';
@@ -59,8 +60,17 @@ export async function checkout(input: {
     billingSnapshot = addressSnapshot(billing);
   }
 
-  const taxTotal =
-    input.currency === 'INR' ? percentOf(serialized.subtotal, env.GST_PERCENT) : '0.00';
+  const taxBreakdown = computeGst({
+    taxable: serialized.subtotal,
+    ratePercent: env.GST_PERCENT,
+    currency: input.currency,
+    sellerState: env.SELLER_STATE,
+    sellerGstin: env.SELLER_GSTIN,
+    shipToState: shippingAddress.state,
+    shipToCountry: shippingAddress.country,
+    buyerGstin: billingSnapshot.gstin,
+  });
+  const taxTotal = taxBreakdown.total;
   const grandTotal = moneyAdd(serialized.subtotal, serialized.shippingTotal, taxTotal);
   const fx = await getActiveFx();
 
@@ -81,6 +91,7 @@ export async function checkout(input: {
       subtotal: serialized.subtotal,
       shippingTotal: serialized.shippingTotal,
       taxTotal,
+      taxBreakdown,
       grandTotal,
       grandTotalInr,
       fxRateUsed: fx.inrPerUsd,
@@ -165,9 +176,13 @@ function addressSnapshot(addr: {
   country: string;
   phone: string | null;
   label: string | null;
+  company: string | null;
+  gstin: string | null;
 }) {
   return {
     label: addr.label,
+    company: addr.company,
+    gstin: addr.gstin,
     line1: addr.line1,
     line2: addr.line2,
     city: addr.city,

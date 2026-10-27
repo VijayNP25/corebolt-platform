@@ -123,6 +123,13 @@ export default function LoginClient({
           minLength={8}
           autoComplete={mode === 'login' ? 'current-password' : 'new-password'}
         />
+        {mode === 'login' ? (
+          <p className="text-sm">
+            <Link href="/forgot-password" className="underline text-[var(--g-text)]">
+              Forgot password?
+            </Link>
+          </p>
+        ) : null}
         {error && <p className="cb-auth-error">{error}</p>}
         <button type="submit" disabled={submitting}>
           {submitting

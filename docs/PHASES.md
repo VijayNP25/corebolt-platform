@@ -10,8 +10,8 @@ New repo: `corebolt-platform` (sibling of `CoreBolt`). Source UI copied from Cor
 | 4. Auth + account | **Done** | Account login/register UI; needs API+DB for real sessions; local orders list |
 | 5. Cart / checkout / payments | **Done (local-first)** | Browser localStorage cart + checkout; syncs to API when available; ICICI/Stripe stubs |
 | 6. Enquiries / ON_REQUEST | **Done** | Modal → enquiry API; Ask Price / Request Quote preserved |
-| 7. Admin | **Done (baseline)** | Admin shell + products from static catalogue; other lists via API |
-| 8. SEO + i18n + reviews | **Done (baseline)** | metadata/sitemap/robots; `/en`+`/hi`; reviews UI on product pages |
+| 7. Admin | **Done** | Admin shell; products, categories, orders, enquiries, customers, reviews, currency, audit and reports all use the API; product edits sync to the storefront catalogue |
+| 8. SEO + i18n + reviews | **Done (baseline)** | metadata/sitemap/robots; `/en`; reviews UI on product pages |
 | 9. Tests + hardening + docs | **Partial** | Unit tests; OpenAPI stub; health reports DB up/down; CI deferred |
 
 ## Works today without Docker/Postgres
